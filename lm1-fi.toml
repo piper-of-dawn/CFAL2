@@ -1,0 +1,10 @@
+[file]
+path= "/home/karma/CFAPractice/mcq/quiz/AI/PDF/L2/CFA L2 B6 FIXED INCOME.pdf"
+lm=1
+
+[requirements-for-each-lm]
+katas=7
+vignette=3
+
+[output]
+path="src/data/questions.json"

@@ -1,0 +1,849 @@
+[
+  {
+    "topic": "Zero-coupon realized return condition",
+    "stem": "For a default-risk-free zero-coupon bond, when does its stated yield equal its actual realized return?",
+    "options": [
+      "Whenever it is sold before maturity",
+      "Only when coupons are reinvested at the original yield",
+      "When it is held to maturity"
+    ],
+    "answer": 2,
+    "explanation": "<h3>First Principles Thinking: core idea</h3><p><strong>C is correct.</strong> The source states that no reinvestment risk is involved and the stated yield equals the realized return if the zero is held to maturity.</p><p>Why the other options are wrong</p><p><strong>A:</strong> The choice \"Whenever it is sold before maturity\" is wrong because Selling before maturity removes the stated hold-to-maturity condition. The source states that no reinvestment risk is involved and the stated yield equals the realized return if the zero is held to maturity. <strong>B:</strong> The choice \"Only when coupons are reinvested at the original yield\" is wrong because Coupon reinvestment is inapplicable to a zero-coupon bond. The source states that no reinvestment risk is involved and the stated yield equals the realized return if the zero is held to maturity.</p>"
+  },
+  {
+    "topic": "Forward-rate timing",
+    "stem": "What does a forward rate specify?",
+    "options": [
+      "A spot rate observed only after a future loan begins",
+      "An interest rate determined today for a loan initiated in a future period",
+      "An interest rate determined today for a loan initiated today"
+    ],
+    "answer": 1,
+    "explanation": "<h3>First Principles Thinking: core idea</h3><p><strong>B is correct.</strong> A forward rate is fixed today for a loan whose initiation occurs in a future period.</p><p>Why the other options are wrong</p><p><strong>A:</strong> A rate first observed after the future loan begins is not determined today, so it lacks the defining forward-rate timing. <strong>C:</strong> A loan initiated today fails the future-initiation condition that distinguishes a forward rate.</p>"
+  },
+  {
+    "topic": "Forward contract initiation cash flow",
+    "stem": "At initiation of the forward contract described in the reading, what cash changes hands?",
+    "options": [
+      "No money is exchanged",
+      "The buyer pays the full principal",
+      "The seller pays the forward contract price"
+    ],
+    "answer": 0,
+    "explanation": "<h3>First Principles Thinking: core idea</h3><p><strong>A is correct.</strong> The source states that no money is exchanged at initiation because performance occurs in the future.</p><p>Why the other options are wrong</p><p><strong>B:</strong> The choice \"The buyer pays the full principal\" is wrong because Paying full principal at initiation contradicts the contract's deferred performance. The source states that no money is exchanged at initiation because performance occurs in the future. <strong>C:</strong> The choice \"The seller pays the forward contract price\" is wrong because The seller does not pay the forward price at initiation. The source states that no money is exchanged at initiation because performance occurs in the future.</p>"
+  },
+  {
+    "topic": "Forward rate breakeven interpretation",
+    "stem": "How can the implied forward rate be interpreted when comparing a longer zero-coupon investment with a shorter zero followed by reinvestment?",
+    "options": [
+      "As the coupon rate on both zeros",
+      "As the realized return regardless of future rates",
+      "As the breakeven reinvestment rate"
+    ],
+    "answer": 2,
+    "explanation": "<h3>First Principles Thinking: core idea</h3><p><strong>C is correct.</strong> The source identifies the forward rate as the breakeven rate between the two investment paths.</p><p>Why the other options are wrong</p><p><strong>A:</strong> The choice \"As the coupon rate on both zeros\" is wrong because Zero-coupon bonds have no coupon rate to serve as the breakeven rate. The source identifies the forward rate as the breakeven rate between the two investment paths. <strong>B:</strong> The choice \"As the realized return regardless of future rates\" is wrong because A forward rate is a breakeven rate, not a guaranteed realized return independent of future rates. The source identifies the forward rate as the breakeven rate between the two investment paths.</p>"
+  },
+  {
+    "topic": "Discount-function and spot-curve equivalence",
+    "stem": "What is the information relationship between the discount function and the spot yield curve?",
+    "options": [
+      "Each completely identifies the other because both contain the same time-value-of-money information",
+      "The discount function contains strictly more information than the spot curve",
+      "The two are independent because only forward rates can determine discount factors"
+    ],
+    "answer": 0,
+    "explanation": "<h3>First Principles Thinking: core idea</h3><p><strong>A is correct.</strong> Each maturity’s discount factor maps directly to its spot rate, so the complete discount function and spot curve contain the same information and each identifies the other.</p><p>Why the other options are wrong</p><p><strong>B:</strong> The discount function does not contain extra information; its discount factors are one-to-one transformations of the corresponding spot rates. <strong>C:</strong> Forward rates can be derived from the spot curve, but that does not make the discount function independent of the spot curve; the two directly identify each other.</p>"
+  },
+  {
+    "topic": "Flat spot curve implication",
+    "stem": "If the spot curve is flat, what does the forward rate model imply about one-period forward rates?",
+    "options": [
+      "They exceed the spot rate",
+      "They fall below the spot rate",
+      "They equal the spot rate"
+    ],
+    "answer": 2,
+    "explanation": "<h3>First Principles Thinking: core idea</h3><p><strong>C is correct.</strong> The source states that all one-period forward rates equal the spot rate when the spot curve is flat.</p><p>Why the other options are wrong</p><p><strong>A:</strong> The choice \"They exceed the spot rate\" is wrong because Exceeding the spot rate would violate the equality implied by a flat spot curve. The source states that all one-period forward rates equal the spot rate when the spot curve is flat. <strong>B:</strong> The choice \"They fall below the spot rate\" is wrong because Falling below the spot rate would violate the equality implied by a flat spot curve. The source states that all one-period forward rates equal the spot rate when the spot curve is flat.</p>"
+  },
+  {
+    "topic": "Downward spot curve relation",
+    "stem": "When the spot curve slopes downward, where does the forward curve lie relative to the spot curve?",
+    "options": [
+      "Below the spot curve",
+      "Above the spot curve",
+      "At the same level for every maturity"
+    ],
+    "answer": 0,
+    "explanation": "<h3>First Principles Thinking: core idea</h3><p><strong>A is correct.</strong> The source states that a downward-sloping spot curve produces a forward curve below the spot curve.</p><p>Why the other options are wrong</p><p><strong>B:</strong> The choice \"Above the spot curve\" is wrong because Placing the forward curve above reverses the downward-curve relationship. The source states that a downward-sloping spot curve produces a forward curve below the spot curve. <strong>C:</strong> The choice \"At the same level for every maturity\" is wrong because Equality at every maturity is the flat-curve case, not the downward-curve case. The source states that a downward-sloping spot curve produces a forward curve below the spot curve.</p>"
+  },
+  {
+    "topic": "Par-curve instrument",
+    "stem": "Which instrument set is represented by a government par curve at each maturity?",
+    "options": [
+      "Coupon-paying government bonds priced below par",
+      "Coupon-paying government bonds priced at par",
+      "Zero-coupon government bonds priced at par"
+    ],
+    "answer": 1,
+    "explanation": "<h3>First Principles Thinking: core idea</h3><p><strong>B is correct.</strong> A government par curve reports yields to maturity on coupon-paying government bonds priced at par across maturities.</p><p>Why the other options are wrong</p><p><strong>A:</strong> Pricing the coupon-paying bonds below par removes the defining par-price condition. <strong>C:</strong> Zero-coupon bonds form the spot curve; the par curve is built from coupon-paying government bonds priced at par.</p>"
+  },
+  {
+    "topic": "Bootstrapping input curve",
+    "stem": "Which observed curve supplies the yields used to bootstrap a zero-coupon yield curve?",
+    "options": [
+      "The zero-coupon curve being solved for",
+      "The forward curve",
+      "The government par curve"
+    ],
+    "answer": 2,
+    "explanation": "<h3>First Principles Thinking: core idea</h3><p><strong>C is correct.</strong> Bootstrapping starts with observed par yields and solves the zero-coupon rates sequentially.</p><p>Why the other options are wrong</p><p><strong>A:</strong> The zero-coupon curve is the output being constructed, so treating it as the observed input reverses the procedure. <strong>B:</strong> The forward curve is not the stated observed yield input; the process begins with the government par curve.</p>"
+  },
+  {
+    "topic": "On-the-run par-curve selection",
+    "stem": "Why are recently issued, on-the-run government bonds most often selected to construct the government par curve?",
+    "options": [
+      "They are less liquid than older issues",
+      "They are the most liquid and typically trade at or close to par",
+      "They are selected even when priced far from par"
+    ],
+    "answer": 1,
+    "explanation": "<h3>First Principles Thinking: core idea</h3><p><strong>B is correct.</strong> On-the-run government bonds are preferred because they are the most liquid and are typically priced at or close to par.</p><p>Why the other options are wrong</p><p><strong>A:</strong> Calling on-the-run bonds less liquid reverses their stated liquidity advantage. <strong>C:</strong> Pricing far from par removes the stated near-par feature that supports their use in a par curve.</p>"
+  },
+  {
+    "topic": "Bootstrapping maturity order",
+    "stem": "In what maturity order are zero-coupon rates solved during bootstrapping?",
+    "options": [
+      "From longest to shortest",
+      "In any arbitrary order",
+      "From shortest to longest"
+    ],
+    "answer": 2,
+    "explanation": "<h3>First Principles Thinking: core idea</h3><p><strong>C is correct.</strong> The source states that zero-coupon rates are solved one by one from the shortest to the longest maturities.</p><p>Why the other options are wrong</p><p><strong>A:</strong> The choice \"From longest to shortest\" is wrong because Starting at the longest maturity reverses the sequential dependency on previously solved shorter spot rates. The source states that zero-coupon rates are solved one by one from the shortest to the longest maturities. <strong>B:</strong> The choice \"In any arbitrary order\" is wrong because Arbitrary order ignores the need to solve each shorter spot rate before the next maturity. The source states that zero-coupon rates are solved one by one from the shortest to the longest maturities.</p>"
+  },
+  {
+    "topic": "Earlier spot-rate role",
+    "stem": "When bootstrapping a later spot rate, how are already-solved earlier spot rates used?",
+    "options": [
+      "To discount the earlier coupon cash flows",
+      "To set the later bond's coupon to zero",
+      "To replace the later par yield"
+    ],
+    "answer": 0,
+    "explanation": "<h3>First Principles Thinking: core idea</h3><p><strong>A is correct.</strong> The numerical illustration uses known earlier spot rates to discount earlier coupon payments before solving the later spot rate.</p><p>Why the other options are wrong</p><p><strong>B:</strong> The choice \"To set the later bond's coupon to zero\" is wrong because Setting the later coupon to zero is not the role of known earlier spot rates. The numerical illustration uses known earlier spot rates to discount earlier coupon payments before solving the later spot rate. <strong>C:</strong> The choice \"To replace the later par yield\" is wrong because Known earlier spot rates discount earlier coupons; they do not replace the later par yield. The numerical illustration uses known earlier spot rates to discount earlier coupon payments before solving the later spot rate.</p>"
+  },
+  {
+    "topic": "Two-year spot rate by bootstrapping",
+    "stem": "A two-year annual-coupon sovereign bond is priced at 1 per unit of principal and has a 5.97% par coupon. The one-year spot rate is 5.00%. Using 1 = 0.0597/1.05 + 1.0597/(1 + z2)^2, what is the two-year spot rate z2?",
+    "options": [
+      "5.00%",
+      "6.00%",
+      "5.97%"
+    ],
+    "answer": 1,
+    "explanation": "<h3>First Principles Thinking: core idea</h3><p><strong>B is correct.</strong> Subtracting the discounted first coupon from 1 and solving 1.0597/(1 + z2)^2 for z2 gives 6.00%.</p><p>Why the other options are wrong</p><p><strong>A:</strong> 5.00% incorrectly reuses the one-year spot rate for the final two-year cash flow instead of solving for the new two-year rate. <strong>C:</strong> 5.97% incorrectly equates the par coupon with the two-year spot rate; the earlier coupon is discounted at 5.00%, so bootstrapping gives 6.00%.</p>"
+  },
+  {
+    "topic": "First-maturity starting point",
+    "stem": "For the first annual maturity in the bootstrapping illustration, what is the relation between the par yield and spot rate?",
+    "options": [
+      "The one-year spot rate requires the two-year spot rate first",
+      "The one-year spot rate is the average of all par yields",
+      "The one-year par yield directly gives the one-year spot rate"
+    ],
+    "answer": 2,
+    "explanation": "<h3>First Principles Thinking: core idea</h3><p><strong>C is correct.</strong> With only one terminal cash flow at the first maturity, the illustration starts with the one-year par yield as the one-year spot rate.</p><p>Why the other options are wrong</p><p><strong>A:</strong> The choice \"The one-year spot rate requires the two-year spot rate first\" is wrong because Requiring the two-year spot rate reverses the bootstrap starting order. With only one terminal cash flow at the first maturity, the illustration starts with the one-year par yield as the one-year spot rate. <strong>B:</strong> The choice \"The one-year spot rate is the average of all par yields\" is wrong because Averaging all par yields is not the direct one-cash-flow solution at the first maturity. With only one terminal cash flow at the first maturity, the illustration starts with the one-year par yield as the one-year spot rate.</p>"
+  },
+  {
+    "topic": "Forward rates as future-spot proxy",
+    "stem": "In active bond management, current implied forward rates are generally used as what?",
+    "options": [
+      "A guarantee of future realized spot rates",
+      "A measure of past coupon reinvestment rates",
+      "A proxy for market expectations of future spot rates"
+    ],
+    "answer": 2,
+    "explanation": "<h3>First Principles Thinking: core idea</h3><p><strong>C is correct.</strong> The source calls implied forward rates the best available and most accessible proxy for market expectations of future spot rates.</p><p>Why the other options are wrong</p><p><strong>A:</strong> The choice \"A guarantee of future realized spot rates\" is wrong because A proxy for expectations is not a guarantee of the rate eventually realized. The source calls implied forward rates the best available and most accessible proxy for market expectations of future spot rates. <strong>B:</strong> The choice \"A measure of past coupon reinvestment rates\" is wrong because Forward rates concern expected future spot rates, not past coupon reinvestment rates. The source calls implied forward rates the best available and most accessible proxy for market expectations of future spot rates.</p>"
+  },
+  {
+    "topic": "Forward-price invariance",
+    "stem": "If future spot rates evolve exactly as predicted by today’s forward curve, what happens to the price of an existing forward contract?",
+    "options": [
+      "It remains unchanged",
+      "It increases",
+      "It decreases"
+    ],
+    "answer": 0,
+    "explanation": "<h3>First Principles Thinking: core idea</h3><p><strong>A is correct.</strong> When the future discount function equals the forward discount function implied today, the forward-pricing ratio is unchanged, so the forward contract price remains unchanged.</p><p>Why the other options are wrong</p><p><strong>B:</strong> An increase requires the future spot curve to fall below the path predicted by today’s forward curve; exact evolution along that path leaves the price unchanged. <strong>C:</strong> A decrease requires the future spot curve to rise above the path predicted by today’s forward curve; exact evolution along that path leaves the price unchanged.</p>"
+  },
+  {
+    "topic": "Expected spot below forward valuation",
+    "stem": "If expected future spot rates are below current forward rates, how does the investor view a bond discounted by the market at the forward rates?",
+    "options": [
+      "Overvalued",
+      "Undervalued",
+      "Unaffected by the rate difference"
+    ],
+    "answer": 1,
+    "explanation": "<h3>First Principles Thinking: core idea</h3><p><strong>B is correct.</strong> The source states that discounting at higher forward rates than the investor expects produces a market price below intrinsic value.</p><p>Why the other options are wrong</p><p><strong>A:</strong> The choice \"Overvalued\" is wrong because Overvalued reverses the valuation effect of market discount rates exceeding the investor's expected rates. The source states that discounting at higher forward rates than the investor expects produces a market price below intrinsic value. <strong>C:</strong> The choice \"Unaffected by the rate difference\" is wrong because The rate gap affects discounted value, so valuation is not unaffected. The source states that discounting at higher forward rates than the investor expects produces a market price below intrinsic value.</p>"
+  },
+  {
+    "topic": "Flat-curve condition for YTM as expected return",
+    "stem": "Under what yield-curve condition is a coupon bond's yield to maturity generally a realistic estimate of its expected return?",
+    "options": [
+      "Whenever the yield curve is upward sloping",
+      "When the yield curve is flat",
+      "Whenever the yield curve is downward sloping"
+    ],
+    "answer": 1,
+    "explanation": "<h3>First Principles Thinking: core idea</h3><p><strong>B is correct.</strong> The source states that yield to maturity is generally a realistic estimate of expected return only if the yield curve is flat.</p><p>Why the other options are wrong</p><p><strong>A:</strong> The choice \"Whenever the yield curve is upward sloping\" is wrong because An upward slope does not satisfy the flat-curve condition required here. The source states that yield to maturity is generally a realistic estimate of expected return only if the yield curve is flat. <strong>C:</strong> The choice \"Whenever the yield curve is downward sloping\" is wrong because A downward slope does not satisfy the flat-curve condition required here. The source states that yield to maturity is generally a realistic estimate of expected return only if the yield curve is flat.</p>"
+  },
+  {
+    "topic": "Forward-rate forecast fallibility",
+    "stem": "Are implied forward rates guaranteed to be unbiased forecasts of future spot rates?",
+    "options": [
+      "Yes, no-arbitrage makes the forecast exact",
+      "Yes, whenever the spot curve is upward sloping",
+      "No, whether they are unbiased estimators is open to debate"
+    ],
+    "answer": 2,
+    "explanation": "<h3>First Principles Thinking: core idea</h3><p><strong>C is correct.</strong> The source explicitly notes that whether forward rates are unbiased estimators of consensus expectations remains open to debate.</p><p>Why the other options are wrong</p><p><strong>A:</strong> The choice \"Yes, no-arbitrage makes the forecast exact\" is wrong because No-arbitrage links current rates but does not make forward rates exact forecasts. The source explicitly notes that whether forward rates are unbiased estimators of consensus expectations remains open to debate. <strong>B:</strong> The choice \"Yes, whenever the spot curve is upward sloping\" is wrong because An upward-sloping spot curve does not resolve whether forward rates are unbiased estimators. The source explicitly notes that whether forward rates are unbiased estimators of consensus expectations remains open to debate.</p>"
+  },
+  {
+    "topic": "Active return opportunity",
+    "stem": "If the yield curve remains relatively stable, what creates an active return opportunity relative to a maturity-matching buy-and-hold strategy?",
+    "options": [
+      "Actual short-term returns exactly matching quoted forward rates",
+      "A zero-coupon bond being held to maturity",
+      "Actual short-term returns exceeding today's quoted forward rates"
+    ],
+    "answer": 2,
+    "explanation": "<h3>First Principles Thinking: core idea</h3><p><strong>C is correct.</strong> With a relatively stable yield curve, finding short-term bonds whose actual returns exceed today’s quoted forward rates produces a total return above the maturity-matching buy-and-hold return.</p><p>Why the other options are wrong</p><p><strong>A:</strong> Matching quoted forward rates provides no excess return over the maturity-matching strategy under the stated stable-curve condition. <strong>B:</strong> Holding a zero-coupon bond to maturity concerns equality of stated yield and realized return, not the active excess-return condition based on beating quoted forward rates.</p>"
+  },
+  {
+    "topic": "Holding-period return under forward-rate evolution",
+    "stem": "Over a one-year holding period, future spot rates evolve exactly as implied by today’s forward curve. What total return do default-risk-free zero-coupon bonds of different initial maturities earn over that period?",
+    "options": [
+      "The one-year risk-free rate, regardless of initial maturity",
+      "Each bond’s original yield to maturity, regardless of initial maturity",
+      "The longest quoted forward rate, regardless of initial maturity"
+    ],
+    "answer": 0,
+    "explanation": "<h3>First Principles Thinking: core idea</h3><p><strong>A is correct.</strong> When the end-of-period spot curve equals the current forward curve, Equation 12 makes every zero-coupon bond’s one-year total return equal to the one-year risk-free rate.</p><p>Why the other options are wrong</p><p><strong>B:</strong> Original yields to maturity differ across maturities and are not the common one-year holding-period return under the stated forward-curve evolution. <strong>C:</strong> The common return is the one-period risk-free rate, not whichever quoted forward rate has the longest tenor.</p>"
+  },
+  {
+    "topic": "Rolling-down maturity choice",
+    "stem": "What maturity does a rolling-down-the-yield-curve strategy purchase relative to its investment horizon?",
+    "options": [
+      "A maturity exactly equal to the investment horizon",
+      "A maturity longer than the investment horizon",
+      "A maturity shorter than the investment horizon"
+    ],
+    "answer": 1,
+    "explanation": "<h3>First Principles Thinking: core idea</h3><p><strong>B is correct.</strong> The source states that the strategy buys a bond with maturity more distant than the investment horizon.</p><p>Why the other options are wrong</p><p><strong>A:</strong> The choice \"A maturity exactly equal to the investment horizon\" is wrong because Matching the horizon omits the longer maturity needed to roll down the curve. The source states that the strategy buys a bond with maturity more distant than the investment horizon. <strong>C:</strong> The choice \"A maturity shorter than the investment horizon\" is wrong because A shorter maturity cannot roll down over an investment horizon that extends beyond its maturity. The source states that the strategy buys a bond with maturity more distant than the investment horizon.</p>"
+  },
+  {
+    "topic": "Rolling-down curve-shape condition",
+    "stem": "Which yield-curve shape is a condition for the rolling-down strategy described?",
+    "options": [
+      "A flat yield curve only",
+      "An upward-sloping yield curve",
+      "A downward-sloping yield curve"
+    ],
+    "answer": 1,
+    "explanation": "<h3>First Principles Thinking: core idea</h3><p><strong>B is correct.</strong> The source identifies an upward-sloping yield curve as a condition for the strategy.</p><p>Why the other options are wrong</p><p><strong>A:</strong> The choice \"A flat yield curve only\" is wrong because A flat curve lacks the declining yields across maturities used by the strategy. The source identifies an upward-sloping yield curve as a condition for the strategy. <strong>C:</strong> The choice \"A downward-sloping yield curve\" is wrong because A downward-sloping curve reverses the required upward-sloping condition. The source identifies an upward-sloping yield curve as a condition for the strategy.</p>"
+  },
+  {
+    "topic": "Rolling-down stability assumption",
+    "stem": "What must be assumed about the yield curve over the investment horizon for the basic rolling-down result?",
+    "options": [
+      "Its level and shape do not change",
+      "Its level rises while its shape inverts",
+      "Its level and shape change unpredictably"
+    ],
+    "answer": 0,
+    "explanation": "<h3>First Principles Thinking: core idea</h3><p><strong>A is correct.</strong> The source assumes that the yield curve does not change level or shape.</p><p>Why the other options are wrong</p><p><strong>B:</strong> The choice \"Its level rises while its shape inverts\" is wrong because A rising, inverting curve violates both the unchanged-level and unchanged-shape assumptions. The source assumes that the yield curve does not change level or shape. <strong>C:</strong> The choice \"Its level and shape change unpredictably\" is wrong because Unpredictable changes explicitly violate the assumed stability of level and shape. The source assumes that the yield curve does not change level or shape.</p>"
+  },
+  {
+    "topic": "Rolling-down return determinants",
+    "stem": "For a rolling-down-the-yield-curve trade on a static upward-sloping curve, which two quantities determine the bond’s total return?",
+    "options": [
+      "The forward-rate–spot-rate spread and the investment horizon",
+      "The bond’s maturity and the maturity-matching strategy’s return",
+      "The forward-rate–spot-rate spread and the bond’s maturity"
+    ],
+    "answer": 2,
+    "explanation": "<h3>First Principles Thinking: core idea</h3><p><strong>C is correct.</strong> The rolling-down return depends on the spread between the forward rate and spot rate and on the bond’s maturity.</p><p>Why the other options are wrong</p><p><strong>A:</strong> The investment horizon defines when the position is sold, but the stated return determinants are the forward-rate–spot-rate spread and the bond’s maturity. <strong>B:</strong> The maturity-matching return is the comparison benchmark, not one of the two stated determinants of the rolling bond’s total return.</p>"
+  },
+  {
+    "topic": "Maturity sensitivity in rolling down",
+    "stem": "In a rolling-down-the-yield-curve trade, how does a longer bond maturity affect total-return sensitivity to the spread between the forward rate and spot rate?",
+    "options": [
+      "It increases the sensitivity",
+      "It decreases the sensitivity",
+      "It eliminates the sensitivity"
+    ],
+    "answer": 0,
+    "explanation": "<h3>First Principles Thinking: core idea</h3><p><strong>A is correct.</strong> The longer the bond’s maturity, the more sensitive its total return is to the forward-rate–spot-rate spread.</p><p>Why the other options are wrong</p><p><strong>B:</strong> Decreasing sensitivity reverses the stated maturity effect; sensitivity rises as maturity lengthens. <strong>C:</strong> A longer maturity does not remove the spread exposure; it makes total return more sensitive to that spread.</p>"
+  },
+  {
+    "topic": "Rolling-down benchmark",
+    "stem": "What return is a rolling-down-the-yield-curve strategy designed to exceed when the upward-sloping curve remains static?",
+    "options": [
+      "The return from holding only the shortest available bond",
+      "The return on a maturity-matching strategy",
+      "The purchased bond’s coupon payment by itself"
+    ],
+    "answer": 1,
+    "explanation": "<h3>First Principles Thinking: core idea</h3><p><strong>B is correct.</strong> Buying a bond longer than the investment horizon is intended to earn more than a bond whose maturity matches that horizon.</p><p>Why the other options are wrong</p><p><strong>A:</strong> The stated benchmark is the maturity-matching strategy, not an unspecified shortest-maturity holding. <strong>C:</strong> A coupon payment alone is not the total-return benchmark; the comparison is with the return on a maturity-matching bond strategy.</p>"
+  },
+  {
+    "topic": "Riding-the-yield-curve terminology",
+    "stem": "What alternative name is used for the rolling-down-the-yield-curve strategy?",
+    "options": [
+      "Riding the yield curve",
+      "Maturity spread carry trade",
+      "Maturity-matching strategy"
+    ],
+    "answer": 0,
+    "explanation": "<h3>First Principles Thinking: core idea</h3><p><strong>A is correct.</strong> The text uses “riding the yield curve” as a direct synonym for rolling down the yield curve.</p><p>Why the other options are wrong</p><p><strong>B:</strong> A maturity spread carry trade borrows short and lends long; it is related but is not the stated synonym for rolling down. <strong>C:</strong> A maturity-matching strategy is the benchmark the rolling-down trade seeks to outperform, not its alternative name.</p>"
+  },
+  {
+    "topic": "Swap curve definition",
+    "stem": "From which fixed rates is the swap rate curve constructed?",
+    "options": [
+      "Fixed rates on fixed-for-floating interest rate swaps across maturities",
+      "Floating market reference rates on the swap legs across maturities",
+      "Differences between fixed and floating swap-leg rates"
+    ],
+    "answer": 0,
+    "explanation": "<h3>First Principles Thinking: core idea</h3><p><strong>A is correct.</strong> The swap curve is the yield curve formed by the fixed swap rates quoted across maturities.</p><p>Why the other options are wrong</p><p><strong>B:</strong> Floating market reference rates determine the floating leg, but the fixed rates across maturities are the rates plotted on the swap curve. <strong>C:</strong> A fixed-minus-floating difference is not the quoted swap rate; the curve uses the fixed rate that equates the two legs at origination.</p>"
+  },
+  {
+    "topic": "Par-swap fixed-rate condition",
+    "stem": "At initiation of a par interest rate swap, what condition determines the fixed swap rate?",
+    "options": [
+      "The fixed-leg present value exceeds the floating-leg present value",
+      "The fixed- and floating-leg present values are equal, making the swap value zero",
+      "The counterparties exchange the notional principal at initiation"
+    ],
+    "answer": 1,
+    "explanation": "<h3>First Principles Thinking: core idea</h3><p><strong>B is correct.</strong> The fixed rate on a par swap equates the present values of the fixed and floating legs, so no money is exchanged and the swap’s initial value is zero.</p><p>Why the other options are wrong</p><p><strong>A:</strong> An excess fixed-leg value would give the swap a nonzero initial value rather than satisfy the par-swap condition. <strong>C:</strong> The no-money-exchanged condition concerns equal leg values; exchanging notional principal at initiation is not how the par fixed rate is set.</p>"
+  },
+  {
+    "topic": "Swap-curve credit content",
+    "stem": "Compared with a default-risk-free government curve, what additional risk does the swap curve reflect?",
+    "options": [
+      "No credit risk",
+      "Counterparty credit risk from swap cash flows",
+      "Only the default risk of the government benchmark"
+    ],
+    "answer": 1,
+    "explanation": "<h3>First Principles Thinking: core idea</h3><p><strong>B is correct.</strong> Swap cash flows depend on counterparties and are subject to greater default risk than government-bond cash flows, so the swap curve includes counterparty credit risk.</p><p>Why the other options are wrong</p><p><strong>A:</strong> Removing credit risk treats swap counterparties like default-risk-free government issuers and omits the stated risk difference. <strong>C:</strong> The additional risk arises from swap counterparties, not from assigning default risk only to the government benchmark.</p>"
+  },
+  {
+    "topic": "Swap-curve maturity coverage",
+    "stem": "Why can a swap curve provide more usable maturity points than a government bond curve?",
+    "options": [
+      "Active swaps may exist at more maturities than liquid government bonds",
+      "Government bonds always provide more liquid points at every maturity",
+      "The two curves must contain exactly the same maturity points"
+    ],
+    "answer": 0,
+    "explanation": "<h3>First Principles Thinking: core idea</h3><p><strong>A is correct.</strong> Swap markets can offer active contracts at maturities where no liquid government bond is available, giving the swap curve more valuation points.</p><p>Why the other options are wrong</p><p><strong>B:</strong> Claiming universal government-market superiority reverses the reason the swap curve is necessary where government maturities are illiquid or absent. <strong>C:</strong> Exact maturity equality removes the stated coverage advantage of active swap contracts.</p>"
+  },
+  {
+    "topic": "Swap-curve benchmark suitability",
+    "stem": "When may the swap curve be the superior benchmark for the time value of money?",
+    "options": [
+      "When the swap market is illiquid but the government market is active",
+      "When swap and government markets have identical liquidity and exposure relevance",
+      "When the government bond market is illiquid but the swap market is active"
+    ],
+    "answer": 2,
+    "explanation": "<h3>First Principles Thinking: core idea</h3><p><strong>C is correct.</strong> Where government bonds are illiquid or unavailable across maturities but swaps trade actively, the swap curve supplies the more useful benchmark.</p><p>Why the other options are wrong</p><p><strong>A:</strong> An illiquid swap market removes the swap curve’s liquidity advantage over an active government market. <strong>B:</strong> Identical liquidity and relevance do not establish the swap curve as superior; its advantage arises when the government benchmark is less usable.</p>"
+  },
+  {
+    "topic": "Swap-curve valuation use",
+    "stem": "How is the swap curve used when valuing non-government fixed-income instruments?",
+    "options": [
+      "As a replacement for all instrument cash flows",
+      "As a benchmark term structure to which an appropriate spread may be added",
+      "As proof that the instrument has no credit risk"
+    ],
+    "answer": 1,
+    "explanation": "<h3>First Principles Thinking: core idea</h3><p><strong>B is correct.</strong> The swap curve supplies benchmark rates for the time value of money across maturities; an appropriate spread is then added to reflect the valued instrument’s pricing relative to that benchmark and determine its fair value.</p><p>Why the other options are wrong</p><p><strong>A:</strong> The benchmark rates are used to value the instrument’s actual cash flows; they do not replace those cash flows. <strong>C:</strong> Adding an appropriate spread to the swap benchmark allows credit and other pricing differences to enter valuation, so use of the curve does not establish that the instrument is free of credit risk.</p>"
+  },
+  {
+    "topic": "Swap floating-leg reference",
+    "stem": "What type of rate does the floating leg underlying the swap curve reference?",
+    "options": [
+      "The fixed swap rate set at origination",
+      "A default-risk-free government spot rate",
+      "A short-term market reference rate"
+    ],
+    "answer": 2,
+    "explanation": "<h3>First Principles Thinking: core idea</h3><p><strong>C is correct.</strong> The floating leg resets from short-term market reference rates, while the other leg pays the fixed swap rate.</p><p>Why the other options are wrong</p><p><strong>A:</strong> The fixed swap rate belongs to the fixed leg and therefore cannot also be the floating leg’s reference. <strong>B:</strong> The key distinction from the government curve is that swap rates are derived using short-term lending reference rates rather than default-risk-free government rates.</p>"
+  },
+  {
+    "topic": "Swap-spread calculation",
+    "stem": "A five-year fixed-for-floating swap rate is 2.00% and the same-maturity on-the-run government bond yields 1.70%. What is the five-year swap spread?",
+    "options": [
+      "−30 basis points",
+      "3.70%",
+      "30 basis points"
+    ],
+    "answer": 2,
+    "explanation": "<h3>First Principles Thinking: core idea</h3><p><strong>C is correct.</strong> The swap spread is 2.00% minus 1.70% = 0.30%, which equals 30 basis points.</p><p>Why the other options are wrong</p><p><strong>A:</strong> −30 basis points reverses the subtraction; the swap rate exceeds the government yield by positive 30 basis points. <strong>B:</strong> 3.70% adds the two rates, whereas the spread is their difference, 0.30%.</p>"
+  },
+  {
+    "topic": "Swap-spread maturity matching",
+    "stem": "Which government security is paired with a swap when calculating its maturity-specific swap spread?",
+    "options": [
+      "The on-the-run government security with the same maturity",
+      "The on-the-run government security with a shorter maturity",
+      "An off-the-run government security with the same maturity"
+    ],
+    "answer": 0,
+    "explanation": "<h3>First Principles Thinking: core idea</h3><p><strong>A is correct.</strong> By convention, a maturity-specific swap spread subtracts the yield on the same-maturity on-the-run government security from the swap rate.</p><p>Why the other options are wrong</p><p><strong>B:</strong> Using a shorter maturity breaks the required maturity match. <strong>C:</strong> Using an off-the-run issue breaks the convention of pairing the swap with the most recently issued government security.</p>"
+  },
+  {
+    "topic": "Positive swap spread interpretation",
+    "stem": "What does a higher swap spread indicate about required compensation?",
+    "options": [
+      "Higher required compensation for credit and/or liquidity risk",
+      "Lower required compensation for all risks",
+      "No difference in required compensation"
+    ],
+    "answer": 0,
+    "explanation": "<h3>First Principles Thinking: core idea</h3><p><strong>A is correct.</strong> The source states that a higher swap spread corresponds to a higher return required for credit and/or liquidity risks.</p><p>Why the other options are wrong</p><p><strong>B:</strong> The choice \"Lower required compensation for all risks\" is wrong because Lower compensation reverses the meaning of a higher positive spread. The source states that a higher swap spread corresponds to a higher return required for credit and/or liquidity risks. <strong>C:</strong> The choice \"No difference in required compensation\" is wrong because No difference in compensation would not produce the higher spread associated with credit or liquidity risk. The source states that a higher swap spread corresponds to a higher return required for credit and/or liquidity risks.</p>"
+  },
+  {
+    "topic": "Countercyclical swap-spread behavior",
+    "stem": "How do swap spreads typically behave over the business cycle?",
+    "options": [
+      "They narrow during recessions and widen during economic expansions",
+      "They widen during recessions and are lower during economic expansions",
+      "They remain constant through recessions and expansions"
+    ],
+    "answer": 1,
+    "explanation": "<h3>First Principles Thinking: core idea</h3><p><strong>B is correct.</strong> The source states that swap spreads typically widen countercyclically, with greater values during recessions and lower values during expansions.</p><p>Why the other options are wrong</p><p><strong>A:</strong> The choice \"They narrow during recessions and widen during economic expansions\" is wrong because Narrowing in recessions and widening in expansions reverses the stated countercyclical pattern. The source states that swap spreads typically widen countercyclically, with greater values during recessions and lower values during expansions. <strong>C:</strong> The choice \"They remain constant through recessions and expansions\" is wrong because A constant spread denies the stated widening in recessions and lower values in expansions. The source states that swap spreads typically widen countercyclically, with greater values during recessions and lower values during expansions.</p>"
+  },
+  {
+    "topic": "Persistence of negative swap spreads",
+    "stem": "Which development is cited as a reason negative swap spreads persisted after the financial crisis?",
+    "options": [
+      "Reduced capital requirements for swap dealers",
+      "Increased regulatory capital requirements for swap dealers",
+      "Tighter liquidity and greater counterparty risk at the time of Lehman Brothers’ collapse"
+    ],
+    "answer": 1,
+    "explanation": "<h3>First Principles Thinking: core idea</h3><p><strong>B is correct.</strong> Increased regulatory capital requirements and leverage constraints among swap dealers are cited as reasons negative swap spreads persisted.</p><p>Why the other options are wrong</p><p><strong>A:</strong> Reduced requirements reverse the cited regulatory change; swap-dealer capital requirements increased. <strong>C:</strong> Tighter liquidity and greater counterparty risk were cited for the 2008 turn into negative territory, whereas the stated explanation for persistence is increased dealer capital requirements and leverage constraints.</p>"
+  },
+  {
+    "topic": "Cross-country swap-rate comparability",
+    "stem": "Why are swap rates generally more comparable across countries than government bond yields?",
+    "options": [
+      "Each country’s government directly controls its swap rates",
+      "Swap markets contain fewer maturities than government bond markets",
+      "Major financial institutions lead the swap market rather than national governments controlling it"
+    ],
+    "answer": 2,
+    "explanation": "<h3>First Principles Thinking: core idea</h3><p><strong>C is correct.</strong> Swap rates are more comparable internationally because major financial institutions lead the swap market rather than individual national governments controlling it.</p><p>Why the other options are wrong</p><p><strong>A:</strong> Government control would reproduce country-specific sovereign-market differences rather than explain greater swap-rate comparability. <strong>B:</strong> The excerpt states that swap markets offer more maturities than government bond markets; fewer maturities is both reversed and unrelated to the stated cross-country comparability reason.</p>"
+  },
+  {
+    "topic": "I-spread definition",
+    "stem": "In its simplest form, how is a bond's I-spread measured?",
+    "options": [
+      "Same-maturity swap rate minus the bond's yield to maturity",
+      "Bond yield to maturity minus the bond's coupon rate",
+      "Bond yield to maturity minus the same-maturity swap rate obtained by straight-line interpolation"
+    ],
+    "answer": 2,
+    "explanation": "<h3>First Principles Thinking: core idea</h3><p><strong>C is correct.</strong> The source defines the simplest I-spread as the bond's yield to maturity minus the swap rate obtained by straight-line interpolation of the swap curve at the same maturity.</p><p>Why the other options are wrong</p><p><strong>A:</strong> The choice \"Same-maturity swap rate minus the bond's yield to maturity\" is wrong because Swap rate minus bond yield reverses the I-spread's subtraction order. The source defines the simplest I-spread as the bond's yield to maturity minus the swap rate obtained by straight-line interpolation of the swap curve at the same maturity. <strong>B:</strong> The choice \"Bond yield to maturity minus the bond's coupon rate\" is wrong because Coupon rate is the wrong comparator; the same-maturity interpolated swap rate is required. The source defines the simplest I-spread as the bond's yield to maturity minus the swap rate obtained by straight-line interpolation of the swap curve at the same maturity.</p>"
+  },
+  {
+    "topic": "Purpose of short-term rate spreads",
+    "stem": "Why do market participants compare short-term risky rates with same-maturity government rates?",
+    "options": [
+      "To measure transaction volume in the secured repo market",
+      "To gauge economy-wide credit and liquidity risk",
+      "To set the geometric-average floating rate on an overnight indexed swap"
+    ],
+    "answer": 1,
+    "explanation": "<h3>First Principles Thinking: core idea</h3><p><strong>B is correct.</strong> The spread between a short-term risky rate and a same-maturity government rate is used as a barometer of relative credit and liquidity risk.</p><p>Why the other options are wrong</p><p><strong>A:</strong> Repo transaction volume is an input to SOFR; it is not the purpose of comparing risky and government short-term rates. <strong>C:</strong> The OIS floating rate is constructed from daily unsecured overnight rates, not from the risky-minus-government spread.</p>"
+  },
+  {
+    "topic": "TED acronym components",
+    "stem": "Which two market references supply the letters in the acronym “TED”?",
+    "options": [
+      "Treasury repo transactions and the overnight indexed swap rate",
+      "The US Treasury bill and the ticker symbol for the MRR-based Eurodollar futures contract",
+      "The market reference rate and the secured overnight financing rate"
+    ],
+    "answer": 1,
+    "explanation": "<h3>First Principles Thinking: core idea</h3><p><strong>B is correct.</strong> The “T” abbreviates the US Treasury bill, and “ED” comes from the ticker symbol for the MRR-based Eurodollar futures contract.</p><p>Why the other options are wrong</p><p><strong>A:</strong> Treasury repo transactions relate to SOFR and the OIS rate belongs to the MRR–OIS spread; they do not supply the T and ED in TED. <strong>C:</strong> MRR and SOFR are rates discussed alongside short-term risk spreads, but they are not the two references from which the TED acronym is formed.</p>"
+  },
+  {
+    "topic": "TED-spread widening signal",
+    "stem": "What does an increase in the TED spread signal?",
+    "options": [
+      "Lower perceived credit and liquidity risk",
+      "No change in perceived market risk",
+      "Greater perceived credit and liquidity risk"
+    ],
+    "answer": 2,
+    "explanation": "<h3>First Principles Thinking: core idea</h3><p><strong>C is correct.</strong> A wider gap between the risky market reference rate and the Treasury bill rate signals greater perceived credit and liquidity risk.</p><p>Why the other options are wrong</p><p><strong>A:</strong> Lower perceived risk would be associated with a narrower, not wider, TED spread. <strong>B:</strong> An increase is explicitly informative about worsening perceived credit and liquidity conditions, so it is not a no-change signal.</p>"
+  },
+  {
+    "topic": "MRR-OIS spread components",
+    "stem": "What does the MRR–OIS spread measure?",
+    "options": [
+      "The difference between the market reference rate and the overnight indexed swap rate",
+      "The difference between the market reference rate and a same-maturity Treasury bill yield",
+      "The difference between SOFR and the volume of qualified repo transactions"
+    ],
+    "answer": 0,
+    "explanation": "<h3>First Principles Thinking: core idea</h3><p><strong>A is correct.</strong> The MRR–OIS spread subtracts the overnight indexed swap rate from the market reference rate.</p><p>Why the other options are wrong</p><p><strong>B:</strong> Market reference rate minus a same-maturity Treasury bill yield defines the TED spread, not the MRR–OIS spread. <strong>C:</strong> SOFR is itself a volume-weighted index of qualified repo transactions; subtracting transaction volume is not an interest-rate spread.</p>"
+  },
+  {
+    "topic": "OIS floating-rate construction",
+    "stem": "In an overnight indexed swap, how is the periodic floating rate determined?",
+    "options": [
+      "From the volume-weighted average of qualified secured repo transactions",
+      "From the geometric average of a daily unsecured overnight rate",
+      "From the same-maturity Treasury bill yield"
+    ],
+    "answer": 1,
+    "explanation": "<h3>First Principles Thinking: core idea</h3><p><strong>B is correct.</strong> An OIS floating payment uses the geometric average of a daily unsecured overnight index rate.</p><p>Why the other options are wrong</p><p><strong>A:</strong> A volume-weighted index of qualified secured repo transactions describes SOFR, not the OIS periodic floating-rate construction. <strong>C:</strong> The Treasury bill yield is the government component of the TED spread, not the overnight index averaged for the OIS floating leg.</p>"
+  },
+  {
+    "topic": "SOFR collateral",
+    "stem": "What collateral underlies borrowing represented by SOFR?",
+    "options": [
+      "US Treasury securities",
+      "No collateral because the borrowing is unsecured overnight lending",
+      "MRR-based Eurodollar futures contracts"
+    ],
+    "answer": 0,
+    "explanation": "<h3>First Principles Thinking: core idea</h3><p><strong>A is correct.</strong> SOFR represents overnight cash borrowing collateralized by US Treasury securities.</p><p>Why the other options are wrong</p><p><strong>B:</strong> Unsecured overnight lending supplies the daily rate averaged in an OIS; SOFR instead measures secured borrowing backed by US Treasuries. <strong>C:</strong> MRR-based Eurodollar futures are referenced in the TED acronym and are not the collateral for SOFR borrowing.</p>"
+  },
+  {
+    "topic": "SOFR construction",
+    "stem": "How is SOFR constructed from qualified repo transactions?",
+    "options": [
+      "As the geometric average of daily unsecured overnight rates",
+      "As a daily volume-weighted index of qualified repo transactions",
+      "As the difference between a market reference rate and a Treasury bill yield"
+    ],
+    "answer": 1,
+    "explanation": "<h3>First Principles Thinking: core idea</h3><p><strong>B is correct.</strong> SOFR is a daily volume-weighted index of all qualified repo-market transactions.</p><p>Why the other options are wrong</p><p><strong>A:</strong> A geometric average of daily unsecured overnight rates describes the OIS floating rate, whereas SOFR uses secured repo transactions and volume weighting. <strong>C:</strong> Market reference rate minus a Treasury bill yield defines the TED spread, not the construction of SOFR.</p>"
+  },
+  {
+    "topic": "Pure expectations forward-rate implication",
+    "stem": "Under pure expectations theory, what do forward rates represent?",
+    "options": [
+      "Expected future spot rates",
+      "Current liquidity premiums only",
+      "Fixed preferred-habitat boundaries"
+    ],
+    "answer": 0,
+    "explanation": "<h3>First Principles Thinking: core idea</h3><p><strong>A is correct.</strong> The source links pure expectations theory to forward rates as expectations of future spot rates.</p><p>Why the other options are wrong</p><p><strong>B:</strong> The choice \"Current liquidity premiums only\" is wrong because Liquidity premiums are added by liquidity-preference theory, not the pure-expectations identification of forwards with expected future spots. The source links pure expectations theory to forward rates as expectations of future spot rates. <strong>C:</strong> The choice \"Fixed preferred-habitat boundaries\" is wrong because Preferred-habitat boundaries belong to a different term-structure theory and do not define pure expectations. The source links pure expectations theory to forward rates as expectations of future spot rates.</p>"
+  },
+  {
+    "topic": "Local expectations return implication",
+    "stem": "Under local expectations theory, what is expected about short-horizon returns on default-risk-free bonds of different maturities?",
+    "options": [
+      "Longer maturities always earn more",
+      "Shorter maturities always earn more",
+      "They are equal over the short horizon"
+    ],
+    "answer": 2,
+    "explanation": "<h3>First Principles Thinking: core idea</h3><p><strong>C is correct.</strong> The source states that local expectations implies equal expected returns over the specified short horizon.</p><p>Why the other options are wrong</p><p><strong>A:</strong> The choice \"Longer maturities always earn more\" is wrong because Always favoring longer maturities contradicts equal expected returns over the short horizon. The source states that local expectations implies equal expected returns over the specified short horizon. <strong>B:</strong> The choice \"Shorter maturities always earn more\" is wrong because Always favoring shorter maturities contradicts equal expected returns over the short horizon. The source states that local expectations implies equal expected returns over the specified short horizon.</p>"
+  },
+  {
+    "topic": "Liquidity preference premium sign",
+    "stem": "Under liquidity preference theory, what compensation do investors require for holding longer-maturity bonds?",
+    "options": [
+      "A positive liquidity premium",
+      "A negative liquidity premium",
+      "No maturity-related premium"
+    ],
+    "answer": 0,
+    "explanation": "<h3>First Principles Thinking: core idea</h3><p><strong>A is correct.</strong> The source states that investors require a liquidity premium for longer maturities.</p><p>Why the other options are wrong</p><p><strong>B:</strong> The choice \"A negative liquidity premium\" is wrong because A negative premium reverses the positive compensation required for longer maturities. The source states that investors require a liquidity premium for longer maturities. <strong>C:</strong> The choice \"No maturity-related premium\" is wrong because No maturity premium removes the compensation required for holding longer maturities. The source states that investors require a liquidity premium for longer maturities.</p>"
+  },
+  {
+    "topic": "Liquidity premium maturity pattern",
+    "stem": "How does the liquidity premium generally change with maturity under liquidity preference theory?",
+    "options": [
+      "It increases with maturity",
+      "It decreases to zero immediately",
+      "It is identical and negative at all maturities"
+    ],
+    "answer": 0,
+    "explanation": "<h3>First Principles Thinking: core idea</h3><p><strong>A is correct.</strong> The source describes a positive liquidity premium that increases with maturity.</p><p>Why the other options are wrong</p><p><strong>B:</strong> The choice \"It decreases to zero immediately\" is wrong because Decreasing immediately reverses the positive premium's increase with maturity. The source describes a positive liquidity premium that increases with maturity. <strong>C:</strong> The choice \"It is identical and negative at all maturities\" is wrong because A constant negative premium reverses both its positive sign and increasing maturity pattern. The source describes a positive liquidity premium that increases with maturity.</p>"
+  },
+  {
+    "topic": "Segmented markets constraint",
+    "stem": "Under segmented markets theory, why do participants concentrate in particular maturity segments?",
+    "options": [
+      "They can freely move across maturities for any small yield difference",
+      "Their asset purchases are constrained by the timing of their liabilities",
+      "All maturities are perfect substitutes"
+    ],
+    "answer": 1,
+    "explanation": "<h3>First Principles Thinking: core idea</h3><p><strong>B is correct.</strong> The source says participants are limited to maturities matching their liability timing.</p><p>Why the other options are wrong</p><p><strong>A:</strong> The choice \"They can freely move across maturities for any small yield difference\" is wrong because Free movement for small yield differences removes the liability-timing constraint. The source says participants are limited to maturities matching their liability timing. <strong>C:</strong> The choice \"All maturities are perfect substitutes\" is wrong because Perfect substitutability across maturities contradicts segmentation by liability timing. The source says participants are limited to maturities matching their liability timing.</p>"
+  },
+  {
+    "topic": "Preferred habitat flexibility",
+    "stem": "Under preferred habitat theory, when may investors leave their preferred maturity segment?",
+    "options": [
+      "When other maturities offer sufficient compensation",
+      "Never under any circumstances",
+      "Only when the yield curve is perfectly flat"
+    ],
+    "answer": 0,
+    "explanation": "<h3>First Principles Thinking: core idea</h3><p><strong>A is correct.</strong> The source states that investors may deviate if returns sufficiently compensate them.</p><p>Why the other options are wrong</p><p><strong>B:</strong> The choice \"Never under any circumstances\" is wrong because Never moving makes preferred habitat as rigid as segmented markets and omits sufficient-return compensation. The source states that investors may deviate if returns sufficiently compensate them. <strong>C:</strong> The choice \"Only when the yield curve is perfectly flat\" is wrong because A perfectly flat curve is not the condition; sufficient compensation at another maturity is. The source states that investors may deviate if returns sufficiently compensate them.</p>"
+  },
+  {
+    "topic": "Supply-demand theory commonality",
+    "stem": "What do segmented markets and preferred habitat theories both use to explain yield-curve shape?",
+    "options": [
+      "Only expected inflation",
+      "Supply and demand for bonds by maturity",
+      "A requirement that forward rates equal realized spot rates"
+    ],
+    "answer": 1,
+    "explanation": "<h3>First Principles Thinking: core idea</h3><p><strong>B is correct.</strong> The source states that both theories explain curve shape in terms of bond supply and demand.</p><p>Why the other options are wrong</p><p><strong>A:</strong> The choice \"Only expected inflation\" is wrong because Expected inflation alone omits the bond supply-and-demand mechanism by maturity. The source states that both theories explain curve shape in terms of bond supply and demand. <strong>C:</strong> The choice \"A requirement that forward rates equal realized spot rates\" is wrong because Equality of forward and realized spot rates is not the shared supply-and-demand explanation. The source states that both theories explain curve shape in terms of bond supply and demand.</p>"
+  },
+  {
+    "topic": "Level-factor movement",
+    "stem": "What yield-curve movement does the level factor represent?",
+    "options": [
+      "An upward or downward shift of rates across maturities",
+      "Opposite movement of intermediate rates versus short- and long-term rates",
+      "A change in steepness caused by unequal short- and long-rate moves"
+    ],
+    "answer": 0,
+    "explanation": "<h3>First Principles Thinking: core idea</h3><p><strong>A is correct.</strong> The level factor is an upward or downward shift across the curve, with rates moving in the same direction by a similar magnitude.</p><p>Why the other options are wrong</p><p><strong>B:</strong> Opposing middle-versus-endpoint movements describe curvature, not level. <strong>C:</strong> Unequal short- and long-rate movements change steepness rather than the curve’s common level.</p>"
+  },
+  {
+    "topic": "Steepness-factor movement",
+    "stem": "What does the steepness factor capture?",
+    "options": [
+      "A parallel shift by the same amount at every maturity",
+      "Opposite movement of the middle segment versus both endpoints",
+      "A nonparallel change in which short-term rates move more than long-term rates or vice versa"
+    ],
+    "answer": 2,
+    "explanation": "<h3>First Principles Thinking: core idea</h3><p><strong>C is correct.</strong> Steepness changes when short- and long-term rates move by different amounts, altering the slope of the curve.</p><p>Why the other options are wrong</p><p><strong>A:</strong> Equal movement at every maturity is a level shift and leaves steepness unchanged. <strong>B:</strong> Opposite middle-versus-endpoint movement is curvature, not steepness.</p>"
+  },
+  {
+    "topic": "Curvature factor movement",
+    "stem": "Which pattern is an example of a curvature change?",
+    "options": [
+      "Short- and long-term rates fall while intermediate rates rise",
+      "All rates rise by the same amount",
+      "Only the shortest rate changes while all others are fixed"
+    ],
+    "answer": 0,
+    "explanation": "<h3>First Principles Thinking: core idea</h3><p><strong>A is correct.</strong> The source gives falling short and long rates with rising intermediate rates as a curvature example.</p><p>Why the other options are wrong</p><p><strong>B:</strong> The choice \"All rates rise by the same amount\" is wrong because All rates rising equally is a level shift rather than opposing intermediate versus endpoint movements. The source gives falling short and long rates with rising intermediate rates as a curvature example. <strong>C:</strong> The choice \"Only the shortest rate changes while all others are fixed\" is wrong because Changing only the shortest rate omits the short-and-long versus intermediate pattern defining the example. The source gives falling short and long rates with rising intermediate rates as a curvature example.</p>"
+  },
+  {
+    "topic": "Level-factor empirical importance",
+    "stem": "Which of the three yield-curve factors explains most of the total changes in swap and bond market yields?",
+    "options": [
+      "The steepness factor",
+      "The level factor",
+      "The curvature factor"
+    ],
+    "answer": 1,
+    "explanation": "<h3>First Principles Thinking: core idea</h3><p><strong>B is correct.</strong> Empirically, the level factor explains most total yield changes; steepness explains less variance and curvature has the smallest impact.</p><p>Why the other options are wrong</p><p><strong>A:</strong> Steepness explains less total variance than the level factor. <strong>C:</strong> Curvature has the smallest impact of the three, so it cannot be the factor explaining most yield changes.</p>"
+  },
+  {
+    "topic": "Aggregation of key rate durations",
+    "stem": "A portfolio has key rate durations of 0.3333, 1.6667, and 3.3333 at its three key maturities. What is its effective duration for a parallel yield-curve shift?",
+    "options": [
+      "3.0000",
+      "3.6667",
+      "5.3333"
+    ],
+    "answer": 2,
+    "explanation": "<h3>First Principles Thinking: core idea</h3><p><strong>C is correct.</strong> For a parallel shift, the key rate durations sum to effective duration: 0.3333 + 1.6667 + 3.3333 = 5.3333.</p><p>Why the other options are wrong</p><p><strong>A:</strong> 3.0000 is the example’s steepness-factor sensitivity, not the sum of the three key rate durations. <strong>B:</strong> 3.6667 is the example’s curvature-factor sensitivity, not the effective duration under a parallel shift.</p>"
+  },
+  {
+    "topic": "Key-rate-duration purpose",
+    "stem": "What risk can key rate durations measure that effective duration alone cannot identify?",
+    "options": [
+      "Only a small parallel shift in the benchmark curve",
+      "Shaping risk from changes at specific maturity segments",
+      "Only an equal yield change at every key maturity"
+    ],
+    "answer": 1,
+    "explanation": "<h3>First Principles Thinking: core idea</h3><p><strong>B is correct.</strong> Effective duration measures a parallel shift, whereas key rate durations isolate sensitivity at specific maturities and therefore identify yield-curve shaping risk.</p><p>Why the other options are wrong</p><p><strong>A:</strong> A small parallel shift is the exposure effective duration already measures; it is not the additional capability of key rate durations. <strong>C:</strong> Equal changes at every key maturity collapse to a parallel shift; key rate durations add the ability to measure nonparallel segment changes.</p>"
+  },
+  {
+    "topic": "Factor-exposure risk management",
+    "stem": "How are a bond portfolio’s level, steepness, and curvature sensitivities used in yield-curve risk management?",
+    "options": [
+      "To manage only parallel level shifts and ignore curve shape",
+      "To force every maturity segment to have the same sensitivity",
+      "To quantify and adjust exposure to distinct yield-curve movements"
+    ],
+    "answer": 2,
+    "explanation": "<h3>First Principles Thinking: core idea</h3><p><strong>C is correct.</strong> Separate factor sensitivities quantify how value responds to level, steepness, and curvature moves, allowing those exposures to be adjusted to desired values.</p><p>Why the other options are wrong</p><p><strong>A:</strong> Restricting management to parallel shifts omits the steepness and curvature exposures the factor model measures. <strong>B:</strong> The purpose is to measure and adjust distinct factor exposures, not force all maturity segments into one identical sensitivity.</p>"
+  },
+  {
+    "topic": "Short-rate volatility driver",
+    "stem": "What uncertainty is short-term interest rate volatility most strongly linked to?",
+    "options": [
+      "Uncertainty about the real economy and inflation at long maturities",
+      "An assumption that volatility is identical at all maturities",
+      "Uncertainty about monetary policy"
+    ],
+    "answer": 2,
+    "explanation": "<h3>First Principles Thinking: core idea</h3><p><strong>C is correct.</strong> Short-term interest rate volatility is most strongly linked to uncertainty regarding monetary policy.</p><p>Why the other options are wrong</p><p><strong>A:</strong> Real-economy and inflation uncertainty is identified as the stronger driver of long-term, not short-term, volatility. <strong>B:</strong> Interest-rate volatility is not identical along the curve, so uniformity cannot be the short-rate driver.</p>"
+  },
+  {
+    "topic": "Interest-rate volatility measure",
+    "stem": "Under the module’s typical lognormal assumption, how is the volatility of an interest rate measured over a specified interval?",
+    "options": [
+      "As the annualized standard deviation of the absolute change in the bond’s price",
+      "As the annualized standard deviation of the proportional change in the bond yield",
+      "As the average level of the bond yield over the interval"
+    ],
+    "answer": 1,
+    "explanation": "<h3>First Principles Thinking: core idea</h3><p><strong>B is correct.</strong> Interest-rate volatility is the annualized standard deviation of the proportional change in a bond yield over the specified interval.</p><p>Why the other options are wrong</p><p><strong>A:</strong> The defined input is the proportional change in yield, not the absolute change in bond price. <strong>C:</strong> An average yield level measures neither dispersion nor proportional yield changes and therefore is not the stated volatility measure.</p>"
+  },
+  {
+    "topic": "Yield volatility price effect",
+    "stem": "For otherwise comparable bonds, what does greater yield volatility imply for price volatility?",
+    "options": [
+      "Greater price volatility",
+      "Lower price volatility",
+      "No relation to price volatility"
+    ],
+    "answer": 0,
+    "explanation": "<h3>First Principles Thinking: core idea</h3><p><strong>A is correct.</strong> The source links yield volatility to the magnitude of bond price volatility.</p><p>Why the other options are wrong</p><p><strong>B:</strong> The choice \"Lower price volatility\" is wrong because Lower price volatility reverses the effect of greater yield volatility. The source links yield volatility to the magnitude of bond price volatility. <strong>C:</strong> The choice \"No relation to price volatility\" is wrong because No relation denies that yield volatility determines the magnitude of bond price volatility. The source links yield volatility to the magnitude of bond price volatility.</p>"
+  },
+  {
+    "topic": "Duration amplification",
+    "stem": "How does greater interest rate sensitivity affect the price response to a given yield change?",
+    "options": [
+      "It eliminates the price response",
+      "It increases the price response",
+      "It reverses the sign of every price response"
+    ],
+    "answer": 1,
+    "explanation": "<h3>First Principles Thinking: core idea</h3><p><strong>B is correct.</strong> The source explains that greater duration or sensitivity produces a larger price change for a given yield move.</p><p>Why the other options are wrong</p><p><strong>A:</strong> The choice \"It eliminates the price response\" is wrong because Eliminating the response reverses duration's role as sensitivity to a yield move. The source explains that greater duration or sensitivity produces a larger price change for a given yield move. <strong>C:</strong> The choice \"It reverses the sign of every price response\" is wrong because Duration changes response magnitude; it does not reverse every price response's sign. The source explains that greater duration or sensitivity produces a larger price change for a given yield move.</p>"
+  },
+  {
+    "topic": "Volatility term-structure definition",
+    "stem": "What does the term structure of interest rate volatilities represent?",
+    "options": [
+      "The yield volatility of a zero-coupon bond at every security maturity",
+      "The price volatility of one fixed-income instrument at a single maturity",
+      "One common yield volatility imposed on every maturity"
+    ],
+    "answer": 0,
+    "explanation": "<h3>First Principles Thinking: core idea</h3><p><strong>A is correct.</strong> The volatility term structure records the yield volatility of a zero-coupon bond for every maturity and thereby measures yield-curve risk.</p><p>Why the other options are wrong</p><p><strong>B:</strong> One instrument at one maturity is a single observation, not a term structure spanning every security maturity. <strong>C:</strong> The excerpt explicitly states that interest-rate volatility is not the same along the yield curve, so one common volatility cannot represent the term structure.</p>"
+  },
+  {
+    "topic": "Typical maturity pattern of yield volatility",
+    "stem": "What maturity pattern does the term structure of interest rate volatilities typically show?",
+    "options": [
+      "Long-term rates are more volatile than short-term rates",
+      "Short- and long-term rates have identical volatility",
+      "Short-term rates are more volatile than long-term rates"
+    ],
+    "answer": 2,
+    "explanation": "<h3>First Principles Thinking: core idea</h3><p><strong>C is correct.</strong> The typical volatility term structure has higher yield volatility at short maturities than at long maturities.</p><p>Why the other options are wrong</p><p><strong>A:</strong> This reverses the typical yield-volatility pattern; long-term bond prices may vary more because of duration, but their yields are typically less volatile. <strong>B:</strong> Interest-rate volatility is explicitly not the same at all maturities.</p>"
+  },
+  {
+    "topic": "Embedded-option value dependence",
+    "stem": "For a fixed-income instrument with an embedded option, which market input is crucial to the option’s value?",
+    "options": [
+      "The level of interest rate volatility",
+      "The yield level with volatility held irrelevant",
+      "One maturity’s rate with the rest of the volatility term structure ignored"
+    ],
+    "answer": 0,
+    "explanation": "<h3>First Principles Thinking: core idea</h3><p><strong>A is correct.</strong> Option values, and therefore values of fixed-income instruments with embedded options, depend crucially on the level of interest rate volatility.</p><p>Why the other options are wrong</p><p><strong>B:</strong> Making volatility irrelevant removes the input identified as crucial to the embedded option’s value. <strong>C:</strong> A single rate level cannot replace the interest-rate volatility input on which the option value depends.</p>"
+  },
+  {
+    "topic": "Term bond risk premium definition",
+    "stem": "What does the term bond risk premium measure for a default-free long-term bond?",
+    "options": [
+      "Its expected return minus the expected return on an even longer default-free bond",
+      "Its ex post observed historical excess return over the one-period risk-free rate",
+      "Its expected excess return over an equivalent short-term bond or the one-period risk-free rate"
+    ],
+    "answer": 2,
+    "explanation": "<h3>First Principles Thinking: core idea</h3><p><strong>C is correct.</strong> The term bond risk premium is the expected excess return of a default-free long-term bond over an equivalent short-term bond or the one-period risk-free rate.</p><p>Why the other options are wrong</p><p><strong>A:</strong> The comparison is with an equivalent short-term bond or one-period risk-free rate, not with an even longer bond. <strong>B:</strong> The premium is a forward-looking expectation that must be estimated, not an ex post observed historical excess return.</p>"
+  },
+  {
+    "topic": "Dominant long-term yield driver",
+    "stem": "According to the research summarized in the module, which factor explains nearly two-thirds of long-term bond-yield variation?",
+    "options": [
+      "Economic growth",
+      "Inflation",
+      "Monetary policy"
+    ],
+    "answer": 1,
+    "explanation": "<h3>First Principles Thinking: core idea</h3><p><strong>B is correct.</strong> Inflation explains nearly two-thirds of long-term yield variation, with most of the remaining third attributable to monetary policy.</p><p>Why the other options are wrong</p><p><strong>A:</strong> Economic growth is not identified as the factor explaining nearly two-thirds of long-term yield variation. <strong>C:</strong> Monetary policy explains about two-thirds of short- and intermediate-term yield variation, not long-term variation.</p>"
+  },
+  {
+    "topic": "Monetary easing and short rates",
+    "stem": "During a recession, a central bank cuts benchmark rates to stimulate economic activity. What is the associated near-term effect on short-term benchmark yields?",
+    "options": [
+      "They fall",
+      "They rise",
+      "They remain unchanged"
+    ],
+    "answer": 0,
+    "explanation": "<h3>First Principles Thinking: core idea</h3><p><strong>A is correct.</strong> A recessionary benchmark-rate cut lowers short-term yields and is associated with bullish steepening when short rates fall more than long rates.</p><p>Why the other options are wrong</p><p><strong>B:</strong> Rising short-term yields correspond to benchmark-rate increases during expansion, not the stated recessionary rate cut. <strong>C:</strong> Leaving short-term yields unchanged omits the direct effect of the benchmark-rate cut.</p>"
+  },
+  {
+    "topic": "Government borrowing supply effect",
+    "stem": "Holding demand constant, how does increased government bond issuance affect yields?",
+    "options": [
+      "It tends to raise yields",
+      "It necessarily lowers yields",
+      "It has no supply effect"
+    ],
+    "answer": 0,
+    "explanation": "<h3>First Principles Thinking: core idea</h3><p><strong>A is correct.</strong> The source explains that greater bond supply from government borrowing places upward pressure on yields.</p><p>Why the other options are wrong</p><p><strong>B:</strong> The choice \"It necessarily lowers yields\" is wrong because Lower yields reverse the upward pressure created by greater government bond supply. The source explains that greater bond supply from government borrowing places upward pressure on yields. <strong>C:</strong> The choice \"It has no supply effect\" is wrong because No supply effect ignores the additional bond issuance caused by government borrowing. The source explains that greater bond supply from government borrowing places upward pressure on yields.</p>"
+  },
+  {
+    "topic": "Flight-to-quality curve change",
+    "stem": "What yield-curve change is most often associated with a flight to quality?",
+    "options": [
+      "Bearish steepening",
+      "An unchanged curve",
+      "Bullish flattening"
+    ],
+    "answer": 2,
+    "explanation": "<h3>First Principles Thinking: core idea</h3><p><strong>C is correct.</strong> The source states that flight to quality is most often associated with bullish flattening.</p><p>Why the other options are wrong</p><p><strong>A:</strong> The choice \"Bearish steepening\" is wrong because Bearish steepening has the wrong direction and shape for the cited flight-to-quality response. The source states that flight to quality is most often associated with bullish flattening. <strong>B:</strong> The choice \"An unchanged curve\" is wrong because An unchanged curve omits the bullish flattening most often associated with flight to quality. The source states that flight to quality is most often associated with bullish flattening.</p>"
+  },
+  {
+    "topic": "Domestic investor demand effect",
+    "stem": "How does greater domestic investor demand for long-dated government bonds affect their prices and the bond risk premium?",
+    "options": [
+      "It lowers prices and raises the bond risk premium",
+      "It raises prices and reduces the bond risk premium",
+      "It leaves both prices and the bond risk premium unchanged"
+    ],
+    "answer": 1,
+    "explanation": "<h3>First Principles Thinking: core idea</h3><p><strong>B is correct.</strong> Greater domestic investor demand bids up government-bond prices and reduces the bond risk premium.</p><p>Why the other options are wrong</p><p><strong>A:</strong> Lower prices and a higher premium reverse both stated effects of stronger domestic demand. <strong>C:</strong> Demand is identified as a key driver, so stronger demand does not leave prices and the bond risk premium unchanged.</p>"
+  },
+  {
+    "topic": "Duration positioning for falling rates",
+    "stem": "Relative to a benchmark, how will an investor who expects interest rates to fall generally position portfolio duration?",
+    "options": [
+      "Shorten duration to reduce exposure to rising bond prices",
+      "Keep duration neutral because falling-rate views cannot be expressed through duration",
+      "Extend duration to benefit from bond price increases"
+    ],
+    "answer": 2,
+    "explanation": "<h3>First Principles Thinking: core idea</h3><p><strong>C is correct.</strong> An investor expecting lower rates generally extends duration relative to the benchmark to benefit from the associated bond price increases.</p><p>Why the other options are wrong</p><p><strong>A:</strong> Shortening duration is the response to expected higher rates and falling bond prices, not to an expected rate decline. <strong>B:</strong> The module explicitly uses relative duration as a way to express a level-rate view; neutrality is not required.</p>"
+  }
+]

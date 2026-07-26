@@ -1,0 +1,4 @@
+interface:
+  display_name: "CFA Kata Pipeline"
+  short_description: "Generate source-locked CFA practice katas"
+  default_prompt: "Use $generate-cfa-katas with lm1-fi.toml to build and validate the CFA question dataset."

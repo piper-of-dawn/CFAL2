@@ -1,0 +1,131 @@
+@import "tailwindcss";
+@import "@appica/ui-react/styles.css";
+@source "../../node_modules/@appica/ui-react/dist";
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: Arial, Helvetica, sans-serif;
+  --font-mono: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
+  transition: background-color .2s ease, color .2s ease;
+}
+
+.option-row:focus-visible, .map-dot:focus-visible {
+  outline: 3px solid var(--color-ring-primary);
+  outline-offset: 3px;
+}
+
+.quiz-grid { position: relative; }
+.quiz-grid::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background-image: radial-gradient(circle, color-mix(in srgb, var(--color-primary) 22%, transparent) 1px, transparent 1px);
+  background-size: 28px 28px;
+  mask-image: linear-gradient(to bottom, black, transparent 78%);
+  opacity: .1;
+}
+.brand-mark {
+  display: inline-flex;
+  width: 2rem;
+  height: 2rem;
+  align-items: center;
+  justify-content: center;
+  border-radius: .7rem;
+  background: var(--color-primary);
+  color: var(--color-primary-foreground);
+  font-weight: 700;
+}
+.material-card {
+  background: var(--color-surface);
+  box-shadow: 0 6px 18px rgb(0 0 0 / 0.18);
+}
+.material-tonal,
+.material-control,
+.material-list-item {
+  background: var(--color-background-muted);
+  box-shadow: none;
+}
+.material-list-item {
+  color: var(--color-foreground);
+  transition: background .2s ease, box-shadow .2s ease, transform .2s ease;
+}
+.material-list-item::before,
+.option-row::before {
+  display: none;
+}
+.material-list-item:hover {
+  background: var(--color-background-strong);
+  box-shadow: none;
+}
+.material-list-item-active {
+  background: var(--color-primary-muted);
+  color: var(--color-primary-foreground);
+  box-shadow: none;
+}
+.material-success {
+  background: var(--color-success-muted);
+  box-shadow: none;
+}
+.material-error {
+  background: var(--color-error-muted);
+  box-shadow: none;
+}
+.option-row {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  gap: .9rem;
+  border: 0;
+  border-radius: 1.25rem;
+  padding: 1.1rem 1.25rem;
+  background: var(--color-background-muted);
+  color: var(--color-foreground);
+  font-size: .95rem;
+  box-shadow: none;
+  transition: background .2s, box-shadow .2s, transform .2s;
+}
+.option-row:hover {
+  background: var(--color-background-strong);
+  box-shadow: none;
+}
+.option-selected {
+  background: var(--color-primary-muted);
+  box-shadow: none;
+}
+.option-correct {
+  background: var(--color-success-muted);
+  box-shadow: none;
+}
+.option-wrong {
+  background: var(--color-error-muted);
+  box-shadow: none;
+}
+.option-letter, .map-dot {
+  display: inline-flex;
+  flex: none;
+  width: 1.8rem;
+  height: 1.8rem;
+  align-items: center;
+  justify-content: center;
+  border-radius: .6rem;
+  background: color-mix(in srgb, var(--color-primary) 10%, transparent);
+  color: var(--color-primary);
+  font-size: .75rem;
+  font-weight: 700;
+}
+.explanation-content h3 { margin-top: 1rem; color: var(--color-foreground); font-size: 1rem; font-weight: 650; }
+.explanation-content p { margin-top: .8rem; }
+.explanation-content strong { color: var(--color-foreground); }
+.map-dot { width: 2.2rem; height: 2.2rem; border: 0; background: transparent; }
+.map-dot-active { box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-primary) 14%, transparent); }
+.map-dot-correct { color: var(--color-success); }
+.map-dot-wrong { color: var(--color-error); }
