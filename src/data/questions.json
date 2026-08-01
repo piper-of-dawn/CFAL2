@@ -133,14 +133,14 @@
   },
   {
     "topic": "Two-year spot rate by bootstrapping",
-    "stem": "A two-year annual-coupon sovereign bond is priced at 1 per unit of principal and has a 5.97% par coupon. The one-year spot rate is 5.00%. Using 1 = 0.0597/1.05 + 1.0597/(1 + z2)^2, what is the two-year spot rate z2?",
+    "stem": "A two-year annual-coupon sovereign bond is priced at $1$ per unit of principal and has a $5.97\\%$ par coupon. The one-year spot rate is $5.00\\%$. Using $$1 = \\frac{0.0597}{1.05} + \\frac{1.0597}{(1 + z_2)^2}$$ what is the two-year spot rate $z_2$?",
     "options": [
-      "5.00%",
-      "6.00%",
-      "5.97%"
+      "$5.00\\%$",
+      "$6.00\\%$",
+      "$5.97\\%$"
     ],
     "answer": 1,
-    "explanation": "<h3>First Principles Thinking: core idea</h3><p><strong>B is correct.</strong> Subtracting the discounted first coupon from 1 and solving 1.0597/(1 + z2)^2 for z2 gives 6.00%.</p><p>Why the other options are wrong</p><p><strong>A:</strong> 5.00% incorrectly reuses the one-year spot rate for the final two-year cash flow instead of solving for the new two-year rate. <strong>C:</strong> 5.97% incorrectly equates the par coupon with the two-year spot rate; the earlier coupon is discounted at 5.00%, so bootstrapping gives 6.00%.</p>"
+    "explanation": "<h3>First Principles Thinking: core idea</h3><p><strong>B is correct.</strong> Subtracting the discounted first coupon from $1$ and solving $\\frac{1.0597}{(1 + z_2)^2}$ for $z_2$ gives $6.00\\%$.</p><p>Why the other options are wrong</p><p><strong>A:</strong> $5.00\\%$ incorrectly reuses the one-year spot rate for the final two-year cash flow instead of solving for the new two-year rate. <strong>C:</strong> $5.97\\%$ incorrectly equates the par coupon with the two-year spot rate; the earlier coupon is discounted at $5.00\\%$, so bootstrapping gives $6.00\\%$.</p>"
   },
   {
     "topic": "First-maturity starting point",
@@ -386,14 +386,14 @@
   },
   {
     "topic": "Swap-spread calculation",
-    "stem": "A five-year fixed-for-floating swap rate is 2.00% and the same-maturity on-the-run government bond yields 1.70%. What is the five-year swap spread?",
+    "stem": "A five-year fixed-for-floating swap rate is $2.00\\%$ and the same-maturity on-the-run government bond yields $1.70\\%$. What is the five-year swap spread?",
     "options": [
-      "−30 basis points",
-      "3.70%",
+      "$-30$ basis points",
+      "$3.70\\%$",
       "30 basis points"
     ],
     "answer": 2,
-    "explanation": "<h3>First Principles Thinking: core idea</h3><p><strong>C is correct.</strong> The swap spread is 2.00% minus 1.70% = 0.30%, which equals 30 basis points.</p><p>Why the other options are wrong</p><p><strong>A:</strong> −30 basis points reverses the subtraction; the swap rate exceeds the government yield by positive 30 basis points. <strong>B:</strong> 3.70% adds the two rates, whereas the spread is their difference, 0.30%.</p>"
+    "explanation": "<h3>First Principles Thinking: core idea</h3><p><strong>C is correct.</strong> The swap spread is $2.00\\% - 1.70\\% = 0.30\\%$, which equals 30 basis points.</p><p>Why the other options are wrong</p><p><strong>A:</strong> $-30$ basis points reverses the subtraction; the swap rate exceeds the government yield by positive 30 basis points. <strong>B:</strong> $3.70\\%$ adds the two rates, whereas the spread is their difference, $0.30\\%$.</p>"
   },
   {
     "topic": "Swap-spread maturity matching",
