@@ -83,7 +83,9 @@ body {
   display: flex;
   width: 100%;
   min-width: 0;
-  align-items: center;
+  max-width: 100%;
+  height: auto;
+  align-items: flex-start;
   gap: .9rem;
   border: 0;
   border-radius: 1.25rem;
@@ -91,8 +93,13 @@ body {
   background: var(--color-background-muted);
   color: var(--color-foreground);
   font-size: .95rem;
+  text-align: left;
+  white-space: normal;
   box-shadow: none;
   transition: background .2s, box-shadow .2s, transform .2s;
+}
+.option-row > * {
+  min-width: 0;
 }
 .option-row:hover {
   background: var(--color-background-strong);
@@ -124,11 +131,13 @@ body {
   font-weight: 700;
 }
 .option-text {
+  display: block;
   min-width: 0;
   flex: 1 1 auto;
   overflow-wrap: anywhere;
   word-break: break-word;
   line-height: 1.5;
+  white-space: normal;
 }
 .option-text .inline-block {
   max-width: 100%;
