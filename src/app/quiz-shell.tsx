@@ -219,7 +219,7 @@ export default function QuizShell({ questionSets }: { questionSets: QuestionSet[
                       onClick={() => selectAnswer(questionIndex, optionIndex)}
                       className={`option-row min-h-16 justify-start text-base ${chosen ? "option-selected" : ""} ${right ? "option-correct" : ""} ${wrong ? "option-wrong" : ""}`}
                     >
-                      <span className="option-letter">{String.fromCharCode(65 + optionIndex)}</span><span className="text-left"><MathText>{option}</MathText></span><span className="ml-auto text-xl">{right ? "✓" : wrong ? "×" : ""}</span>
+                      <span className="option-letter">{String.fromCharCode(65 + optionIndex)}</span><span className="option-text text-left"><MathText>{option}</MathText></span><span className="option-status ml-auto text-xl">{right ? "✓" : wrong ? "×" : ""}</span>
                     </Button>
                   );
                 })}</div>

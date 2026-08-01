@@ -82,6 +82,7 @@ body {
 .option-row {
   display: flex;
   width: 100%;
+  min-width: 0;
   align-items: center;
   gap: .9rem;
   border: 0;
@@ -121,6 +122,21 @@ body {
   color: var(--color-primary);
   font-size: .75rem;
   font-weight: 700;
+}
+.option-text {
+  min-width: 0;
+  flex: 1 1 auto;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+  line-height: 1.5;
+}
+.option-text .inline-block {
+  max-width: 100%;
+  overflow-x: auto;
+  vertical-align: middle;
+}
+.option-status {
+  flex: none;
 }
 .explanation-content h3 { margin-top: 1rem; color: var(--color-foreground); font-size: 1rem; font-weight: 650; }
 .explanation-content p { margin-top: .8rem; }
