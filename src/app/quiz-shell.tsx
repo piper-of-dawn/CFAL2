@@ -266,7 +266,7 @@ export default function QuizShell({ questionSets }: { questionSets: QuestionSet[
               <section key={id} className="material-card rounded-[1.75rem] p-7 sm:p-11">
                 <div className="flex items-center justify-between gap-4"><Badge variant="soft">{question.topic}</Badge><span className="font-mono text-sm text-foreground-muted">{String(questionIndex + 1).padStart(2, "0")} / {count}</span></div>
                 <p className="mt-9 text-sm font-medium text-foreground-muted">Question {questionIndex + 1}</p>
-                <h2 className="mt-3 max-w-3xl text-2xl font-semibold leading-tight sm:text-3xl"><MathText>{question.stem}</MathText></h2>
+                <h2 className="mt-3 max-w-3xl text-base font-semibold leading-snug sm:text-lg"><MathText>{question.stem}</MathText></h2>
                 <div className="mt-9 grid gap-4">{question.options.map((option, optionIndex) => {
                   const chosen = selected === optionIndex;
                   const right = checked && optionIndex === question.answer;
