@@ -353,6 +353,26 @@ body {
 .explanation-content h3 { margin-top: 1rem; color: var(--foreground); font-size: 1rem; font-weight: 650; }
 .explanation-content p { margin-top: .8rem; }
 .explanation-content strong { color: var(--foreground); }
+.vignette-card {
+  scroll-margin-top: 2rem;
+}
+.vignette-prose {
+  max-width: 78ch;
+}
+.vignette-exhibit {
+  border: 1px solid var(--border);
+  background: var(--background-muted);
+}
+.vignette-exhibit h3,
+.vignette-exhibit thead {
+  background: var(--background-strong);
+  color: var(--foreground-strong);
+}
+.vignette-exhibit th,
+.vignette-exhibit td,
+.vignette-exhibit dl > div {
+  border-top: 1px solid var(--border);
+}
 .map-dot { width: 2.2rem; height: 2.2rem; border: 0; background: transparent; }
 .map-dot-active { box-shadow: 0 0 0 3px color-mix(in srgb, var(--primary) 14%, transparent); }
 .map-dot-correct { color: var(--success); }

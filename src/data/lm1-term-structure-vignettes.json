@@ -1,0 +1,3099 @@
+{
+  "metadata": {
+    "source_files": [
+      "/home/karma/CFAPractice/mcq/quiz/AI/PDF/L2/CFA L2 B6 FIXED INCOME.pdf",
+      ".generated/cfa-kata-pipeline/lm-01/learning-outcomes.json",
+      ".generated/cfa-kata-pipeline/lm-01/transcript.txt"
+    ],
+    "module_number": 1,
+    "module_title": "The Term Structure and Interest Rate Dynamics",
+    "source_page_range": "PDF pages 11-55",
+    "question_count": 28,
+    "generated_at": "2026-08-02T12:00:00+00:00",
+    "seed": 20260802,
+    "generator_version": "2.0.0",
+    "non_affiliation_notice": "These original practice items are not affiliated with or endorsed by CFA Institute."
+  },
+  "module_blueprint": {
+    "learning_outcomes": [
+      {
+        "los_id": "lm01-lo01",
+        "text": "describe relationships among spot rates, forward rates, yield to maturity, expected and realized returns on bonds, and the shape of the yield curve"
+      },
+      {
+        "los_id": "lm01-lo02",
+        "text": "describe how zero-coupon rates (spot rates) may be obtained from the par curve by bootstrapping"
+      },
+      {
+        "los_id": "lm01-lo03",
+        "text": "describe the assumptions concerning the evolution of spot rates in relation to forward rates implicit in active bond portfolio management"
+      },
+      {
+        "los_id": "lm01-lo04",
+        "text": "describe the strategy of rolling down the yield curve"
+      },
+      {
+        "los_id": "lm01-lo05",
+        "text": "explain the swap rate curve and why and how market participants use it in valuation"
+      },
+      {
+        "los_id": "lm01-lo06",
+        "text": "calculate and interpret the swap spread for a given maturity"
+      },
+      {
+        "los_id": "lm01-lo07",
+        "text": "describe short-term interest rate spreads used to gauge economy-wide credit risk and liquidity risk"
+      },
+      {
+        "los_id": "lm01-lo08",
+        "text": "explain traditional theories of the term structure of interest rates and describe the implications of each theory for forward rates and the shape of the yield curve"
+      },
+      {
+        "los_id": "lm01-lo09",
+        "text": "explain how a bond’s exposure to each of the factors driving the yield curve can be measured and how these exposures can be used to manage yield curve risks"
+      },
+      {
+        "los_id": "lm01-lo10",
+        "text": "explain the maturity structure of yield volatilities and their effect on price volatility"
+      },
+      {
+        "los_id": "lm01-lo11",
+        "text": "explain how key economic factors are used to establish a view on benchmark rates, spreads, and yield curve changes"
+      }
+    ],
+    "concept_ids": [
+      "corrected_spot_rate",
+      "coupon_holding_period_return",
+      "dated_cash_flow_discounting_inverse",
+      "debt_maturity_supply_effect",
+      "discount_factor_inverse",
+      "duration_neutral_flattening_trade",
+      "expectations_curve_shape_application",
+      "forward_curve_horizon_value",
+      "forward_realization_benchmark",
+      "four_node_curve_exposure",
+      "funding_spread_components",
+      "holding_period_return_inverse",
+      "implied_par_quote",
+      "inverse_swap_spread",
+      "key_rate_hedge",
+      "liquidity_premium_inference",
+      "macro_curve_scenario",
+      "missing_discount_factor",
+      "multi_period_forward_breakeven",
+      "nonmonotonic_curve_interpretation",
+      "par_swap_rate",
+      "preferred_habitat_flow",
+      "realized_horizon_return",
+      "segmented_supply_shock",
+      "swap_spread_change",
+      "two_node_cross_hedge",
+      "yield_volatility_duration_interaction"
+    ],
+    "formula_ids": [
+      "discount_factor_inverse",
+      "multi_period_forward",
+      "realized_horizon_return",
+      "reverse_par_quote",
+      "missing_discount_factor",
+      "implied_face_value",
+      "spot_from_discount_factor",
+      "horizon_curve_valuation",
+      "target_return_purchase_limit",
+      "holding_period_return",
+      "inverse_swap_spread",
+      "par_swap_rate",
+      "four_node_key_rate_change",
+      "two_node_cross_hedge"
+    ]
+  },
+  "item_sets": [
+    {
+      "item_set_id": "vignette-01-liability-and-forward-analysis",
+      "format": "item_set",
+      "vignette": "Aster Quay Securities values dated liabilities and audits realized bond returns. Annual compounding applies. A separate bond bought for 96 pays 2.50 after 6 and 12 months, is sold after 18 months for 98.40, and coupons reinvest at 2.00% annually.",
+      "exhibits": [
+        {
+          "exhibit_id": "EX1",
+          "title": "Liability and discount information",
+          "data": {
+            "rows": [
+              [
+                "Package present value",
+                "94.1300"
+              ],
+              [
+                "Year-2 liability",
+                "40"
+              ],
+              [
+                "Year-5 liability",
+                "70"
+              ],
+              [
+                "DF5",
+                "0.8110"
+              ],
+              [
+                "DF2 for forward analysis",
+                "0.9430"
+              ],
+              [
+                "DF6 for forward analysis",
+                "0.7720"
+              ]
+            ]
+          }
+        }
+      ],
+      "questions": [
+        {
+          "question_id": "LM1-Q01",
+          "los_ids": [
+            "lm01-lo01"
+          ],
+          "concept_ids": [
+            "discount_factor_inverse"
+          ],
+          "difficulty": "exam_level",
+          "question_type": "calculation",
+          "stem": "A dealer must match the liability value in Exhibit 1. The two-year discount factor implied by the quoted package value is closest to:",
+          "choices": [
+            {
+              "label": "A",
+              "text": "0.9340",
+              "value_raw": 0.9339999999999998
+            },
+            {
+              "label": "B",
+              "text": "0.8557",
+              "value_raw": 0.8557272727272727
+            },
+            {
+              "label": "C",
+              "text": "0.5337",
+              "value_raw": 0.5337142857142856
+            }
+          ],
+          "correct_choice": "A",
+          "solution": {
+            "opening": "A is correct.",
+            "formula_or_rule": "PV=40DF2+70DF5; solve for DF2",
+            "steps": [
+              "DF2=(94.1300-70x0.8110)/40.",
+              "DF2=0.9340."
+            ],
+            "answer_value_raw": 0.9339999999999998,
+            "answer_value_display": "0.9340",
+            "units": "discount factor",
+            "rounding_rule": "Calculate without intermediate rounding and round once to the displayed precision.",
+            "explanation": "The earlier discount factor is recovered from the value left after stripping the five-year liability.",
+            "choice_analysis": [
+              {
+                "label": "A",
+                "is_correct": true,
+                "reason": "Correct application of the stated relationship.",
+                "error_mechanism": null
+              },
+              {
+                "label": "B",
+                "is_correct": false,
+                "reason": "This follows from dividing package value by undiscounted total cash flow.",
+                "error_mechanism": "dividing package value by undiscounted total cash flow"
+              },
+              {
+                "label": "C",
+                "is_correct": false,
+                "reason": "This follows from dividing the residual by the wrong liability amount.",
+                "error_mechanism": "dividing the residual by the wrong liability amount"
+              }
+            ]
+          },
+          "validation": {
+            "numerical": {
+              "applicable": true,
+              "independent_result": 0.9339999999999998,
+              "method": "Independent recomputation: (94.1300-70*0.8110)/40",
+              "independent_check": "40*result+70*0.8110=94.1300",
+              "residual": 0,
+              "passed": true
+            },
+            "originality": {
+              "new_entities": true,
+              "new_numbers": true,
+              "new_structure": true,
+              "not_close_paraphrase": true,
+              "passed": true
+            },
+            "grounding": {
+              "los_supported": true,
+              "module_knowledge_required": true,
+              "outside_facts_required": false,
+              "passed": true
+            },
+            "style": {
+              "three_choices": true,
+              "concise_professional_prose": true,
+              "parallel_choices": true,
+              "no_answer_clues": true,
+              "passed": true
+            },
+            "single_answer": true,
+            "overall_pass": true
+          }
+        },
+        {
+          "question_id": "LM1-Q02",
+          "los_ids": [
+            "lm01-lo01"
+          ],
+          "concept_ids": [
+            "multi_period_forward_breakeven"
+          ],
+          "difficulty": "exam_level",
+          "question_type": "calculation",
+          "stem": "The annualized four-year breakeven reinvestment rate from year 2 through year 6 is closest to:",
+          "choices": [
+            {
+              "label": "A",
+              "text": "22.15%",
+              "value_raw": 0.22150259067357503
+            },
+            {
+              "label": "B",
+              "text": "5.13%",
+              "value_raw": 0.051292577377770154
+            },
+            {
+              "label": "C",
+              "text": "4.27%",
+              "value_raw": 0.04274999999999998
+            }
+          ],
+          "correct_choice": "B",
+          "solution": {
+            "opening": "B is correct.",
+            "formula_or_rule": "f(2,4)=(DF2/DF6)^(1/4)-1",
+            "steps": [
+              "f=(0.9430/0.7720)^(1/4)-1.",
+              "f=5.13%."
+            ],
+            "answer_value_raw": 0.051292577377770154,
+            "answer_value_display": "5.13%",
+            "units": "percent",
+            "rounding_rule": "Calculate without intermediate rounding and round once to the displayed precision.",
+            "explanation": "The four-year rate makes investing to year 2 and reinvesting through year 6 equivalent to buying the six-year zero.",
+            "choice_analysis": [
+              {
+                "label": "A",
+                "is_correct": false,
+                "reason": "This follows from omitting the fourth root.",
+                "error_mechanism": "omitting the fourth root"
+              },
+              {
+                "label": "B",
+                "is_correct": true,
+                "reason": "Correct application of the stated relationship.",
+                "error_mechanism": null
+              },
+              {
+                "label": "C",
+                "is_correct": false,
+                "reason": "This follows from arithmetic spreading of the discount-factor difference.",
+                "error_mechanism": "arithmetic spreading of the discount-factor difference"
+              }
+            ]
+          },
+          "validation": {
+            "numerical": {
+              "applicable": true,
+              "independent_result": 0.051292577377770154,
+              "method": "Independent recomputation: (0.9430/0.7720)^(1/4)-1",
+              "independent_check": "0.7720*(1+result)^4=0.9430",
+              "residual": 0,
+              "passed": true
+            },
+            "originality": {
+              "new_entities": true,
+              "new_numbers": true,
+              "new_structure": true,
+              "not_close_paraphrase": true,
+              "passed": true
+            },
+            "grounding": {
+              "los_supported": true,
+              "module_knowledge_required": true,
+              "outside_facts_required": false,
+              "passed": true
+            },
+            "style": {
+              "three_choices": true,
+              "concise_professional_prose": true,
+              "parallel_choices": true,
+              "no_answer_clues": true,
+              "passed": true
+            },
+            "single_answer": true,
+            "overall_pass": true
+          }
+        },
+        {
+          "question_id": "LM1-Q03",
+          "los_ids": [
+            "lm01-lo01"
+          ],
+          "concept_ids": [
+            "realized_horizon_return"
+          ],
+          "difficulty": "difficult",
+          "question_type": "calculation",
+          "stem": "Including coupon reinvestment, the 18-month realized holding-period return is closest to:",
+          "choices": [
+            {
+              "label": "A",
+              "text": "7.71%",
+              "value_raw": 0.07708333333333339
+            },
+            {
+              "label": "B",
+              "text": "5.10%",
+              "value_raw": 0.05104166666666665
+            },
+            {
+              "label": "C",
+              "text": "7.79%",
+              "value_raw": 0.0778632941103179
+            }
+          ],
+          "correct_choice": "C",
+          "solution": {
+            "opening": "C is correct.",
+            "formula_or_rule": "HPR=(horizon sale value+reinvested coupons)/purchase price-1",
+            "steps": [
+              "Horizon wealth=98.40+2.50(1.02)+2.50(1.02^0.5)=103.4749.",
+              "HPR=7.79%."
+            ],
+            "answer_value_raw": 0.0778632941103179,
+            "answer_value_display": "7.79%",
+            "units": "percent",
+            "rounding_rule": "Calculate without intermediate rounding and round once to the displayed precision.",
+            "explanation": "Realized return incorporates both the sale price and the horizon values of interim coupons.",
+            "choice_analysis": [
+              {
+                "label": "A",
+                "is_correct": false,
+                "reason": "This follows from adding coupons without reinvestment.",
+                "error_mechanism": "adding coupons without reinvestment"
+              },
+              {
+                "label": "B",
+                "is_correct": false,
+                "reason": "This follows from omitting the first coupon and its reinvestment.",
+                "error_mechanism": "omitting the first coupon and its reinvestment"
+              },
+              {
+                "label": "C",
+                "is_correct": true,
+                "reason": "Correct application of the stated relationship.",
+                "error_mechanism": null
+              }
+            ]
+          },
+          "validation": {
+            "numerical": {
+              "applicable": true,
+              "independent_result": 0.0778632941103179,
+              "method": "Independent recomputation: (98.40+2.50*1.02+2.50*sqrt(1.02))/96-1",
+              "independent_check": "96*(1+result)=103.47487623459052",
+              "residual": 0,
+              "passed": true
+            },
+            "originality": {
+              "new_entities": true,
+              "new_numbers": true,
+              "new_structure": true,
+              "not_close_paraphrase": true,
+              "passed": true
+            },
+            "grounding": {
+              "los_supported": true,
+              "module_knowledge_required": true,
+              "outside_facts_required": false,
+              "passed": true
+            },
+            "style": {
+              "three_choices": true,
+              "concise_professional_prose": true,
+              "parallel_choices": true,
+              "no_answer_clues": true,
+              "passed": true
+            },
+            "single_answer": true,
+            "overall_pass": true
+          }
+        },
+        {
+          "question_id": "LM1-Q04",
+          "los_ids": [
+            "lm01-lo01"
+          ],
+          "concept_ids": [
+            "nonmonotonic_curve_interpretation"
+          ],
+          "difficulty": "exam_level",
+          "question_type": "interpretation",
+          "stem": "Given that DF1/DF3 implies a higher two-year forward rate than DF3/DF5, which conclusion is most accurate?",
+          "choices": [
+            {
+              "label": "A",
+              "text": "The forward curve declines after year 3 even though all discount factors remain positive.",
+              "value_raw": null
+            },
+            {
+              "label": "B",
+              "text": "The spot curve must be flat through year 5.",
+              "value_raw": null
+            },
+            {
+              "label": "C",
+              "text": "The five-year spot rate must be below the one-year spot rate.",
+              "value_raw": null
+            }
+          ],
+          "correct_choice": "A",
+          "solution": {
+            "opening": "A is correct.",
+            "formula_or_rule": "Adjacent multi-period forwards can fall while discount factors remain positive.",
+            "steps": [
+              "Forward segments are ratios of discount factors over their own tenors.",
+              "Their ordering does not uniquely determine the endpoint spot ordering stated in the distractors."
+            ],
+            "answer_value_raw": null,
+            "answer_value_display": "declining later forward segment",
+            "units": null,
+            "rounding_rule": "Not applicable; qualitative item.",
+            "explanation": "A nonmonotonic term structure can contain positive discount factors and differing forward-segment slopes.",
+            "choice_analysis": [
+              {
+                "label": "A",
+                "is_correct": true,
+                "reason": "Correct application of the stated relationship.",
+                "error_mechanism": null
+              },
+              {
+                "label": "B",
+                "is_correct": false,
+                "reason": "This follows from equating a forward-curve change with a flat spot curve.",
+                "error_mechanism": "equating a forward-curve change with a flat spot curve"
+              },
+              {
+                "label": "C",
+                "is_correct": false,
+                "reason": "This follows from inferring endpoint spot ordering without calculating compounded averages.",
+                "error_mechanism": "inferring endpoint spot ordering without calculating compounded averages"
+              }
+            ]
+          },
+          "validation": {
+            "numerical": {
+              "applicable": false,
+              "independent_result": null,
+              "method": "Conceptual item; no numerical recomputation required.",
+              "independent_check": "Source, logic, and single-answer checks completed independently.",
+              "residual": null,
+              "passed": true
+            },
+            "originality": {
+              "new_entities": true,
+              "new_numbers": true,
+              "new_structure": true,
+              "not_close_paraphrase": true,
+              "passed": true
+            },
+            "grounding": {
+              "los_supported": true,
+              "module_knowledge_required": true,
+              "outside_facts_required": false,
+              "passed": true
+            },
+            "style": {
+              "three_choices": true,
+              "concise_professional_prose": true,
+              "parallel_choices": true,
+              "no_answer_clues": true,
+              "passed": true
+            },
+            "single_answer": true,
+            "overall_pass": true
+          }
+        }
+      ]
+    },
+    {
+      "item_set_id": "vignette-02-curve-control-review",
+      "format": "item_set",
+      "vignette": "Bexley Mutual audits four independent curve-control records rather than building a sequential maturity table. Rates and discount factors use annual conventions. Record C is an invoice for a three-year bond paying a currency coupon of 36 each year; its invoice value is stated directly, with no assumed face normalization.",
+      "exhibits": [
+        {
+          "exhibit_id": "EX2",
+          "title": "Independent audit records",
+          "data": {
+            "A": {
+              "maturity": "4 years",
+              "discount_factors": [
+                0.971,
+                0.936,
+                0.897,
+                0.852
+              ]
+            },
+            "B": {
+              "maturity": "3 years",
+              "par_rate": "4.30%",
+              "known_factors": [
+                0.968,
+                0.929
+              ]
+            },
+            "C": {
+              "invoice_price": 975.612,
+              "annual_coupon_amount": 36,
+              "discount_factors": [
+                0.966,
+                0.925,
+                0.876
+              ]
+            },
+            "D": {
+              "corrected_DF5": 0.821
+            }
+          }
+        }
+      ],
+      "questions": [
+        {
+          "question_id": "LM1-Q05",
+          "los_ids": [
+            "lm01-lo02"
+          ],
+          "concept_ids": [
+            "implied_par_quote"
+          ],
+          "difficulty": "exam_level",
+          "question_type": "calculation",
+          "stem": "The four-year annual par rate consistent with Audit Record A is closest to:",
+          "choices": [
+            {
+              "label": "A",
+              "text": "5.278%",
+              "value_raw": 0.05278174037089872
+            },
+            {
+              "label": "B",
+              "text": "4.048%",
+              "value_raw": 0.04048140043763676
+            },
+            {
+              "label": "C",
+              "text": "4.085%",
+              "value_raw": 0.040854684883340875
+            }
+          ],
+          "correct_choice": "B",
+          "solution": {
+            "opening": "B is correct.",
+            "formula_or_rule": "c=100(1-DF4)/sum(DF1..DF4)",
+            "steps": [
+              "Set c sum(DF)+100DF4=100.",
+              "c=4.048% of par."
+            ],
+            "answer_value_raw": 0.04048140043763676,
+            "answer_value_display": "4.048%",
+            "units": "percent",
+            "rounding_rule": "Calculate without intermediate rounding and round once to the displayed precision.",
+            "explanation": "This reverses bootstrapping by recovering the coupon that makes the bond price equal par.",
+            "choice_analysis": [
+              {
+                "label": "A",
+                "is_correct": false,
+                "reason": "This follows from omitting the final discount factor from the coupon annuity.",
+                "error_mechanism": "omitting the final discount factor from the coupon annuity"
+              },
+              {
+                "label": "B",
+                "is_correct": true,
+                "reason": "Correct application of the stated relationship.",
+                "error_mechanism": null
+              },
+              {
+                "label": "C",
+                "is_correct": false,
+                "reason": "This follows from reporting the four-year spot rate.",
+                "error_mechanism": "reporting the four-year spot rate"
+              }
+            ]
+          },
+          "validation": {
+            "numerical": {
+              "applicable": true,
+              "independent_result": 0.04048140043763677,
+              "method": "Independent recomputation: (1-0.852)/(0.971+0.936+0.897+0.852)",
+              "independent_check": "result*sum(DF1..DF4)+DF4=1",
+              "residual": 0,
+              "passed": true
+            },
+            "originality": {
+              "new_entities": true,
+              "new_numbers": true,
+              "new_structure": true,
+              "not_close_paraphrase": true,
+              "passed": true
+            },
+            "grounding": {
+              "los_supported": true,
+              "module_knowledge_required": true,
+              "outside_facts_required": false,
+              "passed": true
+            },
+            "style": {
+              "three_choices": true,
+              "concise_professional_prose": true,
+              "parallel_choices": true,
+              "no_answer_clues": true,
+              "passed": true
+            },
+            "single_answer": true,
+            "overall_pass": true
+          }
+        },
+        {
+          "question_id": "LM1-Q06",
+          "los_ids": [
+            "lm01-lo02"
+          ],
+          "concept_ids": [
+            "missing_discount_factor"
+          ],
+          "difficulty": "difficult",
+          "question_type": "calculation",
+          "stem": "The missing final discount factor in Audit Record B is closest to:",
+          "choices": [
+            {
+              "label": "A",
+              "text": "0.91843",
+              "value_raw": 0.918429
+            },
+            {
+              "label": "B",
+              "text": "0.88135",
+              "value_raw": 0.8813472925500764
+            },
+            {
+              "label": "C",
+              "text": "0.88056",
+              "value_raw": 0.8805647171620327
+            }
+          ],
+          "correct_choice": "C",
+          "solution": {
+            "opening": "C is correct.",
+            "formula_or_rule": "DF3=[100-c(DF1+DF2)]/(100+c)",
+            "steps": [
+              "Discount the first two coupons with known factors.",
+              "DF3=0.88056."
+            ],
+            "answer_value_raw": 0.8805647171620327,
+            "answer_value_display": "0.88056",
+            "units": "discount factor",
+            "rounding_rule": "Calculate without intermediate rounding and round once to the displayed precision.",
+            "explanation": "The final coupon and principal share the missing maturity discount factor.",
+            "choice_analysis": [
+              {
+                "label": "A",
+                "is_correct": false,
+                "reason": "This follows from omitting the final coupon from the maturity cash flow.",
+                "error_mechanism": "omitting the final coupon from the maturity cash flow"
+              },
+              {
+                "label": "B",
+                "is_correct": false,
+                "reason": "This follows from treating the par rate as a three-year spot rate.",
+                "error_mechanism": "treating the par rate as a three-year spot rate"
+              },
+              {
+                "label": "C",
+                "is_correct": true,
+                "reason": "Correct application of the stated relationship.",
+                "error_mechanism": null
+              }
+            ]
+          },
+          "validation": {
+            "numerical": {
+              "applicable": true,
+              "independent_result": 0.8805647171620327,
+              "method": "Independent recomputation: [1-0.043*(0.968+0.929)]/1.043",
+              "independent_check": "0.043*0.968+0.043*0.929+1.043*result=1",
+              "residual": 0,
+              "passed": true
+            },
+            "originality": {
+              "new_entities": true,
+              "new_numbers": true,
+              "new_structure": true,
+              "not_close_paraphrase": true,
+              "passed": true
+            },
+            "grounding": {
+              "los_supported": true,
+              "module_knowledge_required": true,
+              "outside_facts_required": false,
+              "passed": true
+            },
+            "style": {
+              "three_choices": true,
+              "concise_professional_prose": true,
+              "parallel_choices": true,
+              "no_answer_clues": true,
+              "passed": true
+            },
+            "single_answer": true,
+            "overall_pass": true
+          }
+        },
+        {
+          "question_id": "LM1-Q07",
+          "los_ids": [
+            "lm01-lo01"
+          ],
+          "concept_ids": [
+            "dated_cash_flow_discounting_inverse"
+          ],
+          "difficulty": "exam_level",
+          "question_type": "calculation",
+          "stem": "Audit Record C gives currency cash flows rather than rates. The principal amount implied by the invoice price is closest to:",
+          "choices": [
+            {
+              "label": "A",
+              "text": "1,000.00",
+              "value_raw": 1000.0
+            },
+            {
+              "label": "B",
+              "text": "1,113.71",
+              "value_raw": 1113.7123287671232
+            },
+            {
+              "label": "C",
+              "text": "1,036.00",
+              "value_raw": 1036.0
+            }
+          ],
+          "correct_choice": "A",
+          "solution": {
+            "opening": "A is correct.",
+            "formula_or_rule": "Face=[Price-C(DF1+DF2+DF3)]/DF3",
+            "steps": [
+              "Strip all three annual coupons: 36(0.966+0.925+0.876).",
+              "Face=1,000.00."
+            ],
+            "answer_value_raw": 1000.0,
+            "answer_value_display": "1,000.00",
+            "units": "currency principal",
+            "rounding_rule": "Calculate without intermediate rounding and round once to the displayed precision.",
+            "explanation": "The stated coupon is a currency amount, so no unstated par normalization is required.",
+            "choice_analysis": [
+              {
+                "label": "A",
+                "is_correct": true,
+                "reason": "Correct application of the stated relationship.",
+                "error_mechanism": null
+              },
+              {
+                "label": "B",
+                "is_correct": false,
+                "reason": "This follows from treating the invoice as a single maturity payment and omitting every coupon.",
+                "error_mechanism": "treating the invoice as a single maturity payment and omitting every coupon"
+              },
+              {
+                "label": "C",
+                "is_correct": false,
+                "reason": "This follows from removing only the first two coupons and treating the final coupon as principal.",
+                "error_mechanism": "removing only the first two coupons and treating the final coupon as principal"
+              }
+            ]
+          },
+          "validation": {
+            "numerical": {
+              "applicable": true,
+              "independent_result": 1000.0,
+              "method": "Independent recomputation: [975.612-36*(0.966+0.925+0.876)]/0.876",
+              "independent_check": "36*0.966+36*0.925+1036*0.876=975.612",
+              "residual": 0,
+              "passed": true
+            },
+            "originality": {
+              "new_entities": true,
+              "new_numbers": true,
+              "new_structure": true,
+              "not_close_paraphrase": true,
+              "passed": true
+            },
+            "grounding": {
+              "los_supported": true,
+              "module_knowledge_required": true,
+              "outside_facts_required": false,
+              "passed": true
+            },
+            "style": {
+              "three_choices": true,
+              "concise_professional_prose": true,
+              "parallel_choices": true,
+              "no_answer_clues": true,
+              "passed": true
+            },
+            "single_answer": true,
+            "overall_pass": true
+          }
+        },
+        {
+          "question_id": "LM1-Q08",
+          "los_ids": [
+            "lm01-lo02"
+          ],
+          "concept_ids": [
+            "corrected_spot_rate"
+          ],
+          "difficulty": "exam_level",
+          "question_type": "calculation",
+          "stem": "After correcting the five-year discount factor to 0.8210, its annual spot rate is closest to:",
+          "choices": [
+            {
+              "label": "A",
+              "text": "21.803%",
+              "value_raw": 0.21802679658952506
+            },
+            {
+              "label": "B",
+              "text": "4.023%",
+              "value_raw": 0.04023477607868675
+            },
+            {
+              "label": "C",
+              "text": "3.580%",
+              "value_raw": 0.03580000000000001
+            }
+          ],
+          "correct_choice": "B",
+          "solution": {
+            "opening": "B is correct.",
+            "formula_or_rule": "z5=DF5^(-1/5)-1",
+            "steps": [
+              "z5=0.8210^(-1/5)-1=4.023%."
+            ],
+            "answer_value_raw": 0.04023477607868675,
+            "answer_value_display": "4.023%",
+            "units": "percent",
+            "rounding_rule": "Calculate without intermediate rounding and round once to the displayed precision.",
+            "explanation": "The maturity root converts the cumulative five-year discount to an annual rate.",
+            "choice_analysis": [
+              {
+                "label": "A",
+                "is_correct": false,
+                "reason": "This follows from omitting the fifth root.",
+                "error_mechanism": "omitting the fifth root"
+              },
+              {
+                "label": "B",
+                "is_correct": true,
+                "reason": "Correct application of the stated relationship.",
+                "error_mechanism": null
+              },
+              {
+                "label": "C",
+                "is_correct": false,
+                "reason": "This follows from arithmetic allocation of the total discount.",
+                "error_mechanism": "arithmetic allocation of the total discount"
+              }
+            ]
+          },
+          "validation": {
+            "numerical": {
+              "applicable": true,
+              "independent_result": 0.04023477607868675,
+              "method": "Independent recomputation: 0.821^(-1/5)-1",
+              "independent_check": "(1+result)^(-5)=0.821",
+              "residual": 0,
+              "passed": true
+            },
+            "originality": {
+              "new_entities": true,
+              "new_numbers": true,
+              "new_structure": true,
+              "not_close_paraphrase": true,
+              "passed": true
+            },
+            "grounding": {
+              "los_supported": true,
+              "module_knowledge_required": true,
+              "outside_facts_required": false,
+              "passed": true
+            },
+            "style": {
+              "three_choices": true,
+              "concise_professional_prose": true,
+              "parallel_choices": true,
+              "no_answer_clues": true,
+              "passed": true
+            },
+            "single_answer": true,
+            "overall_pass": true
+          }
+        }
+      ]
+    },
+    {
+      "item_set_id": "vignette-03-competing-horizon-curves",
+      "format": "item_set",
+      "vignette": "Cinder Peak owns a four-year 4% annual-pay bond purchased just after a coupon for 101.20. One year later it receives a coupon of 4 and sells the bond with three payments remaining. The desk compares current-forward and house-projected horizon discount factors and separately evaluates a target-return purchase limit.",
+      "exhibits": [
+        {
+          "exhibit_id": "EX3",
+          "title": "One-year-horizon information",
+          "data": {
+            "remaining_years": [
+              1,
+              2,
+              3
+            ],
+            "current_forward_discount_factors": [
+              0.965,
+              0.923,
+              0.875
+            ],
+            "house_projection_discount_factors": [
+              0.958,
+              0.906,
+              0.846
+            ],
+            "supplied_house_sale_value": 95.44
+          }
+        }
+      ],
+      "questions": [
+        {
+          "question_id": "LM1-Q09",
+          "los_ids": [
+            "lm01-lo01",
+            "lm01-lo03"
+          ],
+          "concept_ids": [
+            "forward_curve_horizon_value"
+          ],
+          "difficulty": "difficult",
+          "question_type": "calculation",
+          "stem": "Using the current-forward horizon factors, the projected ex-coupon sale value is closest to:",
+          "choices": [
+            {
+              "label": "A",
+              "text": "95.05",
+              "value_raw": 95.05199999999999
+            },
+            {
+              "label": "B",
+              "text": "98.00",
+              "value_raw": 98.0
+            },
+            {
+              "label": "C",
+              "text": "98.55",
+              "value_raw": 98.55199999999999
+            }
+          ],
+          "correct_choice": "C",
+          "solution": {
+            "opening": "C is correct.",
+            "formula_or_rule": "P_h=4DF1h+4DF2h+104DF3h",
+            "steps": [
+              "Apply each horizon factor to its remaining dated cash flow.",
+              "P_h=98.55."
+            ],
+            "answer_value_raw": 98.55199999999999,
+            "answer_value_display": "98.55",
+            "units": "price per 100",
+            "rounding_rule": "Calculate without intermediate rounding and round once to the displayed precision.",
+            "explanation": "Current forwards imply a complete horizon discount curve for the remaining cash flows.",
+            "choice_analysis": [
+              {
+                "label": "A",
+                "is_correct": false,
+                "reason": "This follows from omitting the final coupon from the maturity cash flow.",
+                "error_mechanism": "omitting the final coupon from the maturity cash flow"
+              },
+              {
+                "label": "B",
+                "is_correct": false,
+                "reason": "This follows from discounting all remaining cash flows at the three-year horizon factor.",
+                "error_mechanism": "discounting all remaining cash flows at the three-year horizon factor"
+              },
+              {
+                "label": "C",
+                "is_correct": true,
+                "reason": "Correct application of the stated relationship.",
+                "error_mechanism": null
+              }
+            ]
+          },
+          "validation": {
+            "numerical": {
+              "applicable": true,
+              "independent_result": 98.55199999999999,
+              "method": "Independent recomputation: 4*0.965+4*0.923+104*0.875",
+              "independent_check": "Each cash flow uses its matching horizon factor",
+              "residual": 0,
+              "passed": true
+            },
+            "originality": {
+              "new_entities": true,
+              "new_numbers": true,
+              "new_structure": true,
+              "not_close_paraphrase": true,
+              "passed": true
+            },
+            "grounding": {
+              "los_supported": true,
+              "module_knowledge_required": true,
+              "outside_facts_required": false,
+              "passed": true
+            },
+            "style": {
+              "three_choices": true,
+              "concise_professional_prose": true,
+              "parallel_choices": true,
+              "no_answer_clues": true,
+              "passed": true
+            },
+            "single_answer": true,
+            "overall_pass": true
+          }
+        },
+        {
+          "question_id": "LM1-Q10",
+          "los_ids": [
+            "lm01-lo01"
+          ],
+          "concept_ids": [
+            "holding_period_return_inverse"
+          ],
+          "difficulty": "exam_level",
+          "question_type": "calculation",
+          "stem": "The desk supplies a house-projected ex-coupon sale value of 95.44. To earn at least 3.50% over one year including the coupon, the maximum purchase price is closest to:",
+          "choices": [
+            {
+              "label": "A",
+              "text": "96.08",
+              "value_raw": 96.07729468599034
+            },
+            {
+              "label": "B",
+              "text": "92.21",
+              "value_raw": 92.21256038647344
+            },
+            {
+              "label": "C",
+              "text": "99.44",
+              "value_raw": 99.44
+            }
+          ],
+          "correct_choice": "A",
+          "solution": {
+            "opening": "A is correct.",
+            "formula_or_rule": "Maximum purchase price=(coupon+projected sale value)/(1+target HPR)",
+            "steps": [
+              "Horizon wealth=4.00+95.44.",
+              "Maximum price=99.44/1.035=96.08."
+            ],
+            "answer_value_raw": 96.07729468599034,
+            "answer_value_display": "96.08",
+            "units": "price per 100",
+            "rounding_rule": "Calculate without intermediate rounding and round once to the displayed precision.",
+            "explanation": "The target-return decision reverses the holding-period return equation rather than repeating the horizon valuation in Q09.",
+            "choice_analysis": [
+              {
+                "label": "A",
+                "is_correct": true,
+                "reason": "Correct application of the stated relationship.",
+                "error_mechanism": null
+              },
+              {
+                "label": "B",
+                "is_correct": false,
+                "reason": "This follows from omitting the year-end coupon from horizon wealth.",
+                "error_mechanism": "omitting the year-end coupon from horizon wealth"
+              },
+              {
+                "label": "C",
+                "is_correct": false,
+                "reason": "This follows from failing to discount target horizon wealth back at the required return.",
+                "error_mechanism": "failing to discount target horizon wealth back at the required return"
+              }
+            ]
+          },
+          "validation": {
+            "numerical": {
+              "applicable": true,
+              "independent_result": 96.07729468599034,
+              "method": "Independent recomputation: (95.44+4)/1.035",
+              "independent_check": "result*1.035=99.44 horizon wealth",
+              "residual": 0,
+              "passed": true
+            },
+            "originality": {
+              "new_entities": true,
+              "new_numbers": true,
+              "new_structure": true,
+              "not_close_paraphrase": true,
+              "passed": true
+            },
+            "grounding": {
+              "los_supported": true,
+              "module_knowledge_required": true,
+              "outside_facts_required": false,
+              "passed": true
+            },
+            "style": {
+              "three_choices": true,
+              "concise_professional_prose": true,
+              "parallel_choices": true,
+              "no_answer_clues": true,
+              "passed": true
+            },
+            "single_answer": true,
+            "overall_pass": true
+          }
+        },
+        {
+          "question_id": "LM1-Q11",
+          "los_ids": [
+            "lm01-lo01",
+            "lm01-lo03"
+          ],
+          "concept_ids": [
+            "coupon_holding_period_return"
+          ],
+          "difficulty": "exam_level",
+          "question_type": "calculation",
+          "stem": "If the house curve is realized, the one-year holding-period return including the year-end coupon is closest to:",
+          "choices": [
+            {
+              "label": "A",
+              "text": "-5.69%",
+              "value_raw": -0.056916996047430835
+            },
+            {
+              "label": "B",
+              "text": "-1.74%",
+              "value_raw": -0.017391304347826098
+            },
+            {
+              "label": "C",
+              "text": "1.34%",
+              "value_raw": 0.013359683794466282
+            }
+          ],
+          "correct_choice": "B",
+          "solution": {
+            "opening": "B is correct.",
+            "formula_or_rule": "HPR=(coupon+sale value)/purchase price-1",
+            "steps": [
+              "Horizon wealth=4+95.440000.",
+              "HPR=-1.74%."
+            ],
+            "answer_value_raw": -0.017391304347826098,
+            "answer_value_display": "-1.74%",
+            "units": "percent",
+            "rounding_rule": "Calculate without intermediate rounding and round once to the displayed precision.",
+            "explanation": "The realized return depends on the realized horizon curve and cash income.",
+            "choice_analysis": [
+              {
+                "label": "A",
+                "is_correct": false,
+                "reason": "This follows from omitting the horizon coupon.",
+                "error_mechanism": "omitting the horizon coupon"
+              },
+              {
+                "label": "B",
+                "is_correct": true,
+                "reason": "Correct application of the stated relationship.",
+                "error_mechanism": null
+              },
+              {
+                "label": "C",
+                "is_correct": false,
+                "reason": "This follows from using the current-forward rather than house sale value.",
+                "error_mechanism": "using the current-forward rather than house sale value"
+              }
+            ]
+          },
+          "validation": {
+            "numerical": {
+              "applicable": true,
+              "independent_result": -0.017391304347826098,
+              "method": "Independent recomputation: (95.44+4)/101.20-1",
+              "independent_check": "101.20*(1+result)=99.44",
+              "residual": 0,
+              "passed": true
+            },
+            "originality": {
+              "new_entities": true,
+              "new_numbers": true,
+              "new_structure": true,
+              "not_close_paraphrase": true,
+              "passed": true
+            },
+            "grounding": {
+              "los_supported": true,
+              "module_knowledge_required": true,
+              "outside_facts_required": false,
+              "passed": true
+            },
+            "style": {
+              "three_choices": true,
+              "concise_professional_prose": true,
+              "parallel_choices": true,
+              "no_answer_clues": true,
+              "passed": true
+            },
+            "single_answer": true,
+            "overall_pass": true
+          }
+        },
+        {
+          "question_id": "LM1-Q12",
+          "los_ids": [
+            "lm01-lo03"
+          ],
+          "concept_ids": [
+            "forward_realization_benchmark"
+          ],
+          "difficulty": "difficult",
+          "question_type": "conceptual",
+          "stem": "Suppose the realized horizon spot curve exactly matches the curve implied today by forward rates. Relative to a maturity-matched strategy, an active maturity extension made solely because the current curve slopes upward is most likely to:",
+          "choices": [
+            {
+              "label": "A",
+              "text": "earn excess return because a positively sloped curve guarantees price appreciation.",
+              "value_raw": null
+            },
+            {
+              "label": "B",
+              "text": "underperform because forward rates always overstate realized future spot rates.",
+              "value_raw": null
+            },
+            {
+              "label": "C",
+              "text": "earn no forecast-based excess return after accounting for the forward-implied benchmark.",
+              "value_raw": null
+            }
+          ],
+          "correct_choice": "C",
+          "solution": {
+            "opening": "C is correct.",
+            "formula_or_rule": "If future spots equal today’s forwards, maturity choices earn their forward-implied breakeven returns.",
+            "steps": [
+              "Forward rates are the reinvestment rates that equalize maturity strategies under the stated realization.",
+              "Curve slope alone does not create forecast-based excess return against that benchmark."
+            ],
+            "answer_value_raw": null,
+            "answer_value_display": "no forecast-based excess return",
+            "units": null,
+            "rounding_rule": "Not applicable; qualitative item.",
+            "explanation": "This directly tests the active-management assumption in LO3 without invoking the separate roll-down LOS.",
+            "choice_analysis": [
+              {
+                "label": "A",
+                "is_correct": false,
+                "reason": "This follows from treating curve slope as a guaranteed active return.",
+                "error_mechanism": "treating curve slope as a guaranteed active return"
+              },
+              {
+                "label": "B",
+                "is_correct": false,
+                "reason": "This follows from assuming a systematic forward bias not stated in the scenario.",
+                "error_mechanism": "assuming a systematic forward bias not stated in the scenario"
+              },
+              {
+                "label": "C",
+                "is_correct": true,
+                "reason": "Correct application of the stated relationship.",
+                "error_mechanism": null
+              }
+            ]
+          },
+          "validation": {
+            "numerical": {
+              "applicable": false,
+              "independent_result": null,
+              "method": "Conceptual item; no numerical recomputation required.",
+              "independent_check": "Source, logic, and single-answer checks completed independently.",
+              "residual": null,
+              "passed": true
+            },
+            "originality": {
+              "new_entities": true,
+              "new_numbers": true,
+              "new_structure": true,
+              "not_close_paraphrase": true,
+              "passed": true
+            },
+            "grounding": {
+              "los_supported": true,
+              "module_knowledge_required": true,
+              "outside_facts_required": false,
+              "passed": true
+            },
+            "style": {
+              "three_choices": true,
+              "concise_professional_prose": true,
+              "parallel_choices": true,
+              "no_answer_clues": true,
+              "passed": true
+            },
+            "single_answer": true,
+            "overall_pass": true
+          }
+        }
+      ]
+    },
+    {
+      "item_set_id": "vignette-04-swap-curve-controls",
+      "format": "item_set",
+      "vignette": "Darsa Rail Pension reviews inverse swap-spread controls, a projected five-year spread change, and short-term funding conditions.",
+      "exhibits": [
+        {
+          "exhibit_id": "EX4",
+          "title": "Swap and discount data",
+          "data": {
+            "seven_year_control": {
+              "swap": "4.22%",
+              "spread": "36 bps"
+            },
+            "five_year_initial": {
+              "swap": "4.08%",
+              "government": "3.70%"
+            },
+            "five_year_projected": {
+              "swap": "4.14%",
+              "government": "3.82%"
+            },
+            "three_year_discount_factors": [
+              0.969,
+              0.936,
+              0.899
+            ]
+          }
+        }
+      ],
+      "questions": [
+        {
+          "question_id": "LM1-Q13",
+          "los_ids": [
+            "lm01-lo06"
+          ],
+          "concept_ids": [
+            "inverse_swap_spread"
+          ],
+          "difficulty": "exam_level",
+          "question_type": "calculation",
+          "stem": "A seven-year fixed swap rate is 4.22% and its swap spread is 36 bps. The same-maturity government yield is closest to:",
+          "choices": [
+            {
+              "label": "A",
+              "text": "3.860%",
+              "value_raw": 0.0386
+            },
+            {
+              "label": "B",
+              "text": "4.580%",
+              "value_raw": 0.0458
+            },
+            {
+              "label": "C",
+              "text": "4.216%",
+              "value_raw": 0.042164
+            }
+          ],
+          "correct_choice": "A",
+          "solution": {
+            "opening": "A is correct.",
+            "formula_or_rule": "Government yield=swap rate-swap spread",
+            "steps": [
+              "Convert 36 bps to 0.36%.",
+              "Government yield=4.22%-0.36%=3.860%."
+            ],
+            "answer_value_raw": 0.0386,
+            "answer_value_display": "3.860%",
+            "units": "percent",
+            "rounding_rule": "Calculate without intermediate rounding and round once to the displayed precision.",
+            "explanation": "The distractors use plausible direction and unit-conversion errors without an extreme rate.",
+            "choice_analysis": [
+              {
+                "label": "A",
+                "is_correct": true,
+                "reason": "Correct application of the stated relationship.",
+                "error_mechanism": null
+              },
+              {
+                "label": "B",
+                "is_correct": false,
+                "reason": "This follows from adding the spread to the swap rate rather than subtracting it.",
+                "error_mechanism": "adding the spread to the swap rate rather than subtracting it"
+              },
+              {
+                "label": "C",
+                "is_correct": false,
+                "reason": "This follows from converting 36 basis points to 0.0036% instead of 0.36%.",
+                "error_mechanism": "converting 36 basis points to 0.0036% instead of 0.36%"
+              }
+            ]
+          },
+          "validation": {
+            "numerical": {
+              "applicable": true,
+              "independent_result": 0.0386,
+              "method": "Independent recomputation: 4.22%-36 bps",
+              "independent_check": "3.860%+0.360%=4.220%",
+              "residual": 0,
+              "passed": true
+            },
+            "originality": {
+              "new_entities": true,
+              "new_numbers": true,
+              "new_structure": true,
+              "not_close_paraphrase": true,
+              "passed": true
+            },
+            "grounding": {
+              "los_supported": true,
+              "module_knowledge_required": true,
+              "outside_facts_required": false,
+              "passed": true
+            },
+            "style": {
+              "three_choices": true,
+              "concise_professional_prose": true,
+              "parallel_choices": true,
+              "no_answer_clues": true,
+              "passed": true
+            },
+            "single_answer": true,
+            "overall_pass": true
+          }
+        },
+        {
+          "question_id": "LM1-Q14",
+          "los_ids": [
+            "lm01-lo06"
+          ],
+          "concept_ids": [
+            "swap_spread_change"
+          ],
+          "difficulty": "exam_level",
+          "question_type": "calculation",
+          "stem": "Following the projected changes, the five-year swap spread will:",
+          "choices": [
+            {
+              "label": "A",
+              "text": "widen by 32 bps",
+              "value_raw": 32.000000000000014
+            },
+            {
+              "label": "B",
+              "text": "narrow by 6 bps",
+              "value_raw": -6.0000000000000355
+            },
+            {
+              "label": "C",
+              "text": "narrow by 0.06 bps",
+              "value_raw": -0.06000000000000036
+            }
+          ],
+          "correct_choice": "B",
+          "solution": {
+            "opening": "B is correct.",
+            "formula_or_rule": "Change=new spread-initial spread",
+            "steps": [
+              "New spread=32 bps.",
+              "Change=-6 bps."
+            ],
+            "answer_value_raw": -6.0000000000000355,
+            "answer_value_display": "narrow by 6 bps",
+            "units": "basis points",
+            "rounding_rule": "Calculate without intermediate rounding and round once to the displayed precision.",
+            "explanation": "The government yield rises more, narrowing the spread.",
+            "choice_analysis": [
+              {
+                "label": "A",
+                "is_correct": false,
+                "reason": "This follows from reporting the new level as the change.",
+                "error_mechanism": "reporting the new level as the change"
+              },
+              {
+                "label": "B",
+                "is_correct": true,
+                "reason": "Correct application of the stated relationship.",
+                "error_mechanism": null
+              },
+              {
+                "label": "C",
+                "is_correct": false,
+                "reason": "This follows from misconverting basis points.",
+                "error_mechanism": "misconverting basis points"
+              }
+            ]
+          },
+          "validation": {
+            "numerical": {
+              "applicable": true,
+              "independent_result": null,
+              "method": "Independent recomputation: [(4.14%-3.82%)-(4.08%-3.70%)]*10000",
+              "independent_check": "Projected 32 bps minus initial 38 bps equals -6 bps",
+              "residual": 0,
+              "passed": true
+            },
+            "originality": {
+              "new_entities": true,
+              "new_numbers": true,
+              "new_structure": true,
+              "not_close_paraphrase": true,
+              "passed": true
+            },
+            "grounding": {
+              "los_supported": true,
+              "module_knowledge_required": true,
+              "outside_facts_required": false,
+              "passed": true
+            },
+            "style": {
+              "three_choices": true,
+              "concise_professional_prose": true,
+              "parallel_choices": true,
+              "no_answer_clues": true,
+              "passed": true
+            },
+            "single_answer": true,
+            "overall_pass": true
+          }
+        },
+        {
+          "question_id": "LM1-Q15",
+          "los_ids": [
+            "lm01-lo05"
+          ],
+          "concept_ids": [
+            "par_swap_rate"
+          ],
+          "difficulty": "difficult",
+          "question_type": "calculation",
+          "stem": "For annual fixed payments and unit notional, the three-year par swap fixed rate implied by Exhibit 4 is closest to:",
+          "choices": [
+            {
+              "label": "A",
+              "text": "3.613%",
+              "value_raw": 0.036128062003210726
+            },
+            {
+              "label": "B",
+              "text": "5.302%",
+              "value_raw": 0.05301837270341206
+            },
+            {
+              "label": "C",
+              "text": "3.602%",
+              "value_raw": 0.03601997146932952
+            }
+          ],
+          "correct_choice": "C",
+          "solution": {
+            "opening": "C is correct.",
+            "formula_or_rule": "S=(1-DF3)/(DF1+DF2+DF3)",
+            "steps": [
+              "Floating-leg value=1-DF3.",
+              "Divide by the fixed-leg discount-factor sum.",
+              "S=3.602%."
+            ],
+            "answer_value_raw": 0.03601997146932952,
+            "answer_value_display": "3.602%",
+            "units": "percent",
+            "rounding_rule": "Calculate without intermediate rounding and round once to the displayed precision.",
+            "explanation": "At the par swap rate, fixed- and floating-leg present values are equal.",
+            "choice_analysis": [
+              {
+                "label": "A",
+                "is_correct": false,
+                "reason": "This follows from reporting the terminal zero rate.",
+                "error_mechanism": "reporting the terminal zero rate"
+              },
+              {
+                "label": "B",
+                "is_correct": false,
+                "reason": "This follows from omitting the final discount factor from the fixed-leg annuity.",
+                "error_mechanism": "omitting the final discount factor from the fixed-leg annuity"
+              },
+              {
+                "label": "C",
+                "is_correct": true,
+                "reason": "Correct application of the stated relationship.",
+                "error_mechanism": null
+              }
+            ]
+          },
+          "validation": {
+            "numerical": {
+              "applicable": true,
+              "independent_result": 0.03601997146932952,
+              "method": "Independent recomputation: (1-0.899)/(0.969+0.936+0.899)",
+              "independent_check": "result*sum(discount factors)=1-0.899",
+              "residual": 0,
+              "passed": true
+            },
+            "originality": {
+              "new_entities": true,
+              "new_numbers": true,
+              "new_structure": true,
+              "not_close_paraphrase": true,
+              "passed": true
+            },
+            "grounding": {
+              "los_supported": true,
+              "module_knowledge_required": true,
+              "outside_facts_required": false,
+              "passed": true
+            },
+            "style": {
+              "three_choices": true,
+              "concise_professional_prose": true,
+              "parallel_choices": true,
+              "no_answer_clues": true,
+              "passed": true
+            },
+            "single_answer": true,
+            "overall_pass": true
+          }
+        },
+        {
+          "question_id": "LM1-Q16",
+          "los_ids": [
+            "lm01-lo07"
+          ],
+          "concept_ids": [
+            "funding_spread_components"
+          ],
+          "difficulty": "exam_level",
+          "question_type": "interpretation",
+          "stem": "A rise in an unsecured bank rate while the matched near-risk-free rate is unchanged most accurately indicates:",
+          "choices": [
+            {
+              "label": "A",
+              "text": "a wider short-term spread consistent with greater combined credit or liquidity concern.",
+              "value_raw": null
+            },
+            {
+              "label": "B",
+              "text": "a wider short-term spread that isolates credit risk from liquidity risk.",
+              "value_raw": null
+            },
+            {
+              "label": "C",
+              "text": "an unchanged short-term spread with greater expected inflation.",
+              "value_raw": null
+            }
+          ],
+          "correct_choice": "A",
+          "solution": {
+            "opening": "A is correct.",
+            "formula_or_rule": "The matched spread equals unsecured minus near-risk-free and reflects both credit and liquidity.",
+            "steps": [
+              "Only the unsecured rate rises, so the spread widens.",
+              "The module does not permit splitting the observed widening uniquely between credit and liquidity."
+            ],
+            "answer_value_raw": null,
+            "answer_value_display": "wider combined-risk spread",
+            "units": null,
+            "rounding_rule": "Not applicable; qualitative item.",
+            "explanation": "Parallel answer choices distinguish what the spread can and cannot identify.",
+            "choice_analysis": [
+              {
+                "label": "A",
+                "is_correct": true,
+                "reason": "Correct application of the stated relationship.",
+                "error_mechanism": null
+              },
+              {
+                "label": "B",
+                "is_correct": false,
+                "reason": "This follows from claiming the observed spread isolates one component.",
+                "error_mechanism": "claiming the observed spread isolates one component"
+              },
+              {
+                "label": "C",
+                "is_correct": false,
+                "reason": "This follows from ignoring the changed unsecured rate.",
+                "error_mechanism": "ignoring the changed unsecured rate"
+              }
+            ]
+          },
+          "validation": {
+            "numerical": {
+              "applicable": false,
+              "independent_result": null,
+              "method": "Conceptual item; no numerical recomputation required.",
+              "independent_check": "Source, logic, and single-answer checks completed independently.",
+              "residual": null,
+              "passed": true
+            },
+            "originality": {
+              "new_entities": true,
+              "new_numbers": true,
+              "new_structure": true,
+              "not_close_paraphrase": true,
+              "passed": true
+            },
+            "grounding": {
+              "los_supported": true,
+              "module_knowledge_required": true,
+              "outside_facts_required": false,
+              "passed": true
+            },
+            "style": {
+              "three_choices": true,
+              "concise_professional_prose": true,
+              "parallel_choices": true,
+              "no_answer_clues": true,
+              "passed": true
+            },
+            "single_answer": true,
+            "overall_pass": true
+          }
+        }
+      ]
+    },
+    {
+      "item_set_id": "vignette-05-theory-application",
+      "format": "item_set",
+      "vignette": "Elowen Research tests how alternative term-structure theories translate into forecasts, supply shocks, and investor flows. All scenarios hold unmentioned forces constant.",
+      "exhibits": [],
+      "questions": [
+        {
+          "question_id": "LM1-Q17",
+          "los_ids": [
+            "lm01-lo08"
+          ],
+          "concept_ids": [
+            "liquidity_premium_inference"
+          ],
+          "difficulty": "exam_level",
+          "question_type": "interpretation",
+          "stem": "A one-year forward rate beginning in two years is 4.20%, while the desk expects the future one-year spot rate to be 3.40%. This 0.80% gap is most consistent with:",
+          "choices": [
+            {
+              "label": "A",
+              "text": "an unbiased forward rate under pure expectations.",
+              "value_raw": null
+            },
+            {
+              "label": "B",
+              "text": "a positive maturity premium embedded in the forward rate.",
+              "value_raw": null
+            },
+            {
+              "label": "C",
+              "text": "strict segmentation proving the future spot rate will be 3.40%.",
+              "value_raw": null
+            }
+          ],
+          "correct_choice": "B",
+          "solution": {
+            "opening": "B is correct.",
+            "formula_or_rule": "A forward above the expected future short rate can contain a positive maturity premium.",
+            "steps": [
+              "The forward exceeds the desk forecast by 0.80%.",
+              "Liquidity-premium and preferred-habitat reasoning can accommodate such compensation."
+            ],
+            "answer_value_raw": null,
+            "answer_value_display": "positive maturity premium",
+            "units": null,
+            "rounding_rule": "Not applicable; qualitative item.",
+            "explanation": "The observed gap is applied evidence, not a request to label a definition.",
+            "choice_analysis": [
+              {
+                "label": "A",
+                "is_correct": false,
+                "reason": "This follows from equating the forward and expected future spot despite their difference.",
+                "error_mechanism": "equating the forward and expected future spot despite their difference"
+              },
+              {
+                "label": "B",
+                "is_correct": true,
+                "reason": "Correct application of the stated relationship.",
+                "error_mechanism": null
+              },
+              {
+                "label": "C",
+                "is_correct": false,
+                "reason": "This follows from treating a forecast as certain and assigning a unique segmentation cause.",
+                "error_mechanism": "treating a forecast as certain and assigning a unique segmentation cause"
+              }
+            ]
+          },
+          "validation": {
+            "numerical": {
+              "applicable": false,
+              "independent_result": null,
+              "method": "Conceptual item; no numerical recomputation required.",
+              "independent_check": "Source, logic, and single-answer checks completed independently.",
+              "residual": null,
+              "passed": true
+            },
+            "originality": {
+              "new_entities": true,
+              "new_numbers": true,
+              "new_structure": true,
+              "not_close_paraphrase": true,
+              "passed": true
+            },
+            "grounding": {
+              "los_supported": true,
+              "module_knowledge_required": true,
+              "outside_facts_required": false,
+              "passed": true
+            },
+            "style": {
+              "three_choices": true,
+              "concise_professional_prose": true,
+              "parallel_choices": true,
+              "no_answer_clues": true,
+              "passed": true
+            },
+            "single_answer": true,
+            "overall_pass": true
+          }
+        },
+        {
+          "question_id": "LM1-Q18",
+          "los_ids": [
+            "lm01-lo08"
+          ],
+          "concept_ids": [
+            "segmented_supply_shock"
+          ],
+          "difficulty": "difficult",
+          "question_type": "interpretation",
+          "stem": "If regulation prevents short-maturity funds from buying long bonds, a surge in long-bond issuance most likely causes:",
+          "choices": [
+            {
+              "label": "A",
+              "text": "similar yield increases because investors can freely substitute across all maturities.",
+              "value_raw": null
+            },
+            {
+              "label": "B",
+              "text": "a decline in long yields because added supply raises long-bond prices.",
+              "value_raw": null
+            },
+            {
+              "label": "C",
+              "text": "a larger yield increase in the long segment than in the short segment.",
+              "value_raw": null
+            }
+          ],
+          "correct_choice": "C",
+          "solution": {
+            "opening": "C is correct.",
+            "formula_or_rule": "Segmented markets permit maturity-specific supply shocks.",
+            "steps": [
+              "The added supply is concentrated in the long segment.",
+              "Restricted investors cannot fully arbitrage the relative yield change."
+            ],
+            "answer_value_raw": null,
+            "answer_value_display": "larger long-segment yield increase",
+            "units": null,
+            "rounding_rule": "Not applicable; qualitative item.",
+            "explanation": "The application follows sector supply and demand, not a definition-label exercise.",
+            "choice_analysis": [
+              {
+                "label": "A",
+                "is_correct": false,
+                "reason": "This follows from assuming the cross-segment substitution excluded by the scenario.",
+                "error_mechanism": "assuming the cross-segment substitution excluded by the scenario"
+              },
+              {
+                "label": "B",
+                "is_correct": false,
+                "reason": "This follows from reversing the price effect of greater supply.",
+                "error_mechanism": "reversing the price effect of greater supply"
+              },
+              {
+                "label": "C",
+                "is_correct": true,
+                "reason": "Correct application of the stated relationship.",
+                "error_mechanism": null
+              }
+            ]
+          },
+          "validation": {
+            "numerical": {
+              "applicable": false,
+              "independent_result": null,
+              "method": "Conceptual item; no numerical recomputation required.",
+              "independent_check": "Source, logic, and single-answer checks completed independently.",
+              "residual": null,
+              "passed": true
+            },
+            "originality": {
+              "new_entities": true,
+              "new_numbers": true,
+              "new_structure": true,
+              "not_close_paraphrase": true,
+              "passed": true
+            },
+            "grounding": {
+              "los_supported": true,
+              "module_knowledge_required": true,
+              "outside_facts_required": false,
+              "passed": true
+            },
+            "style": {
+              "three_choices": true,
+              "concise_professional_prose": true,
+              "parallel_choices": true,
+              "no_answer_clues": true,
+              "passed": true
+            },
+            "single_answer": true,
+            "overall_pass": true
+          }
+        },
+        {
+          "question_id": "LM1-Q19",
+          "los_ids": [
+            "lm01-lo08"
+          ],
+          "concept_ids": [
+            "expectations_curve_shape_application"
+          ],
+          "difficulty": "exam_level",
+          "question_type": "interpretation",
+          "stem": "A market view assumes no maturity premium and projects successive one-year short rates of 3.80%, 3.10%, and 2.60%. The spot curve implied by this view is most likely:",
+          "choices": [
+            {
+              "label": "A",
+              "text": "downward sloping because later expected short rates are below the initial short rate.",
+              "value_raw": null
+            },
+            {
+              "label": "B",
+              "text": "upward sloping because longer maturities necessarily require additional compensation.",
+              "value_raw": null
+            },
+            {
+              "label": "C",
+              "text": "flat because the maturity premium is assumed to be zero.",
+              "value_raw": null
+            }
+          ],
+          "correct_choice": "A",
+          "solution": {
+            "opening": "A is correct.",
+            "formula_or_rule": "With no maturity premium, expected future short rates determine forward rates and the resulting spot-curve shape.",
+            "steps": [
+              "Successive expected one-year rates decline from 3.80% to 2.60%.",
+              "Their compounded averages decline as maturity extends, producing a downward-sloping spot curve."
+            ],
+            "answer_value_raw": null,
+            "answer_value_display": "downward-sloping spot curve",
+            "units": null,
+            "rounding_rule": "Not applicable; qualitative item.",
+            "explanation": "This applies pure expectations to an explicit path of short rates rather than comparing long-bond and rollover returns.",
+            "choice_analysis": [
+              {
+                "label": "A",
+                "is_correct": true,
+                "reason": "Correct application of the stated relationship.",
+                "error_mechanism": null
+              },
+              {
+                "label": "B",
+                "is_correct": false,
+                "reason": "This follows from adding a maturity premium excluded by the scenario.",
+                "error_mechanism": "adding a maturity premium excluded by the scenario"
+              },
+              {
+                "label": "C",
+                "is_correct": false,
+                "reason": "This follows from confusing a zero maturity premium with unchanged expected short rates.",
+                "error_mechanism": "confusing a zero maturity premium with unchanged expected short rates"
+              }
+            ]
+          },
+          "validation": {
+            "numerical": {
+              "applicable": false,
+              "independent_result": null,
+              "method": "Conceptual item; no numerical recomputation required.",
+              "independent_check": "Source, logic, and single-answer checks completed independently.",
+              "residual": null,
+              "passed": true
+            },
+            "originality": {
+              "new_entities": true,
+              "new_numbers": true,
+              "new_structure": true,
+              "not_close_paraphrase": true,
+              "passed": true
+            },
+            "grounding": {
+              "los_supported": true,
+              "module_knowledge_required": true,
+              "outside_facts_required": false,
+              "passed": true
+            },
+            "style": {
+              "three_choices": true,
+              "concise_professional_prose": true,
+              "parallel_choices": true,
+              "no_answer_clues": true,
+              "passed": true
+            },
+            "single_answer": true,
+            "overall_pass": true
+          }
+        },
+        {
+          "question_id": "LM1-Q20",
+          "los_ids": [
+            "lm01-lo08"
+          ],
+          "concept_ids": [
+            "preferred_habitat_flow"
+          ],
+          "difficulty": "exam_level",
+          "question_type": "interpretation",
+          "stem": "Long-horizon insurers receive enough additional premium to move from intermediate bonds into long bonds. Holding other forces constant, this flow most likely:",
+          "choices": [
+            {
+              "label": "A",
+              "text": "raises both intermediate and long prices by the same proportion.",
+              "value_raw": null
+            },
+            {
+              "label": "B",
+              "text": "lowers long yields relative to intermediate yields.",
+              "value_raw": null
+            },
+            {
+              "label": "C",
+              "text": "raises long yields because demand for long bonds increases.",
+              "value_raw": null
+            }
+          ],
+          "correct_choice": "B",
+          "solution": {
+            "opening": "B is correct.",
+            "formula_or_rule": "Preferred-habitat investors can shift when compensated.",
+            "steps": [
+              "The shift increases long-bond demand relative to intermediate-bond demand.",
+              "Higher relative long-bond prices mean lower relative long yields."
+            ],
+            "answer_value_raw": null,
+            "answer_value_display": "lower relative long yields",
+            "units": null,
+            "rounding_rule": "Not applicable; qualitative item.",
+            "explanation": "This applies the theory to a cross-maturity demand flow.",
+            "choice_analysis": [
+              {
+                "label": "A",
+                "is_correct": false,
+                "reason": "This follows from assuming a directed maturity shift has equal price effects.",
+                "error_mechanism": "assuming a directed maturity shift has equal price effects"
+              },
+              {
+                "label": "B",
+                "is_correct": true,
+                "reason": "Correct application of the stated relationship.",
+                "error_mechanism": null
+              },
+              {
+                "label": "C",
+                "is_correct": false,
+                "reason": "This follows from reversing the price-yield effect of increased long-bond demand.",
+                "error_mechanism": "reversing the price-yield effect of increased long-bond demand"
+              }
+            ]
+          },
+          "validation": {
+            "numerical": {
+              "applicable": false,
+              "independent_result": null,
+              "method": "Conceptual item; no numerical recomputation required.",
+              "independent_check": "Source, logic, and single-answer checks completed independently.",
+              "residual": null,
+              "passed": true
+            },
+            "originality": {
+              "new_entities": true,
+              "new_numbers": true,
+              "new_structure": true,
+              "not_close_paraphrase": true,
+              "passed": true
+            },
+            "grounding": {
+              "los_supported": true,
+              "module_knowledge_required": true,
+              "outside_facts_required": false,
+              "passed": true
+            },
+            "style": {
+              "three_choices": true,
+              "concise_professional_prose": true,
+              "parallel_choices": true,
+              "no_answer_clues": true,
+              "passed": true
+            },
+            "single_answer": true,
+            "overall_pass": true
+          }
+        }
+      ]
+    },
+    {
+      "item_set_id": "vignette-06-four-node-risk-decision",
+      "format": "item_set",
+      "vignette": "Faron Endowment measures curve risk at four portfolio-specific nodes. Sensitivities are value changes for a 1 bp rise. A separate two-node mandate uses two cross-exposed hedge instruments. Its satellite mandate and single-node hedge for Q23 retain sensitivities of -2,340 and -780 per bp.",
+      "exhibits": [
+        {
+          "exhibit_id": "EX6",
+          "title": "Curve-risk and hedge-decision data",
+          "data": {
+            "four_node_case": {
+              "nodes": [
+                "2-year",
+                "4-year",
+                "7-year",
+                "12-year"
+              ],
+              "sensitivities": [
+                -540,
+                -860,
+                -1120,
+                -760
+              ],
+              "scenario_A_bp": [
+                3,
+                -2,
+                4,
+                -1
+              ]
+            },
+            "two_node_hedge_case": {
+              "nodes": [
+                "3-year",
+                "11-year"
+              ],
+              "mandate": [
+                -492,
+                -804
+              ],
+              "hedge_A_long": [
+                -280,
+                -60
+              ],
+              "hedge_B_long": [
+                -50,
+                -360
+              ]
+            }
+          }
+        }
+      ],
+      "questions": [
+        {
+          "question_id": "LM1-Q21",
+          "los_ids": [
+            "lm01-lo09"
+          ],
+          "concept_ids": [
+            "four_node_curve_exposure"
+          ],
+          "difficulty": "difficult",
+          "question_type": "calculation",
+          "stem": "For Scenario A in Exhibit 6, the first-order portfolio value change is closest to:",
+          "choices": [
+            {
+              "label": "A",
+              "text": "-13,120",
+              "value_raw": -13120
+            },
+            {
+              "label": "B",
+              "text": "8,580",
+              "value_raw": 8580
+            },
+            {
+              "label": "C",
+              "text": "-3,620",
+              "value_raw": -3620
+            }
+          ],
+          "correct_choice": "C",
+          "solution": {
+            "opening": "C is correct.",
+            "formula_or_rule": "Delta V=sum(S_i Delta y_i)",
+            "steps": [
+              "Multiply each of four node sensitivities by its matching signed move.",
+              "Delta V=-3,620."
+            ],
+            "answer_value_raw": -3620,
+            "answer_value_display": "-3,620",
+            "units": "currency units",
+            "rounding_rule": "Calculate without intermediate rounding and round once to the displayed precision.",
+            "explanation": "The four-node structure measures a nonparallel curve change without collapsing it into three source-style nodes.",
+            "choice_analysis": [
+              {
+                "label": "A",
+                "is_correct": false,
+                "reason": "This follows from multiplying aggregate sensitivity by aggregate move.",
+                "error_mechanism": "multiplying aggregate sensitivity by aggregate move"
+              },
+              {
+                "label": "B",
+                "is_correct": false,
+                "reason": "This follows from discarding component signs.",
+                "error_mechanism": "discarding component signs"
+              },
+              {
+                "label": "C",
+                "is_correct": true,
+                "reason": "Correct application of the stated relationship.",
+                "error_mechanism": null
+              }
+            ]
+          },
+          "validation": {
+            "numerical": {
+              "applicable": true,
+              "independent_result": -3620,
+              "method": "Independent recomputation: -540*3-860*(-2)-1120*4-760*(-1)",
+              "independent_check": "Contributions: -1620,+1720,-4480,+760",
+              "residual": 0,
+              "passed": true
+            },
+            "originality": {
+              "new_entities": true,
+              "new_numbers": true,
+              "new_structure": true,
+              "not_close_paraphrase": true,
+              "passed": true
+            },
+            "grounding": {
+              "los_supported": true,
+              "module_knowledge_required": true,
+              "outside_facts_required": false,
+              "passed": true
+            },
+            "style": {
+              "three_choices": true,
+              "concise_professional_prose": true,
+              "parallel_choices": true,
+              "no_answer_clues": true,
+              "passed": true
+            },
+            "single_answer": true,
+            "overall_pass": true
+          }
+        },
+        {
+          "question_id": "LM1-Q22",
+          "los_ids": [
+            "lm01-lo09"
+          ],
+          "concept_ids": [
+            "two_node_cross_hedge"
+          ],
+          "difficulty": "exam_level",
+          "question_type": "calculation",
+          "stem": "Solving simultaneously for zero net exposure at the three- and eleven-year nodes, the required position in Hedge A is closest to:",
+          "choices": [
+            {
+              "label": "A",
+              "text": "Short 1.40 units",
+              "value_raw": -1.4
+            },
+            {
+              "label": "B",
+              "text": "Short 2.00 units",
+              "value_raw": -2.0
+            },
+            {
+              "label": "C",
+              "text": "Short 1.76 units",
+              "value_raw": -1.7571428571428571
+            }
+          ],
+          "correct_choice": "A",
+          "solution": {
+            "opening": "A is correct.",
+            "formula_or_rule": "Solve -492-280x-50y=0 and -804-60x-360y=0",
+            "steps": [
+              "The simultaneous solution is x=-1.40 and y=-2.00.",
+              "Three-year residual=0; eleven-year residual=0."
+            ],
+            "answer_value_raw": -1.4,
+            "answer_value_display": "Short 1.40 units",
+            "units": "hedge units",
+            "rounding_rule": "Calculate without intermediate rounding and round once to the displayed precision.",
+            "explanation": "The two hedges have cross-node exposures, so both neutrality equations must be solved together.",
+            "choice_analysis": [
+              {
+                "label": "A",
+                "is_correct": true,
+                "reason": "Correct application of the stated relationship.",
+                "error_mechanism": null
+              },
+              {
+                "label": "B",
+                "is_correct": false,
+                "reason": "This follows from using the solved Hedge B quantity for Hedge A.",
+                "error_mechanism": "using the solved Hedge B quantity for Hedge A"
+              },
+              {
+                "label": "C",
+                "is_correct": false,
+                "reason": "This follows from neutralizing the three-year node with Hedge A alone and ignoring Hedge B cross-exposure.",
+                "error_mechanism": "neutralizing the three-year node with Hedge A alone and ignoring Hedge B cross-exposure"
+              }
+            ]
+          },
+          "validation": {
+            "numerical": {
+              "applicable": true,
+              "independent_result": -1.4,
+              "method": "Independent simultaneous solution of the two-node hedge system.",
+              "independent_check": "-492 - 280x - 50y = 0; -804 - 60x - 360y = 0",
+              "residual": 0,
+              "passed": true
+            },
+            "originality": {
+              "new_entities": true,
+              "new_numbers": true,
+              "new_structure": true,
+              "not_close_paraphrase": true,
+              "passed": true
+            },
+            "grounding": {
+              "los_supported": true,
+              "module_knowledge_required": true,
+              "outside_facts_required": false,
+              "passed": true
+            },
+            "style": {
+              "three_choices": true,
+              "concise_professional_prose": true,
+              "parallel_choices": true,
+              "no_answer_clues": true,
+              "passed": true
+            },
+            "single_answer": true,
+            "overall_pass": true
+          }
+        },
+        {
+          "question_id": "LM1-Q23",
+          "los_ids": [
+            "lm01-lo09"
+          ],
+          "concept_ids": [
+            "key_rate_hedge"
+          ],
+          "difficulty": "exam_level",
+          "question_type": "calculation",
+          "stem": "A satellite mandate has five-year sensitivity of -2,340 per bp. With a hedge security sensitivity of -780 per bp per long unit, the neutralizing position is:",
+          "choices": [
+            {
+              "label": "A",
+              "text": "Long 3.00 units",
+              "value_raw": 3.0
+            },
+            {
+              "label": "B",
+              "text": "Short 3.00 units",
+              "value_raw": -3.0
+            },
+            {
+              "label": "C",
+              "text": "Short 0.33 units",
+              "value_raw": -0.3333333333333333
+            }
+          ],
+          "correct_choice": "B",
+          "solution": {
+            "opening": "B is correct.",
+            "formula_or_rule": "Units=-mandate sensitivity/hedge sensitivity",
+            "steps": [
+              "Units=-(-2,340)/(-780)=-3.00.",
+              "A negative unit count means short."
+            ],
+            "answer_value_raw": -3.0,
+            "answer_value_display": "Short 3.00 units",
+            "units": "hedge units",
+            "rounding_rule": "Calculate without intermediate rounding and round once to the displayed precision.",
+            "explanation": "Three short units add +2,340 per bp and exactly offset the mandate.",
+            "choice_analysis": [
+              {
+                "label": "A",
+                "is_correct": false,
+                "reason": "This follows from adding negative exposure.",
+                "error_mechanism": "adding negative exposure"
+              },
+              {
+                "label": "B",
+                "is_correct": true,
+                "reason": "Correct application of the stated relationship.",
+                "error_mechanism": null
+              },
+              {
+                "label": "C",
+                "is_correct": false,
+                "reason": "This follows from inverting the sensitivity ratio.",
+                "error_mechanism": "inverting the sensitivity ratio"
+              }
+            ]
+          },
+          "validation": {
+            "numerical": {
+              "applicable": true,
+              "independent_result": -3.0,
+              "method": "Independent recomputation: -(-2340)/(-780)",
+              "independent_check": "-2340+(-3)*(-780)=0",
+              "residual": 0,
+              "passed": true
+            },
+            "originality": {
+              "new_entities": true,
+              "new_numbers": true,
+              "new_structure": true,
+              "not_close_paraphrase": true,
+              "passed": true
+            },
+            "grounding": {
+              "los_supported": true,
+              "module_knowledge_required": true,
+              "outside_facts_required": false,
+              "passed": true
+            },
+            "style": {
+              "three_choices": true,
+              "concise_professional_prose": true,
+              "parallel_choices": true,
+              "no_answer_clues": true,
+              "passed": true
+            },
+            "single_answer": true,
+            "overall_pass": true
+          }
+        },
+        {
+          "question_id": "LM1-Q24",
+          "los_ids": [
+            "lm01-lo10"
+          ],
+          "concept_ids": [
+            "yield_volatility_duration_interaction"
+          ],
+          "difficulty": "difficult",
+          "question_type": "conceptual",
+          "stem": "Short-maturity yields are observed to be more volatile than long-maturity yields. Which conclusion about bond price volatility is most accurate?",
+          "choices": [
+            {
+              "label": "A",
+              "text": "Short bonds have greater price volatility whenever their yields are more volatile.",
+              "value_raw": null
+            },
+            {
+              "label": "B",
+              "text": "Long bonds have greater price volatility whenever their durations are longer.",
+              "value_raw": null
+            },
+            {
+              "label": "C",
+              "text": "Relative price volatility depends on both yield volatility and each bond’s interest-rate sensitivity.",
+              "value_raw": null
+            }
+          ],
+          "correct_choice": "C",
+          "solution": {
+            "opening": "C is correct.",
+            "formula_or_rule": "Yield volatility and duration both affect price volatility.",
+            "steps": [
+              "Yield volatility often declines with maturity.",
+              "Longer maturity generally increases duration, so the net price-volatility ranking is not determined by either fact alone."
+            ],
+            "answer_value_raw": null,
+            "answer_value_display": "depends on both factors",
+            "units": null,
+            "rounding_rule": "Not applicable; qualitative item.",
+            "explanation": "This stays within the module’s qualitative relationship and avoids an unsupported multiplicative rule.",
+            "choice_analysis": [
+              {
+                "label": "A",
+                "is_correct": false,
+                "reason": "This follows from treating yield volatility alone as decisive.",
+                "error_mechanism": "treating yield volatility alone as decisive"
+              },
+              {
+                "label": "B",
+                "is_correct": false,
+                "reason": "This follows from treating duration alone as decisive.",
+                "error_mechanism": "treating duration alone as decisive"
+              },
+              {
+                "label": "C",
+                "is_correct": true,
+                "reason": "Correct application of the stated relationship.",
+                "error_mechanism": null
+              }
+            ]
+          },
+          "validation": {
+            "numerical": {
+              "applicable": false,
+              "independent_result": null,
+              "method": "Conceptual item; no numerical recomputation required.",
+              "independent_check": "Source, logic, and single-answer checks completed independently.",
+              "residual": null,
+              "passed": true
+            },
+            "originality": {
+              "new_entities": true,
+              "new_numbers": true,
+              "new_structure": true,
+              "not_close_paraphrase": true,
+              "passed": true
+            },
+            "grounding": {
+              "los_supported": true,
+              "module_knowledge_required": true,
+              "outside_facts_required": false,
+              "passed": true
+            },
+            "style": {
+              "three_choices": true,
+              "concise_professional_prose": true,
+              "parallel_choices": true,
+              "no_answer_clues": true,
+              "passed": true
+            },
+            "single_answer": true,
+            "overall_pass": true
+          }
+        }
+      ]
+    },
+    {
+      "item_set_id": "vignette-07-macro-and-supply-trades",
+      "format": "item_set",
+      "vignette": "Galen Ridge forecasts a 75 bp short-yield increase and a 25 bp long-yield increase. Portfolio value sensitivities are -1,800 per bp at the short node and -4,200 per bp at the long node. For a level-neutral trade, a short bond has sensitivity of -300 per bp per million and a long bond has sensitivity of -800 per bp per million. The committee also considers shifting government issuance from short bills to long bonds without changing total borrowing.",
+      "exhibits": [],
+      "questions": [
+        {
+          "question_id": "LM1-Q25",
+          "los_ids": [
+            "lm01-lo09",
+            "lm01-lo11"
+          ],
+          "concept_ids": [
+            "macro_curve_scenario"
+          ],
+          "difficulty": "exam_level",
+          "question_type": "calculation",
+          "stem": "If short and long yields rise 75 bp and 25 bp, respectively, portfolio value changes by approximately:",
+          "choices": [
+            {
+              "label": "A",
+              "text": "-240,000",
+              "value_raw": -240000.0
+            },
+            {
+              "label": "B",
+              "text": "-24.00",
+              "value_raw": -24.0
+            },
+            {
+              "label": "C",
+              "text": "-360,000",
+              "value_raw": -360000.0
+            }
+          ],
+          "correct_choice": "A",
+          "solution": {
+            "opening": "A is correct.",
+            "formula_or_rule": "Delta V=S_short Delta y_short+S_long Delta y_long",
+            "steps": [
+              "Short contribution=-135,000.",
+              "Long contribution=-105,000.",
+              "Total=-240,000."
+            ],
+            "answer_value_raw": -240000.0,
+            "answer_value_display": "-240,000",
+            "units": "currency units",
+            "rounding_rule": "Calculate without intermediate rounding and round once to the displayed precision.",
+            "explanation": "Both rising yields create losses.",
+            "choice_analysis": [
+              {
+                "label": "A",
+                "is_correct": true,
+                "reason": "Correct application of the stated relationship.",
+                "error_mechanism": null
+              },
+              {
+                "label": "B",
+                "is_correct": false,
+                "reason": "This follows from using decimal moves with per-bp sensitivities.",
+                "error_mechanism": "using decimal moves with per-bp sensitivities"
+              },
+              {
+                "label": "C",
+                "is_correct": false,
+                "reason": "This follows from swapping maturity moves.",
+                "error_mechanism": "swapping maturity moves"
+              }
+            ]
+          },
+          "validation": {
+            "numerical": {
+              "applicable": true,
+              "independent_result": -240000,
+              "method": "Independent recomputation: -1800*75-4200*25",
+              "independent_check": "-135000-105000=-240000",
+              "residual": 0,
+              "passed": true
+            },
+            "originality": {
+              "new_entities": true,
+              "new_numbers": true,
+              "new_structure": true,
+              "not_close_paraphrase": true,
+              "passed": true
+            },
+            "grounding": {
+              "los_supported": true,
+              "module_knowledge_required": true,
+              "outside_facts_required": false,
+              "passed": true
+            },
+            "style": {
+              "three_choices": true,
+              "concise_professional_prose": true,
+              "parallel_choices": true,
+              "no_answer_clues": true,
+              "passed": true
+            },
+            "single_answer": true,
+            "overall_pass": true
+          }
+        },
+        {
+          "question_id": "LM1-Q26",
+          "los_ids": [
+            "lm01-lo11"
+          ],
+          "concept_ids": [
+            "duration_neutral_flattening_trade"
+          ],
+          "difficulty": "exam_level",
+          "question_type": "calculation",
+          "stem": "Per 1.00 million long bond purchased, short-bond notional sold for level neutrality is closest to:",
+          "choices": [
+            {
+              "label": "A",
+              "text": "0.38 million sold",
+              "value_raw": 0.375
+            },
+            {
+              "label": "B",
+              "text": "2.67 million sold",
+              "value_raw": 2.6666666666666665
+            },
+            {
+              "label": "C",
+              "text": "2.67 million purchased",
+              "value_raw": -2.6666666666666665
+            }
+          ],
+          "correct_choice": "B",
+          "solution": {
+            "opening": "B is correct.",
+            "formula_or_rule": "Short notional sold=800/300",
+            "steps": [
+              "Long exposure=-800 per bp.",
+              "Sell 2.6667 short-bond units for +800 per bp."
+            ],
+            "answer_value_raw": 2.6666666666666665,
+            "answer_value_display": "2.67 million sold",
+            "units": "million notional",
+            "rounding_rule": "Calculate without intermediate rounding and round once to the displayed precision.",
+            "explanation": "The short position offsets the long bond level sensitivity.",
+            "choice_analysis": [
+              {
+                "label": "A",
+                "is_correct": false,
+                "reason": "This follows from inverting the sensitivity ratio.",
+                "error_mechanism": "inverting the sensitivity ratio"
+              },
+              {
+                "label": "B",
+                "is_correct": true,
+                "reason": "Correct application of the stated relationship.",
+                "error_mechanism": null
+              },
+              {
+                "label": "C",
+                "is_correct": false,
+                "reason": "This follows from taking the same directional exposure.",
+                "error_mechanism": "taking the same directional exposure"
+              }
+            ]
+          },
+          "validation": {
+            "numerical": {
+              "applicable": true,
+              "independent_result": 2.6666666666666665,
+              "method": "Independent recomputation: 800/300",
+              "independent_check": "-800+2.6666666667*300=0",
+              "residual": 0,
+              "passed": true
+            },
+            "originality": {
+              "new_entities": true,
+              "new_numbers": true,
+              "new_structure": true,
+              "not_close_paraphrase": true,
+              "passed": true
+            },
+            "grounding": {
+              "los_supported": true,
+              "module_knowledge_required": true,
+              "outside_facts_required": false,
+              "passed": true
+            },
+            "style": {
+              "three_choices": true,
+              "concise_professional_prose": true,
+              "parallel_choices": true,
+              "no_answer_clues": true,
+              "passed": true
+            },
+            "single_answer": true,
+            "overall_pass": true
+          }
+        },
+        {
+          "question_id": "LM1-Q27",
+          "los_ids": [
+            "lm01-lo11"
+          ],
+          "concept_ids": [
+            "duration_neutral_flattening_trade"
+          ],
+          "difficulty": "difficult",
+          "question_type": "interpretation",
+          "stem": "The committee expects short yields to rise more than long yields and wants a level-neutral curve trade. The most appropriate position is to:",
+          "choices": [
+            {
+              "label": "A",
+              "text": "sell long bonds and buy short bonds in duration-neutral amounts.",
+              "value_raw": null
+            },
+            {
+              "label": "B",
+              "text": "buy long and short bonds in equal market values.",
+              "value_raw": null
+            },
+            {
+              "label": "C",
+              "text": "buy long bonds and sell short bonds in duration-neutral amounts.",
+              "value_raw": null
+            }
+          ],
+          "correct_choice": "C",
+          "solution": {
+            "opening": "C is correct.",
+            "formula_or_rule": "A flattening trade buys long maturities and sells short maturities, with duration weights neutralizing level risk.",
+            "steps": [
+              "Short yields are expected to underperform through larger price declines.",
+              "Long bonds are purchased while short bonds are sold."
+            ],
+            "answer_value_raw": null,
+            "answer_value_display": "buy long and sell short",
+            "units": null,
+            "rounding_rule": "Not applicable; qualitative item.",
+            "explanation": "The construction targets relative curve movement rather than a directional duration bet.",
+            "choice_analysis": [
+              {
+                "label": "A",
+                "is_correct": false,
+                "reason": "This follows from positioning for steepening rather than flattening.",
+                "error_mechanism": "positioning for steepening rather than flattening"
+              },
+              {
+                "label": "B",
+                "is_correct": false,
+                "reason": "This follows from adding long exposure on both curve segments instead of isolating slope.",
+                "error_mechanism": "adding long exposure on both curve segments instead of isolating slope"
+              },
+              {
+                "label": "C",
+                "is_correct": true,
+                "reason": "Correct application of the stated relationship.",
+                "error_mechanism": null
+              }
+            ]
+          },
+          "validation": {
+            "numerical": {
+              "applicable": false,
+              "independent_result": null,
+              "method": "Conceptual item; no numerical recomputation required.",
+              "independent_check": "Source, logic, and single-answer checks completed independently.",
+              "residual": null,
+              "passed": true
+            },
+            "originality": {
+              "new_entities": true,
+              "new_numbers": true,
+              "new_structure": true,
+              "not_close_paraphrase": true,
+              "passed": true
+            },
+            "grounding": {
+              "los_supported": true,
+              "module_knowledge_required": true,
+              "outside_facts_required": false,
+              "passed": true
+            },
+            "style": {
+              "three_choices": true,
+              "concise_professional_prose": true,
+              "parallel_choices": true,
+              "no_answer_clues": true,
+              "passed": true
+            },
+            "single_answer": true,
+            "overall_pass": true
+          }
+        },
+        {
+          "question_id": "LM1-Q28",
+          "los_ids": [
+            "lm01-lo11"
+          ],
+          "concept_ids": [
+            "debt_maturity_supply_effect"
+          ],
+          "difficulty": "exam_level",
+          "question_type": "interpretation",
+          "stem": "A treasury shifts issuance from short bills to long bonds without changing total borrowing. Holding demand constant, the curve will most likely:",
+          "choices": [
+            {
+              "label": "A",
+              "text": "steepen as relative long-bond supply raises long yields.",
+              "value_raw": null
+            },
+            {
+              "label": "B",
+              "text": "flatten as relative long-bond supply lowers long yields.",
+              "value_raw": null
+            },
+            {
+              "label": "C",
+              "text": "shift down in parallel because total borrowing is unchanged.",
+              "value_raw": null
+            }
+          ],
+          "correct_choice": "A",
+          "solution": {
+            "opening": "A is correct.",
+            "formula_or_rule": "Greater supply in a maturity segment lowers its price and raises its yield, all else equal.",
+            "steps": [
+              "Long-bond supply rises while bill supply falls.",
+              "Long yields rise relative to short yields."
+            ],
+            "answer_value_raw": null,
+            "answer_value_display": "steeper curve",
+            "units": null,
+            "rounding_rule": "Not applicable; qualitative item.",
+            "explanation": "Debt maturity structure can affect relative yields even when total borrowing is unchanged.",
+            "choice_analysis": [
+              {
+                "label": "A",
+                "is_correct": true,
+                "reason": "Correct application of the stated relationship.",
+                "error_mechanism": null
+              },
+              {
+                "label": "B",
+                "is_correct": false,
+                "reason": "This follows from reversing the price-yield response to added long supply.",
+                "error_mechanism": "reversing the price-yield response to added long supply"
+              },
+              {
+                "label": "C",
+                "is_correct": false,
+                "reason": "This follows from ignoring the maturity composition of supply.",
+                "error_mechanism": "ignoring the maturity composition of supply"
+              }
+            ]
+          },
+          "validation": {
+            "numerical": {
+              "applicable": false,
+              "independent_result": null,
+              "method": "Conceptual item; no numerical recomputation required.",
+              "independent_check": "Source, logic, and single-answer checks completed independently.",
+              "residual": null,
+              "passed": true
+            },
+            "originality": {
+              "new_entities": true,
+              "new_numbers": true,
+              "new_structure": true,
+              "not_close_paraphrase": true,
+              "passed": true
+            },
+            "grounding": {
+              "los_supported": true,
+              "module_knowledge_required": true,
+              "outside_facts_required": false,
+              "passed": true
+            },
+            "style": {
+              "three_choices": true,
+              "concise_professional_prose": true,
+              "parallel_choices": true,
+              "no_answer_clues": true,
+              "passed": true
+            },
+            "single_answer": true,
+            "overall_pass": true
+          }
+        }
+      ]
+    }
+  ],
+  "quality_control": {
+    "schema_valid": true,
+    "requested_count": 28,
+    "released_count": 28,
+    "rejected_count": 0,
+    "regenerated_count": 35,
+    "all_items_passed": true,
+    "all_numerical_items_independently_recomputed": true,
+    "all_distractors_verified": true,
+    "all_items_module_grounded": true,
+    "all_items_original": true,
+    "answer_position_distribution": {
+      "A": 10,
+      "B": 9,
+      "C": 9
+    },
+    "los_coverage": [
+      {
+        "los_id": "lm01-lo01",
+        "question_ids": [
+          "LM1-Q01",
+          "LM1-Q02",
+          "LM1-Q03",
+          "LM1-Q04",
+          "LM1-Q07",
+          "LM1-Q09",
+          "LM1-Q10",
+          "LM1-Q11"
+        ]
+      },
+      {
+        "los_id": "lm01-lo02",
+        "question_ids": [
+          "LM1-Q05",
+          "LM1-Q06",
+          "LM1-Q08"
+        ]
+      },
+      {
+        "los_id": "lm01-lo03",
+        "question_ids": [
+          "LM1-Q09",
+          "LM1-Q11",
+          "LM1-Q12"
+        ]
+      },
+      {
+        "los_id": "lm01-lo04",
+        "question_ids": []
+      },
+      {
+        "los_id": "lm01-lo05",
+        "question_ids": [
+          "LM1-Q15"
+        ]
+      },
+      {
+        "los_id": "lm01-lo06",
+        "question_ids": [
+          "LM1-Q13",
+          "LM1-Q14"
+        ]
+      },
+      {
+        "los_id": "lm01-lo07",
+        "question_ids": [
+          "LM1-Q16"
+        ]
+      },
+      {
+        "los_id": "lm01-lo08",
+        "question_ids": [
+          "LM1-Q17",
+          "LM1-Q18",
+          "LM1-Q19",
+          "LM1-Q20"
+        ]
+      },
+      {
+        "los_id": "lm01-lo09",
+        "question_ids": [
+          "LM1-Q21",
+          "LM1-Q22",
+          "LM1-Q23",
+          "LM1-Q25"
+        ]
+      },
+      {
+        "los_id": "lm01-lo10",
+        "question_ids": [
+          "LM1-Q24"
+        ]
+      },
+      {
+        "los_id": "lm01-lo11",
+        "question_ids": [
+          "LM1-Q25",
+          "LM1-Q26",
+          "LM1-Q27",
+          "LM1-Q28"
+        ]
+      }
+    ],
+    "failed_item_ids": [],
+    "overall_pass": true
+  }
+}

@@ -1,6 +1,7 @@
 import type { Question } from "@/app/question-content";
 
 export function getQuestionId(setId: string, question: Question) {
+  if (question.trackingId) return question.trackingId;
   const source = `${setId}\n${question.topic}`;
   let hash = 2166136261;
 

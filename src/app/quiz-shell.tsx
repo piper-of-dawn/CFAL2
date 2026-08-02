@@ -1,20 +1,23 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { Fragment, useEffect, useMemo, useState } from "react";
 import { Badge } from "@appica/ui-react/badge";
 import { Button } from "@appica/ui-react/button";
 import { Progress } from "@appica/ui-react/progress";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@appica/ui-react/select";
 import { useTheme } from "@appica/ui-react/hooks/use-theme";
 import { getQuestionId } from "@/lib/question-id";
-import type { Question } from "./question-content";
-import { Explanation, MathText } from "./question-content";
+import type { PracticeGroup } from "./question-content";
+import { ExhibitView, Explanation, MathText } from "./question-content";
 
 type QuestionSet = {
   id: string;
   label: string;
   filename: string;
-  questions: Question[];
+  groups: PracticeGroup[];
+  questionCount: number;
+  vignetteCount: number;
+  format: "MCQ" | "Vignette";
   error: string | null;
 };
 
@@ -48,21 +51,23 @@ export default function QuizShell({ questionSets }: { questionSets: QuestionSet[
   const { resolvedTheme, setTheme, mounted } = useTheme();
   const activeTheme = mounted && resolvedTheme === "dark" ? "dark" : "light";
   const activeSet = questionSets.find((set) => set.id === selectedSetId) ?? questionSets[0];
-  const questions = useMemo(() => activeSet?.questions ?? [], [activeSet?.questions]);
-  const questionItems = useMemo(
-    () =>
-      questions
-        .map((question, index) => ({
-          id: getQuestionId(activeSet?.id ?? "", question),
-          index,
-          question,
-        }))
-        .sort((first, second) => {
-          const wrongCountDelta = (wrongCounts[second.id] ?? 0) - (wrongCounts[first.id] ?? 0);
-          return wrongCountDelta || first.index - second.index;
-        }),
-    [activeSet?.id, questions, wrongCounts],
-  );
+  const groupItems = useMemo(() => (activeSet?.groups ?? [])
+    .map((group, groupIndex) => ({
+      group,
+      groupIndex,
+      questions: group.questions.map((question, questionIndex) => ({
+        id: getQuestionId(activeSet?.id ?? "", question),
+        question,
+        questionIndex,
+      })),
+    }))
+    .sort((first, second) => {
+      const firstWrongCount = Math.max(0, ...first.questions.map((item) => wrongCounts[item.id] ?? 0));
+      const secondWrongCount = Math.max(0, ...second.questions.map((item) => wrongCounts[item.id] ?? 0));
+      return secondWrongCount - firstWrongCount || first.groupIndex - second.groupIndex;
+    }), [activeSet?.groups, activeSet?.id, wrongCounts]);
+  const questionItems = useMemo(() => groupItems.flatMap(({ group, groupIndex, questions }) =>
+    questions.map((item) => ({ ...item, group, groupIndex }))), [groupItems]);
 
   useEffect(() => {
     if (!started) return;
@@ -143,7 +148,8 @@ export default function QuizShell({ questionSets }: { questionSets: QuestionSet[
   };
   const formatTime = (seconds: number) => `${String(Math.floor(seconds / 60)).padStart(2, "0")}:${String(seconds % 60).padStart(2, "0")}`;
   const score = questionItems.reduce((total, item) => total + (answers[item.id] === item.question.answer ? 1 : 0), 0);
-  const count = String(questions.length).padStart(2, "0");
+  const questionCount = activeSet?.questionCount ?? 0;
+  const count = String(questionCount).padStart(2, "0");
 
   if (!activeSet) {
     return (
@@ -171,7 +177,7 @@ export default function QuizShell({ questionSets }: { questionSets: QuestionSet[
   }
 
   if (!started) {
-    const canStart = !activeSet.error && questions.length > 0;
+    const canStart = !activeSet.error && questionCount > 0;
 
     return (
       <main className="min-h-screen bg-background-subtle text-foreground">
@@ -219,7 +225,7 @@ export default function QuizShell({ questionSets }: { questionSets: QuestionSet[
                           <span className="block font-semibold">{set.label}</span>
                           <span className="mt-1 block font-mono text-xs text-foreground-muted">{set.filename}</span>
                         </span>
-                        <span className="font-mono text-sm text-foreground-muted">{set.error ? "Invalid" : `${set.questions.length} Qs`}</span>
+                        <span className="font-mono text-sm text-foreground-muted">{set.error ? "Invalid" : set.vignetteCount ? `${set.vignetteCount} Vignettes · ${set.questionCount} Qs` : `${set.questionCount} Qs`}</span>
                       </span>
                     </Button>
                   ))}
@@ -227,16 +233,16 @@ export default function QuizShell({ questionSets }: { questionSets: QuestionSet[
                 {activeSet.error && <p className="material-error mt-6 rounded-3xl p-4 text-sm leading-6 text-foreground-muted">{activeSet.filename}: {activeSet.error}</p>}
                 <div className="mt-9 flex flex-wrap items-center gap-4">
                   <Button size="lg" className="min-w-52" disabled={!canStart} onClick={startPractice}>Start practice <span aria-hidden="true">→</span></Button>
-                  <span className="font-mono text-sm text-foreground-muted">{canStart ? `${questions.length} questions ready` : "Select a valid JSON file"}</span>
+                  <span className="font-mono text-sm text-foreground-muted">{canStart ? `${questionCount} questions ready` : "Select a valid JSON file"}</span>
                 </div>
               </div>
               <div className="relative">
                 <div className="absolute -inset-8 rounded-[2.5rem] bg-foreground/5 blur-3xl" />
                 <div className="material-card relative rounded-[2rem] p-7 sm:p-10">
                   <div className="flex items-start justify-between gap-4"><div><p className="text-sm text-foreground-muted">Preview</p><h2 className="mt-2 text-2xl font-semibold tracking-tight">{activeSet.label}</h2><p className="mt-2 font-mono text-xs text-foreground-muted">{activeSet.filename}</p></div><Badge variant="soft">{canStart ? "Ready" : "Invalid"}</Badge></div>
-                  <div className="mt-8 grid max-w-lg grid-cols-3 gap-4"><Stat label="Questions" value={count} /><Stat label="Format" value="MCQ" /><Stat label="Difficulty" value="Core" /></div>
+                  <div className="mt-8 grid max-w-lg grid-cols-3 gap-4"><Stat label="Questions" value={count} /><Stat label={activeSet.vignetteCount ? "Vignettes" : "Format"} value={activeSet.vignetteCount ? String(activeSet.vignetteCount).padStart(2, "0") : activeSet.format} /><Stat label={activeSet.vignetteCount ? "Format" : "Difficulty"} value={activeSet.vignetteCount ? activeSet.format : "Core"} /></div>
                   <Progress value={0} className="mt-8" aria-label="Quiz progress" />
-                  <div className="mt-9 max-h-80 space-y-2 overflow-y-auto">{questionItems.map((item, index) => <div key={item.id} className="material-list-item flex items-center gap-4 rounded-2xl px-3 py-4 text-sm"><span className="material-index flex size-7 items-center justify-center rounded-full text-xs font-semibold">{String(index + 1).padStart(2, "0")}</span>{item.question.topic}</div>)}</div>
+                  <div className="mt-9 max-h-80 space-y-2 overflow-y-auto">{groupItems.map((item, index) => <div key={item.group.id} className="material-list-item flex items-center gap-4 rounded-2xl px-3 py-4 text-sm"><span className="material-index flex size-7 items-center justify-center rounded-full text-xs font-semibold">{String(index + 1).padStart(2, "0")}</span><span><span className="block font-medium">{item.group.title}</span><span className="mt-1 block font-mono text-xs text-foreground-muted">{item.questions.length} {item.questions.length === 1 ? "question" : "questions"}</span></span></div>)}</div>
                 </div>
               </div>
             </div>
@@ -254,16 +260,24 @@ export default function QuizShell({ questionSets }: { questionSets: QuestionSet[
           <div className="flex items-center gap-3"><span className="font-mono text-sm text-foreground-muted">{formatTime(elapsed)}</span><ThemeToggle theme={activeTheme} onChange={changeTheme} /></div>
         </header>
         <div className="py-12">
-          <div className="mb-12 grid grid-cols-3 gap-4"><Stat label="Answered" value={`${Object.keys(answers).length} / ${questions.length}`} /><Stat label="Score" value={`${score} / ${questions.length}`} /><Stat label="Time" value={formatTime(elapsed)} /></div>
+          <div className="mb-12 grid grid-cols-3 gap-4"><Stat label="Answered" value={`${Object.keys(answers).length} / ${questionCount}`} /><Stat label="Score" value={`${score} / ${questionCount}`} /><Stat label="Time" value={formatTime(elapsed)} /></div>
           <div className="space-y-10">{questionItems.map((item, questionIndex) => {
-            const { id, question } = item;
+            const { id, question, group } = item;
             const selected = answers[id];
             const checked = selected !== undefined;
             const correct = selected === question.answer;
             const explanationVisible = Boolean(visibleExplanations[id]);
             const shouldPromptExplanation = checked && !correct && !explanationVisible;
+            const showVignette = group.format === "item_set" && (questionIndex === 0 || questionItems[questionIndex - 1].group.id !== group.id);
+            const vignettePosition = groupItems.findIndex((candidate) => candidate.group.id === group.id) + 1;
             return (
-              <section key={id} className="material-card rounded-[1.75rem] p-7 sm:p-11">
+              <Fragment key={id}>
+              {showVignette && <article className="vignette-card material-card rounded-[1.75rem] p-7 sm:p-11" data-testid="vignette" data-item-set-id={group.id}>
+                <div className="flex flex-wrap items-start justify-between gap-4"><div><p className="font-mono text-xs uppercase tracking-[0.16em] text-foreground-muted">Vignette {vignettePosition} of {activeSet.vignetteCount}</p><h2 className="mt-3 text-2xl font-semibold tracking-tight">{group.title}</h2></div><Badge variant="soft">{group.questions.length} questions</Badge></div>
+                <div className="vignette-prose mt-7 space-y-4 text-base leading-7 text-foreground-muted">{group.vignette?.split(/\n{2,}/).map((paragraph, paragraphIndex) => <p key={paragraphIndex}><MathText>{paragraph}</MathText></p>)}</div>
+                {group.exhibits.length > 0 && <div className="mt-7 grid gap-4">{group.exhibits.map((exhibit) => <ExhibitView key={exhibit.id} exhibit={exhibit} />)}</div>}
+              </article>}
+              <section className="material-card rounded-[1.75rem] p-7 sm:p-11" data-testid="question" data-question-id={question.trackingId}>
                 <div className="flex items-center justify-between gap-4"><Badge variant="soft">{question.topic}</Badge><span className="font-mono text-sm text-foreground-muted">{String(questionIndex + 1).padStart(2, "0")} / {count}</span></div>
                 <p className="mt-9 text-sm font-medium text-foreground-muted">Question {questionIndex + 1}</p>
                 <h2 className="mt-3 max-w-3xl text-base font-semibold leading-snug sm:text-lg"><MathText>{question.stem}</MathText></h2>
@@ -297,6 +311,7 @@ export default function QuizShell({ questionSets }: { questionSets: QuestionSet[
                 </div>
                 {explanationVisible && <div className="material-tonal mt-6 rounded-3xl p-6"><div className="font-semibold">{checked && correct ? "Correct answer" : "Explanation"}</div><Explanation value={question.explanation} /></div>}
               </section>
+              </Fragment>
             );
           })}</div>
         </div>

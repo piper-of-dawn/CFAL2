@@ -1,5 +1,5 @@
 import QuizShell from "./quiz-shell";
-import { validateQuestions } from "./question-content";
+import { normalizeQuestionDataset } from "./question-content";
 import { readdir, readFile } from "node:fs/promises";
 import path from "node:path";
 
@@ -24,21 +24,40 @@ async function getQuestionSets() {
       try {
         const source = await readFile(path.join(dataDirectory, filename), "utf8");
         const parsed = JSON.parse(source);
-        const dataset = validateQuestions(parsed);
+        const result = normalizeQuestionDataset(parsed);
+
+        if (!result.dataset) {
+          return {
+            id: filename,
+            label: titleFromFilename(filename),
+            filename,
+            groups: [],
+            questionCount: 0,
+            vignetteCount: 0,
+            format: "MCQ" as const,
+            error: result.error,
+          };
+        }
 
         return {
           id: filename,
-          label: titleFromFilename(filename),
+          label: result.dataset.label ?? titleFromFilename(filename),
           filename,
-          questions: dataset.questions,
-          error: dataset.error,
+          groups: result.dataset.groups,
+          questionCount: result.dataset.questionCount,
+          vignetteCount: result.dataset.vignetteCount,
+          format: result.dataset.format,
+          error: null,
         };
       } catch (error) {
         return {
           id: filename,
           label: titleFromFilename(filename),
           filename,
-          questions: [],
+          groups: [],
+          questionCount: 0,
+          vignetteCount: 0,
+          format: "MCQ" as const,
           error: error instanceof Error ? error.message : "The question dataset could not be parsed.",
         };
       }

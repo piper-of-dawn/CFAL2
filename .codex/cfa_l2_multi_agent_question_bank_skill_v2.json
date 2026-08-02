@@ -1,0 +1,1372 @@
+{
+  "skill_metadata": {
+    "name": "cfa_l2_multi_agent_question_bank_generator",
+    "version": "2.0.0",
+    "artifact_type": "agent_skill_specification",
+    "purpose": "Generate an original, numerically verified bank of CFA Level II-style multiple-choice questions from a user-specified learning module in supplied curriculum files.",
+    "primary_priority": "numerical_accuracy",
+    "secondary_priorities": [
+      "faithful coverage of the requested learning module",
+      "strict three-choice CFA-style item construction",
+      "surface originality",
+      "single-defensible-answer quality",
+      "machine-valid JSON output"
+    ],
+    "non_affiliation_notice": "This skill imitates structural features observed in the supplied CFA curriculum practice material. It is not affiliated with, endorsed by, or an official product of CFA Institute."
+  },
+  "operating_principles": [
+    "The requested learning module is the only authority for examinable concepts, terminology, assumptions, formulas, and conventions.",
+    "A generated question must test knowledge or calculation supported by the requested module, but must not reproduce the module's wording, entities, numerical sequence, exhibit layout, or question skeleton.",
+    "Numerical correctness overrides speed, elegance, question count, and stylistic variety.",
+    "A question is not releasable unless independent agents agree that it has exactly one defensible answer.",
+    "The system must regenerate a failed item instead of merely changing its answer key.",
+    "The final question-bank artifact must be valid JSON and must contain no Markdown fences or prose outside the JSON document."
+  ],
+  "user_input_schema": {
+    "type": "object",
+    "required": [
+      "learning_module"
+    ],
+    "additionalProperties": false,
+    "properties": {
+      "learning_module": {
+        "type": "string",
+        "minLength": 1,
+        "description": "Learning module number, exact title, or an unambiguous combination of both."
+      },
+      "source_paths": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "default": [],
+        "description": "Optional explicit curriculum files or directories. If omitted, inspect available supplied source files."
+      },
+      "question_count": {
+        "type": "integer",
+        "minimum": 1,
+        "maximum": 200,
+        "default": 24
+      },
+      "format": {
+        "type": "string",
+        "enum": [
+          "item_sets",
+          "standalone",
+          "mixed"
+        ],
+        "default": "item_sets"
+      },
+      "item_set_size": {
+        "oneOf": [
+          {
+            "type": "integer",
+            "enum": [
+              4,
+              6
+            ]
+          },
+          {
+            "type": "string",
+            "enum": [
+              "mixed"
+            ]
+          }
+        ],
+        "default": "mixed",
+        "description": "For exam-simulation mode, use item sets of four or six questions."
+      },
+      "difficulty": {
+        "type": "string",
+        "enum": [
+          "standard",
+          "difficult",
+          "exam_level",
+          "mixed"
+        ],
+        "default": "exam_level"
+      },
+      "numerical_weight": {
+        "type": "number",
+        "minimum": 0.0,
+        "maximum": 1.0,
+        "default": 0.65
+      },
+      "include_solutions": {
+        "type": "boolean",
+        "default": true
+      },
+      "include_choice_analysis": {
+        "type": "boolean",
+        "default": true
+      },
+      "seed": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "default": null
+      },
+      "output_path": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "default": null,
+        "description": "Optional destination for the generated JSON question bank."
+      }
+    }
+  },
+  "sensible_agent_behavior": {
+    "defaulting": [
+      "Proceed without clarification when the requested module is uniquely identifiable.",
+      "Use the defaults in user_input_schema when optional preferences are missing.",
+      "Ask one focused clarification only when multiple modules remain genuinely plausible after inspecting the source files."
+    ],
+    "execution": [
+      "Do not stop after producing an outline, workflow, or partial sample.",
+      "Use file inspection and deterministic calculation tools when available.",
+      "Keep a structured progress state so a failed question can be regenerated without restarting the full run.",
+      "When an extraction is ambiguous, inspect the rendered page, table, tree, or exhibit rather than guessing.",
+      "If a requested count cannot be met without releasing failed items, return fewer validated questions and report the shortfall."
+    ],
+    "final_chat_response": {
+      "when_file_system_is_available": [
+        "Save the validated question bank to the requested or derived JSON path.",
+        "Respond with the path, number of released questions, number rejected or regenerated, and overall validation status.",
+        "Do not paste the entire question bank into chat unless explicitly requested."
+      ],
+      "when_file_system_is_unavailable": [
+        "Return the validated JSON document directly.",
+        "Do not wrap it in Markdown."
+      ]
+    }
+  },
+  "architecture": {
+    "pattern": "hierarchical sequential workflow with independent parallel audits",
+    "reason": "The work is predictable enough for a controlled pipeline, but numerical validation, originality review, and style review benefit from independent specialist judgments.",
+    "shared_artifacts": [
+      "module_blueprint",
+      "formula_registry",
+      "coverage_plan",
+      "draft_question_package",
+      "validation_reports",
+      "release_manifest"
+    ],
+    "information_barriers": [
+      "The numerical checker receives the question stem, exhibits, choices, module formula registry, and assumptions, but not the generator's selected answer or worked solution.",
+      "The originality auditor receives the source module and the generated surface text, but not the generator's private rationale.",
+      "The CFA-style examiner receives the generated vignette, exhibits, questions, and choices, but not numerical validation results.",
+      "The final adjudicator receives all structured reports but does not receive private chain-of-thought from any agent."
+    ],
+    "agents": [
+      {
+        "agent_id": "orchestrator",
+        "role": "Supervisor and release controller",
+        "responsibilities": [
+          "Parse the user request and resolve defaults.",
+          "Assign deterministic seeds.",
+          "Run the workflow in order.",
+          "Route failed items back to the correct stage.",
+          "Enforce retry limits and hard-failure conditions.",
+          "Release only items that pass every mandatory gate."
+        ],
+        "must_not": [
+          "Override a failed numerical check.",
+          "Average conflicting judgments into a pass.",
+          "Silently reduce quality thresholds to meet the requested count."
+        ],
+        "output": "run_state and release_manifest"
+      },
+      {
+        "agent_id": "module_mapper",
+        "role": "Source analyst",
+        "responsibilities": [
+          "Locate the exact start and end of the requested learning module.",
+          "Extract the official module title and all Learning Outcome Statements.",
+          "Build a concept inventory, formula registry, assumption registry, terminology list, and section map.",
+          "Inspect examples, exhibits, practice problems, and solutions only to infer tested mechanisms and style patterns.",
+          "Mark formulas or exhibits that require visual page inspection."
+        ],
+        "must_not": [
+          "Import outside concepts because they seem related.",
+          "Treat a table of contents as sufficient evidence.",
+          "Copy source question wording into the blueprint."
+        ],
+        "output": "module_blueprint"
+      },
+      {
+        "agent_id": "question_generator",
+        "role": "Original question and vignette constructor",
+        "responsibilities": [
+          "Create new entities, dates, currencies, data, exhibits, and scenarios.",
+          "Select primitive numerical inputs that are internally consistent.",
+          "Construct the authoritative calculation before creating answer choices.",
+          "Generate plausible distractors from identifiable mistakes.",
+          "Map every item to one primary LOS and optional secondary LOS.",
+          "Write concise stems and item-set vignettes in the required style."
+        ],
+        "must_not": [
+          "Reuse a source entity, fact pattern, numerical sequence, table geometry, or distinctive sentence structure.",
+          "Create difficulty by omitting required information.",
+          "Use outside market facts or trivia.",
+          "Select the correct option position systematically."
+        ],
+        "output": "draft_question_package"
+      },
+      {
+        "agent_id": "numerical_accuracy_checker",
+        "role": "Independent quantitative verifier",
+        "independence_rule": "Solve each numerical item from the stem and exhibits alone. Do not inspect the generator's answer key until an independent result has been locked.",
+        "responsibilities": [
+          "Recompute every numerical answer with executable code or a deterministic calculator.",
+          "Use an independent method, inverse calculation, or residual test.",
+          "Check cash-flow timing, compounding convention, units, signs, basis points, probabilities, and rounding.",
+          "Recalculate all numerical distractors and identify the exact error each represents.",
+          "Verify that displayed choices remain distinct after rounding.",
+          "Perform economic-direction and boundary checks."
+        ],
+        "mandatory_result": "pass or fail; no subjective partial pass",
+        "output": "numerical_validation_report"
+      },
+      {
+        "agent_id": "source_independence_auditor",
+        "role": "Originality, leakage, and module-dependence auditor",
+        "responsibilities": [
+          "Check for direct copying and close paraphrase.",
+          "Check for indirect copying through identical scenario structure, exhibit layout, numerical progression, distractor pattern, or order of operations.",
+          "Check that no question mentions the curriculum, source, page, example number, author, or original issuer.",
+          "Confirm that the tested knowledge is explicitly supported by the requested module.",
+          "Reject questions answerable by generic common sense, pure reading comprehension, or outside facts without using module knowledge.",
+          "Reject questions whose answer depends on a convention absent from the module."
+        ],
+        "source_dependence_definition": "The correct answer must require a formula, assumption, defined relationship, classification, valuation method, or interpretation taught in the requested learning module. The question need not quote or cite the source.",
+        "output": "originality_and_grounding_report"
+      },
+      {
+        "agent_id": "cfa_style_examiner",
+        "role": "CFA-style item-writing reviewer",
+        "responsibilities": [
+          "Enforce exactly three answer choices labeled A, B, and C.",
+          "Check that item-set questions refer cleanly to the vignette or exhibits.",
+          "Prefer concise command language such as most likely, least likely, most accurate, best described, or closest to.",
+          "Check that all required data are present and irrelevant data are plausible rather than deceptive.",
+          "Check parallel grammar and comparable answer-choice precision.",
+          "Check that the correct answer is not revealed by length, wording, units, or grammatical fit.",
+          "Check that solutions begin with the selected choice and explain why it is correct.",
+          "Ensure difficulty comes from concept integration, calculation, and interpretation rather than obscure wording."
+        ],
+        "style_basis": [
+          "Three-option multiple choice",
+          "Item-set vignettes with exhibits",
+          "Frequent exhibit-based stems",
+          "Calculation questions using closest to",
+          "Conceptual questions using most likely or most accurate",
+          "Solutions identifying the correct letter and explaining the mechanism"
+        ],
+        "output": "style_validation_report"
+      },
+      {
+        "agent_id": "final_adjudicator",
+        "role": "Independent release gate",
+        "responsibilities": [
+          "Confirm the item passed numerical, originality, grounding, style, schema, and single-answer checks.",
+          "Check LOS coverage and duplication across the complete bank.",
+          "Reject a question when specialist reports conflict.",
+          "Approve the final release manifest and JSON serialization."
+        ],
+        "output": "release_decision"
+      }
+    ]
+  },
+  "source_processing": {
+    "module_resolution": [
+      "Inspect all plausible curriculum files.",
+      "Match module number and title against internal headings and Learning Outcome Statements.",
+      "Record the module's exact page range.",
+      "If the same module appears in multiple versions, use the version explicitly requested; otherwise use the most complete supplied curriculum edition and report the selection."
+    ],
+    "blueprint_fields": [
+      "official_module_title",
+      "module_number",
+      "source_page_range",
+      "learning_outcomes",
+      "sections_and_subsections",
+      "defined_terms",
+      "formula_registry",
+      "assumption_registry",
+      "exhibit_mechanisms",
+      "worked_example_mechanisms",
+      "common_error_patterns",
+      "practice_style_fingerprint"
+    ],
+    "formula_registry_requirements": [
+      "Give every formula a unique internal identifier.",
+      "Define every symbol and unit.",
+      "Record compounding, timing, sign, and rounding conventions.",
+      "Record required assumptions and valid use cases.",
+      "Record an algebraic inverse or independent check when possible.",
+      "Do not expose copied source text in the final question bank."
+    ],
+    "coverage_policy": [
+      "Every generated item must map to at least one LOS.",
+      "Every LOS should receive at least one item when the requested question count permits.",
+      "Allocate more items to multi-step, mathematically dense, and conceptually central sections.",
+      "Do not claim unpublished exam weights.",
+      "Avoid repeatedly testing the same formula with only cosmetic numerical changes."
+    ]
+  },
+  "question_design_policy": {
+    "public_question_text_rules": [
+      "Use invented professional settings, entities, securities, funds, analysts, and currencies.",
+      "Do not refer to the source file, curriculum, learning module, page, example, exhibit number from the source, or original author.",
+      "Do not copy or closely paraphrase any source vignette, question, answer choice, or solution.",
+      "All information needed to answer must appear in the question set, except the module knowledge being tested.",
+      "Use realistic data but avoid accidental dependence on live market conditions.",
+      "Use consistent date, day-count, compounding, and payment-frequency assumptions.",
+      "Keep prose economical and professional."
+    ],
+    "item_set_rules": {
+      "exam_simulation_sizes": [
+        4,
+        6
+      ],
+      "vignette_requirements": [
+        "One coherent professional situation.",
+        "Only facts that support at least one question or provide realistic context.",
+        "Exhibits should be compact and machine-readable.",
+        "Questions may share data but must test distinct decisions or calculations.",
+        "Later questions must not depend on answers to earlier questions."
+      ],
+      "standalone_rule": "Use only when requested or when an item cannot be placed naturally into an item set."
+    },
+    "question_type_targets": {
+      "calculation": 0.65,
+      "conceptual": 0.2,
+      "interpretation": 0.15
+    },
+    "difficulty_definition": {
+      "standard": "One principal relationship with a direct calculation or interpretation.",
+      "difficult": "Two or more linked steps, convention selection, or distinction between closely related concepts.",
+      "exam_level": "A concise item with plausible distractors arising from realistic errors, requiring both technical knowledge and disciplined reading.",
+      "prohibited_difficulty": [
+        "missing assumptions",
+        "ambiguous language",
+        "needless arithmetic volume",
+        "outside trivia",
+        "hidden precision",
+        "multiple defensible interpretations"
+      ]
+    },
+    "answer_choice_rules": [
+      "Exactly three choices.",
+      "Exactly one defensible correct answer.",
+      "Comparable grammar, units, precision, and length.",
+      "For numerical items, generate the correct value first and distractors second.",
+      "Randomize the correct-answer position under a balanced distribution.",
+      "Do not use all of the above, none of the above, or overlapping ranges.",
+      "Do not rely on unstated rounding to distinguish answers."
+    ],
+    "distractor_rules": [
+      "Every distractor must be calculated or logically derived.",
+      "Every distractor must correspond to a named error mechanism.",
+      "Typical mechanisms include incorrect compounding, incorrect sign, wrong timing, omitted cash flow, wrong node, failure to exercise an option, basis-point conversion error, premature rounding, wrong benchmark, arithmetic instead of geometric averaging, and use of an inapplicable formula.",
+      "Do not use absurd values merely to fill choices.",
+      "Do not repeat the same distractor mechanism across most of the bank."
+    ]
+  },
+  "numerical_accuracy_protocol": {
+    "construction_order": [
+      "Select the LOS and target quantity.",
+      "Choose primitive inputs.",
+      "Check that the inputs satisfy all domain constraints.",
+      "Compute the authoritative unrounded answer.",
+      "Perform an internal inverse, residual, or identity check.",
+      "Create and calculate distractors.",
+      "Round only for display.",
+      "Confirm display-level separation.",
+      "Write the stem and solution around the locked calculation."
+    ],
+    "mandatory_tooling": [
+      "Use Python, Decimal, Fraction, a spreadsheet engine, or another deterministic calculation tool for every numerical item.",
+      "Do not use mental arithmetic as the final authority.",
+      "Store executable validation code or a compact calculation trace in the private audit package.",
+      "Use fixed random seeds when random data generation is used."
+    ],
+    "precision_policy": {
+      "internal_precision": "At least 15 significant decimal digits or exact rational arithmetic when practical.",
+      "rounding": "Round only once at the final display stage unless the source convention explicitly requires staged rounding.",
+      "default_absolute_tolerance": 1e-10,
+      "default_relative_tolerance": 1e-09,
+      "choice_separation": "After display rounding, the distance from the correct choice to every distractor must exceed the maximum of twice the rounding unit and the declared numerical tolerance."
+    },
+    "domain_checks": {
+      "discounting_and_yield": [
+        "Verify positive discount factors when required.",
+        "Verify cash-flow dates and exponent timing.",
+        "Substitute solved rates or spreads back into the pricing equation."
+      ],
+      "binomial_trees": [
+        "Verify tree dimensions and node reachability.",
+        "Verify risk-neutral probabilities sum to one at every step.",
+        "Verify backward induction at every node.",
+        "For option-free bonds, reconcile tree value with spot-rate value when the tree is calibrated."
+      ],
+      "pathwise_and_monte_carlo": [
+        "Verify path probabilities or simulation weights.",
+        "Report seed, path count, estimator, standard error, and convergence criterion when simulation is used.",
+        "Do not claim more paths remove model error."
+      ],
+      "returns": [
+        "Reconcile beginning value, coupons, reinvestment, sale or maturity value, and annualization.",
+        "Verify that the sign and magnitude agree with the stated rate movement."
+      ],
+      "duration_convexity_and_sensitivity": [
+        "Verify price direction against rate direction.",
+        "Check unit conversion between decimal yield changes and basis points.",
+        "Check approximation magnitude and convexity sign when relevant."
+      ],
+      "credit_and_probability": [
+        "Verify probabilities lie in valid ranges.",
+        "Verify transition rows sum to one when applicable.",
+        "Verify recovery, loss given default, and exposure conventions are consistent."
+      ]
+    },
+    "independent_recalculation": {
+      "required": true,
+      "methods": [
+        "Equivalent algebraic formula",
+        "Inverse recovery of an input",
+        "Present-value residual",
+        "Cash-flow identity",
+        "Alternative algorithm",
+        "Boundary or monotonicity test",
+        "Economic-direction test"
+      ],
+      "failure_action": "Reject and regenerate the item from new primitive inputs."
+    }
+  },
+  "originality_and_grounding_protocol": {
+    "surface_originality_checks": [
+      "No reused person, company, issuer, bond, fund, city, or institution names.",
+      "No reused dates, currencies, coupon sequences, spot-rate sequences, tree rates, prices, or answer values.",
+      "No close paraphrase of the source vignette or stem.",
+      "No copied exhibit title, column ordering, row ordering, or distinctive layout.",
+      "No identical sequence of sub-calculations when a materially different construction is possible.",
+      "No copied combination and ordering of distractor mechanisms."
+    ],
+    "semantic_originality_checks": [
+      "Compare the generated item against source examples and practice items for structural similarity.",
+      "A change of names and numbers alone is insufficient.",
+      "Reject an item that preserves the same narrative arc, same data dependencies, and same requested calculation as a source item.",
+      "Permit use of the same underlying concept or formula because that is the purpose of the exercise."
+    ],
+    "module_dependence_checks": [
+      "Identify the precise LOS and module-defined knowledge required.",
+      "State why generic common sense is insufficient.",
+      "State why outside facts are unnecessary.",
+      "Confirm all conventions needed for the answer are supported by the module.",
+      "Confirm the item tests application, calculation, interpretation, or distinction rather than source recall."
+    ],
+    "public_output_restrictions": [
+      "Do not include source quotations.",
+      "Do not include source page citations inside question stems, choices, or solutions.",
+      "Do not reveal source-example similarity analysis.",
+      "Use internal concept IDs rather than copied text when an audit link is needed."
+    ]
+  },
+  "cfa_style_profile": {
+    "item_format": [
+      "Three answer choices labeled A, B, and C.",
+      "Item-set questions tied to a concise vignette and exhibits.",
+      "A question must be answerable independently of answers to other questions."
+    ],
+    "preferred_stem_patterns": [
+      "Based on Exhibit X, ... is closest to:",
+      "Based on the information provided, ... is most likely to:",
+      "Which of the following statements is most accurate?",
+      "The analyst's conclusion is most likely:",
+      "The best action is to:",
+      "The change will most likely cause ... to:"
+    ],
+    "solution_style": [
+      "Begin with '<letter> is correct.'",
+      "Show the relevant formula or rule.",
+      "Show substitutions and intermediate values for numerical items.",
+      "Explain the financial or conceptual meaning.",
+      "Explain why each distractor is wrong when choice analysis is requested."
+    ],
+    "style_failures": [
+      "Four or more answer choices",
+      "Conversational or coaching language inside the exam item",
+      "Needlessly long background",
+      "Trick wording unrelated to the concept",
+      "Answer choices with non-parallel grammar",
+      "Correct answer identifiable from precision or length",
+      "Question asking for unsupported historical or market facts",
+      "Question that merely asks the candidate to repeat a sentence from the source"
+    ]
+  },
+  "workflow": [
+    {
+      "stage": 1,
+      "name": "resolve_request",
+      "owner": "orchestrator",
+      "actions": [
+        "Validate the input schema.",
+        "Resolve defaults and seed.",
+        "Identify candidate source files."
+      ],
+      "exit_gate": "valid request or structured error"
+    },
+    {
+      "stage": 2,
+      "name": "map_module",
+      "owner": "module_mapper",
+      "actions": [
+        "Locate the exact module.",
+        "Extract LOS and module structure.",
+        "Build formula, assumption, and concept registries.",
+        "Build a style fingerprint from practice material without copying it."
+      ],
+      "exit_gate": "complete module_blueprint"
+    },
+    {
+      "stage": 3,
+      "name": "plan_bank",
+      "owner": "orchestrator",
+      "actions": [
+        "Allocate questions by LOS, type, difficulty, and format.",
+        "Create item-set themes that do not mirror source cases.",
+        "Balance correct-answer positions and distractor mechanisms."
+      ],
+      "exit_gate": "coverage_plan passes completeness and duplication checks"
+    },
+    {
+      "stage": 4,
+      "name": "generate_items",
+      "owner": "question_generator",
+      "actions": [
+        "Create original primitive data and scenarios.",
+        "Compute authoritative answers.",
+        "Create choices, solutions, and internal validation payloads."
+      ],
+      "exit_gate": "draft_question_package is structurally complete"
+    },
+    {
+      "stage": 5,
+      "name": "parallel_independent_audits",
+      "owners": [
+        "numerical_accuracy_checker",
+        "source_independence_auditor",
+        "cfa_style_examiner"
+      ],
+      "actions": [
+        "Run all three audits independently.",
+        "Return machine-readable pass/fail reports and defect codes."
+      ],
+      "exit_gate": "all mandatory reports pass"
+    },
+    {
+      "stage": 6,
+      "name": "repair_or_regenerate",
+      "owner": "orchestrator",
+      "actions": [
+        "Route numerical defects to full item regeneration.",
+        "Route originality defects to new scenario and new primitive data generation.",
+        "Route style-only defects to controlled rewriting followed by all audits again.",
+        "Limit each item to three regeneration cycles."
+      ],
+      "exit_gate": "item passes or is permanently rejected"
+    },
+    {
+      "stage": 7,
+      "name": "bank_level_audit",
+      "owner": "final_adjudicator",
+      "actions": [
+        "Check LOS coverage.",
+        "Check duplicated concepts, scenarios, values, and wording.",
+        "Check answer-position balance.",
+        "Check requested numerical weight within feasible tolerance.",
+        "Check every item has exactly one correct answer."
+      ],
+      "exit_gate": "release_manifest approved"
+    },
+    {
+      "stage": 8,
+      "name": "serialize_and_save",
+      "owner": "orchestrator",
+      "actions": [
+        "Validate against the output schema.",
+        "Serialize as UTF-8 JSON.",
+        "Save atomically to a temporary file and rename after successful validation.",
+        "Return a concise completion report."
+      ],
+      "exit_gate": "valid JSON artifact saved"
+    }
+  ],
+  "retry_and_failure_policy": {
+    "max_regeneration_cycles_per_item": 3,
+    "style_only_rewrite_allowed": true,
+    "numerical_patch_allowed": false,
+    "originality_patch_allowed": false,
+    "hard_failure_conditions": [
+      "Requested learning module cannot be located confidently.",
+      "The source extraction is too ambiguous to reconstruct a required formula or exhibit.",
+      "A numerical answer cannot be independently reproduced.",
+      "Two or more choices remain defensible.",
+      "A required assumption is absent from the stem.",
+      "Choices collide after display rounding.",
+      "The item remains substantially similar to a source item after regeneration.",
+      "The item depends on content outside the requested module.",
+      "The final artifact fails JSON-schema validation."
+    ],
+    "error_codes": [
+      "INVALID_REQUEST",
+      "MODULE_NOT_FOUND",
+      "AMBIGUOUS_MODULE",
+      "SOURCE_EXTRACTION_FAILURE",
+      "INSUFFICIENT_SOURCE_SUPPORT",
+      "NUMERICAL_VALIDATION_FAILURE",
+      "MULTIPLE_CORRECT_ANSWERS",
+      "ROUNDING_COLLISION",
+      "ORIGINALITY_FAILURE",
+      "CFA_STYLE_FAILURE",
+      "COVERAGE_FAILURE",
+      "SCHEMA_VALIDATION_FAILURE",
+      "OUTPUT_WRITE_FAILURE"
+    ]
+  },
+  "question_bank_output_schema": {
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "type": "object",
+    "required": [
+      "metadata",
+      "module_blueprint",
+      "item_sets",
+      "quality_control"
+    ],
+    "additionalProperties": false,
+    "properties": {
+      "metadata": {
+        "type": "object",
+        "required": [
+          "source_files",
+          "module_number",
+          "module_title",
+          "question_count",
+          "generated_at",
+          "seed",
+          "generator_version"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "source_files": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "minItems": 1
+          },
+          "module_number": {
+            "type": [
+              "integer",
+              "string"
+            ]
+          },
+          "module_title": {
+            "type": "string"
+          },
+          "source_page_range": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "question_count": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "generated_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "seed": {
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "generator_version": {
+            "type": "string"
+          },
+          "non_affiliation_notice": {
+            "type": "string"
+          }
+        }
+      },
+      "module_blueprint": {
+        "type": "object",
+        "required": [
+          "learning_outcomes",
+          "concept_ids",
+          "formula_ids"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "learning_outcomes": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": [
+                "los_id",
+                "text"
+              ],
+              "additionalProperties": false,
+              "properties": {
+                "los_id": {
+                  "type": "string"
+                },
+                "text": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "concept_ids": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "formula_ids": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "item_sets": {
+        "type": "array",
+        "minItems": 1,
+        "items": {
+          "type": "object",
+          "required": [
+            "item_set_id",
+            "format",
+            "questions"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "item_set_id": {
+              "type": "string"
+            },
+            "format": {
+              "type": "string",
+              "enum": [
+                "item_set",
+                "standalone"
+              ]
+            },
+            "vignette": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "exhibits": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "required": [
+                  "exhibit_id",
+                  "title",
+                  "data"
+                ],
+                "additionalProperties": false,
+                "properties": {
+                  "exhibit_id": {
+                    "type": "string"
+                  },
+                  "title": {
+                    "type": "string"
+                  },
+                  "data": {}
+                }
+              }
+            },
+            "questions": {
+              "type": "array",
+              "minItems": 1,
+              "items": {
+                "type": "object",
+                "required": [
+                  "question_id",
+                  "los_ids",
+                  "concept_ids",
+                  "difficulty",
+                  "question_type",
+                  "stem",
+                  "choices",
+                  "correct_choice",
+                  "solution",
+                  "validation"
+                ],
+                "additionalProperties": false,
+                "properties": {
+                  "question_id": {
+                    "type": "string"
+                  },
+                  "los_ids": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    },
+                    "minItems": 1
+                  },
+                  "concept_ids": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    },
+                    "minItems": 1
+                  },
+                  "difficulty": {
+                    "type": "string",
+                    "enum": [
+                      "standard",
+                      "difficult",
+                      "exam_level"
+                    ]
+                  },
+                  "question_type": {
+                    "type": "string",
+                    "enum": [
+                      "calculation",
+                      "conceptual",
+                      "interpretation"
+                    ]
+                  },
+                  "stem": {
+                    "type": "string"
+                  },
+                  "choices": {
+                    "type": "array",
+                    "minItems": 3,
+                    "maxItems": 3,
+                    "items": {
+                      "type": "object",
+                      "required": [
+                        "label",
+                        "text"
+                      ],
+                      "additionalProperties": false,
+                      "properties": {
+                        "label": {
+                          "type": "string",
+                          "enum": [
+                            "A",
+                            "B",
+                            "C"
+                          ]
+                        },
+                        "text": {
+                          "type": "string"
+                        },
+                        "value_raw": {
+                          "type": [
+                            "number",
+                            "string",
+                            "null"
+                          ]
+                        }
+                      }
+                    }
+                  },
+                  "correct_choice": {
+                    "type": "string",
+                    "enum": [
+                      "A",
+                      "B",
+                      "C"
+                    ]
+                  },
+                  "solution": {
+                    "type": "object",
+                    "required": [
+                      "opening",
+                      "formula_or_rule",
+                      "steps",
+                      "answer_value_raw",
+                      "answer_value_display",
+                      "units",
+                      "rounding_rule",
+                      "explanation"
+                    ],
+                    "additionalProperties": false,
+                    "properties": {
+                      "opening": {
+                        "type": "string",
+                        "pattern": "^[ABC] is correct\\."
+                      },
+                      "formula_or_rule": {
+                        "type": "string"
+                      },
+                      "steps": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        },
+                        "minItems": 1
+                      },
+                      "answer_value_raw": {
+                        "type": [
+                          "number",
+                          "string",
+                          "null"
+                        ]
+                      },
+                      "answer_value_display": {
+                        "type": [
+                          "number",
+                          "string",
+                          "null"
+                        ]
+                      },
+                      "units": {
+                        "type": [
+                          "string",
+                          "null"
+                        ]
+                      },
+                      "rounding_rule": {
+                        "type": "string"
+                      },
+                      "explanation": {
+                        "type": "string"
+                      },
+                      "choice_analysis": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "required": [
+                            "label",
+                            "is_correct",
+                            "reason",
+                            "error_mechanism"
+                          ],
+                          "additionalProperties": false,
+                          "properties": {
+                            "label": {
+                              "type": "string",
+                              "enum": [
+                                "A",
+                                "B",
+                                "C"
+                              ]
+                            },
+                            "is_correct": {
+                              "type": "boolean"
+                            },
+                            "reason": {
+                              "type": "string"
+                            },
+                            "error_mechanism": {
+                              "type": [
+                                "string",
+                                "null"
+                              ]
+                            }
+                          }
+                        },
+                        "minItems": 3,
+                        "maxItems": 3
+                      }
+                    }
+                  },
+                  "validation": {
+                    "type": "object",
+                    "required": [
+                      "numerical",
+                      "originality",
+                      "grounding",
+                      "style",
+                      "single_answer",
+                      "overall_pass"
+                    ],
+                    "additionalProperties": false,
+                    "properties": {
+                      "numerical": {
+                        "type": "object",
+                        "required": [
+                          "applicable",
+                          "independent_result",
+                          "method",
+                          "independent_check",
+                          "residual",
+                          "passed"
+                        ],
+                        "additionalProperties": false,
+                        "properties": {
+                          "applicable": {
+                            "type": "boolean"
+                          },
+                          "independent_result": {
+                            "type": [
+                              "number",
+                              "string",
+                              "null"
+                            ]
+                          },
+                          "method": {
+                            "type": "string"
+                          },
+                          "independent_check": {
+                            "type": "string"
+                          },
+                          "residual": {
+                            "type": [
+                              "number",
+                              "null"
+                            ]
+                          },
+                          "passed": {
+                            "type": "boolean"
+                          }
+                        }
+                      },
+                      "originality": {
+                        "type": "object",
+                        "required": [
+                          "new_entities",
+                          "new_numbers",
+                          "new_structure",
+                          "not_close_paraphrase",
+                          "passed"
+                        ],
+                        "additionalProperties": false,
+                        "properties": {
+                          "new_entities": {
+                            "type": "boolean"
+                          },
+                          "new_numbers": {
+                            "type": "boolean"
+                          },
+                          "new_structure": {
+                            "type": "boolean"
+                          },
+                          "not_close_paraphrase": {
+                            "type": "boolean"
+                          },
+                          "passed": {
+                            "type": "boolean"
+                          }
+                        }
+                      },
+                      "grounding": {
+                        "type": "object",
+                        "required": [
+                          "los_supported",
+                          "module_knowledge_required",
+                          "outside_facts_required",
+                          "passed"
+                        ],
+                        "additionalProperties": false,
+                        "properties": {
+                          "los_supported": {
+                            "type": "boolean"
+                          },
+                          "module_knowledge_required": {
+                            "type": "boolean"
+                          },
+                          "outside_facts_required": {
+                            "type": "boolean"
+                          },
+                          "passed": {
+                            "type": "boolean"
+                          }
+                        }
+                      },
+                      "style": {
+                        "type": "object",
+                        "required": [
+                          "three_choices",
+                          "concise_professional_prose",
+                          "parallel_choices",
+                          "no_answer_clues",
+                          "passed"
+                        ],
+                        "additionalProperties": false,
+                        "properties": {
+                          "three_choices": {
+                            "type": "boolean"
+                          },
+                          "concise_professional_prose": {
+                            "type": "boolean"
+                          },
+                          "parallel_choices": {
+                            "type": "boolean"
+                          },
+                          "no_answer_clues": {
+                            "type": "boolean"
+                          },
+                          "passed": {
+                            "type": "boolean"
+                          }
+                        }
+                      },
+                      "single_answer": {
+                        "type": "boolean"
+                      },
+                      "overall_pass": {
+                        "type": "boolean"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "quality_control": {
+        "type": "object",
+        "required": [
+          "schema_valid",
+          "requested_count",
+          "released_count",
+          "rejected_count",
+          "regenerated_count",
+          "all_items_passed",
+          "all_numerical_items_independently_recomputed",
+          "all_distractors_verified",
+          "all_items_module_grounded",
+          "all_items_original",
+          "answer_position_distribution",
+          "los_coverage",
+          "failed_item_ids",
+          "overall_pass"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "schema_valid": {
+            "type": "boolean"
+          },
+          "requested_count": {
+            "type": "integer"
+          },
+          "released_count": {
+            "type": "integer"
+          },
+          "rejected_count": {
+            "type": "integer"
+          },
+          "regenerated_count": {
+            "type": "integer"
+          },
+          "all_items_passed": {
+            "type": "boolean"
+          },
+          "all_numerical_items_independently_recomputed": {
+            "type": "boolean"
+          },
+          "all_distractors_verified": {
+            "type": "boolean"
+          },
+          "all_items_module_grounded": {
+            "type": "boolean"
+          },
+          "all_items_original": {
+            "type": "boolean"
+          },
+          "answer_position_distribution": {
+            "type": "object",
+            "required": [
+              "A",
+              "B",
+              "C"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "A": {
+                "type": "integer"
+              },
+              "B": {
+                "type": "integer"
+              },
+              "C": {
+                "type": "integer"
+              }
+            }
+          },
+          "los_coverage": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": [
+                "los_id",
+                "question_ids"
+              ],
+              "additionalProperties": false,
+              "properties": {
+                "los_id": {
+                  "type": "string"
+                },
+                "question_ids": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          },
+          "failed_item_ids": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "overall_pass": {
+            "type": "boolean"
+          }
+        }
+      }
+    }
+  },
+  "acceptance_tests": [
+    {
+      "test_id": "AT-01",
+      "requirement": "The requested module is identified from internal source headings and LOS, not filename alone."
+    },
+    {
+      "test_id": "AT-02",
+      "requirement": "Every released question maps to at least one LOS."
+    },
+    {
+      "test_id": "AT-03",
+      "requirement": "Every released question has exactly three choices."
+    },
+    {
+      "test_id": "AT-04",
+      "requirement": "Every released question has exactly one defensible answer."
+    },
+    {
+      "test_id": "AT-05",
+      "requirement": "Every numerical item is solved independently by the numerical checker."
+    },
+    {
+      "test_id": "AT-06",
+      "requirement": "Every numerical distractor is recomputed and tied to an explicit error mechanism."
+    },
+    {
+      "test_id": "AT-07",
+      "requirement": "No displayed choices collide after rounding."
+    },
+    {
+      "test_id": "AT-08",
+      "requirement": "No question copies or closely paraphrases source text."
+    },
+    {
+      "test_id": "AT-09",
+      "requirement": "No question preserves a source item's scenario structure with only names and numbers changed."
+    },
+    {
+      "test_id": "AT-10",
+      "requirement": "No question refers to the source, curriculum page, original example, or source entity."
+    },
+    {
+      "test_id": "AT-11",
+      "requirement": "Every question requires module-defined knowledge or calculation."
+    },
+    {
+      "test_id": "AT-12",
+      "requirement": "No question requires live market knowledge or outside facts."
+    },
+    {
+      "test_id": "AT-13",
+      "requirement": "Item-set questions are independent of answers to earlier questions."
+    },
+    {
+      "test_id": "AT-14",
+      "requirement": "Correct-answer positions are reasonably balanced."
+    },
+    {
+      "test_id": "AT-15",
+      "requirement": "Solutions identify the correct letter and explain the mechanism."
+    },
+    {
+      "test_id": "AT-16",
+      "requirement": "The final artifact validates against question_bank_output_schema."
+    },
+    {
+      "test_id": "AT-17",
+      "requirement": "No failed item is silently included to meet the requested count."
+    },
+    {
+      "test_id": "AT-18",
+      "requirement": "Any ambiguous extraction is resolved through rendered-page inspection or reported as a failure."
+    }
+  ],
+  "error_output_schema": {
+    "type": "object",
+    "required": [
+      "status",
+      "error_code",
+      "message",
+      "details",
+      "recoverable"
+    ],
+    "additionalProperties": false,
+    "properties": {
+      "status": {
+        "const": "error"
+      },
+      "error_code": {
+        "type": "string",
+        "enum": [
+          "INVALID_REQUEST",
+          "MODULE_NOT_FOUND",
+          "AMBIGUOUS_MODULE",
+          "SOURCE_EXTRACTION_FAILURE",
+          "INSUFFICIENT_SOURCE_SUPPORT",
+          "NUMERICAL_VALIDATION_FAILURE",
+          "MULTIPLE_CORRECT_ANSWERS",
+          "ROUNDING_COLLISION",
+          "ORIGINALITY_FAILURE",
+          "CFA_STYLE_FAILURE",
+          "COVERAGE_FAILURE",
+          "SCHEMA_VALIDATION_FAILURE",
+          "OUTPUT_WRITE_FAILURE"
+        ]
+      },
+      "message": {
+        "type": "string"
+      },
+      "details": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      },
+      "recoverable": {
+        "type": "boolean"
+      }
+    }
+  },
+  "example_invocation": {
+    "learning_module": "Learning Module 2: The Arbitrage-Free Valuation Framework",
+    "question_count": 24,
+    "format": "item_sets",
+    "item_set_size": "mixed",
+    "difficulty": "exam_level",
+    "numerical_weight": 0.75,
+    "include_solutions": true,
+    "include_choice_analysis": true,
+    "seed": 20260802,
+    "output_path": "outputs/lm2_arbitrage_free_question_bank.json"
+  },
+  "execution_instruction": "When the user supplies a learning module, execute the full workflow, generate the requested bank, independently audit every item, save only validated questions in the JSON artifact, and return a concise completion report.",
+  "created_at": "2026-08-02T08:23:43.895366+00:00"
+}

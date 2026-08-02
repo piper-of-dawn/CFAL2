@@ -1,0 +1,4 @@
+interface:
+  display_name: "CFA Question Bank Generator"
+  short_description: "Generate validated CFA question banks as JSON"
+  default_prompt: "Use $generate-cfa-question-bank to generate 12 JSON questions on the specified CFA topic."
